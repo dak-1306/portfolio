@@ -1,1 +1,31 @@
 @import "tailwindcss";
+
+@theme {
+  --font-heading: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html,
+  body {
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@layer components {
+  .tooltip {
+    @apply absolute left-1/2 -translate-x-1/2 top-full mt-2
+                   opacity-0 group-hover:opacity-100 
+                   pointer-events-none transition-all duration-300
+                   bg-gray-800 text-white text-xs px-2 py-1 rounded-lg shadow-lg whitespace-nowrap;
+  }
+}

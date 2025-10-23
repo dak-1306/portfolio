@@ -1,0 +1,32 @@
+:root {
+  /* background */
+  --color-background-light: #ffffff;
+  --color-background-gradient: linear-gradient(
+    -45deg,
+    #1e1e1e 28%,
+    #036109 63%,
+    #fff200 100%
+  );
+  --color-card-background: linear-gradient(45deg, #ffffff 0%, #a5d6a7 100%);
+
+  /* ui */
+  --color-header: #063919;
+  --color-footer: #001b01;
+  --color-shadow: rgba(0, 0, 0, 0.2);
+
+  /* color text */
+  --color-h1: #063919;
+  --color-h2: #005005;
+  --color-text: #333333;
+  --color-warning: #f9a825;
+  --color-warning-hover: #f57f17;
+  --color-error: #c62828;
+  --color-error-hover: #b71c1c;
+  --color-info: #0277bd;
+
+  /* btn */
+  --color-success: linear-gradient(45deg, #1b5e20 0%, #00ff09 100%);
+  --color-success-hover: linear-gradient(45deg, #00ff09 0%, #1b5e20 100%);
+  --color-cta: linear-gradient(45deg, #f8ff00 0%, #ff8c00 100%);
+  --color-cta-hover: linear-gradient(45deg, #ff8c00 0%, #f8ff00 100%);
+}
