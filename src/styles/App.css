@@ -18,6 +18,7 @@
   --color-h1: #063919;
   --color-h2: #005005;
   --color-text: #333333;
+  --color-text-light: #ffffff;
   --color-warning: #f9a825;
   --color-warning-hover: #f57f17;
   --color-error: #c62828;
@@ -27,6 +28,38 @@
   /* btn */
   --color-success: linear-gradient(45deg, #1b5e20 0%, #00ff09 100%);
   --color-success-hover: linear-gradient(45deg, #00ff09 0%, #1b5e20 100%);
-  --color-cta: linear-gradient(45deg, #f8ff00 0%, #ff8c00 100%);
-  --color-cta-hover: linear-gradient(45deg, #ff8c00 0%, #f8ff00 100%);
+  --color-CV: linear-gradient(45deg, #f8ff00 0%, #ff8c00 100%);
+  --color-CV-hover: linear-gradient(45deg, #ff8c00 0%, #f8ff00 100%);
+  --color-danger: linear-gradient(45deg, #ff0000 0%, #8b0000 100%);
+  --color-danger-hover: linear-gradient(45deg, #8b0000 0%, #ff0000 100%);
+}
+
+.btn-success {
+  background: var(--color-success);
+  color: var(--color-text-light);
+}
+.btn-success:hover {
+  background: var(--color-success-hover);
+}
+.btn-CV {
+  background: var(--color-CV);
+  color: var(--color-text);
+}
+.btn-CV:hover {
+  background: var(--color-CV-hover);
+}
+.btn-danger {
+  background: var(--color-danger);
+  color: var(--color-text-light);
+}
+.btn-danger:hover {
+  background: var(--color-danger-hover);
+}
+.card {
+  background: var(--color-card-background);
+  box-shadow: 0 4px 6px var(--color-shadow);
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px var(--color-shadow);
 }
