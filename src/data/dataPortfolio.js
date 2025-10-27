@@ -123,8 +123,8 @@ const projects = [
 
 // dữ liệu trang contact
 const contact = {
-  phone: "+84 123 456 789",
-  email: "nguyen.van.a@example.com",
+  phone: "+84 839 479 440",
+  email: "thd1306@gmail.com",
   linkedin: "https://www.linkedin.com/in/nguyenvana",
   github: "https://github.com/username",
   socialMedia: {

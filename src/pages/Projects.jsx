@@ -2,6 +2,7 @@ import { useState } from "react";
 import MainLayout from "../components/layout/MainLayout";
 import { Link } from "react-router-dom";
 import Button from "../components/common/Button";
+import Tooltip from "../components/common/Tooltip";
 import Card from "../components/common/card.jsx";
 import Timeline from "../components/projects/TimeLine";
 import { projects } from "../data/dataPortfolio";
@@ -53,11 +54,13 @@ function Projects() {
                   };
                   const iconDef = map[key] || ["fab", key];
                   return (
-                    <FontAwesomeIcon
-                      key={tech}
-                      icon={iconDef}
-                      className="text-2xl text-gray-600 hover:text-gray-800"
-                    />
+                    <Tooltip label={tech} key={tech}>
+                      <FontAwesomeIcon
+                        key={tech}
+                        icon={iconDef}
+                        className="text-2xl text-gray-600 hover:text-gray-800"
+                      />
+                    </Tooltip>
                   );
                 })}
               </div>

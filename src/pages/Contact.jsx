@@ -1,116 +1,278 @@
+import { useState } from "react";
 import MainLayout from "../components/layout/MainLayout";
 import Button from "../components/common/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Tooltip from "../components/common/Tooltip";
 import { contact } from "../data/dataPortfolio";
-function Contact() {
+
+export default function Contact() {
   const { phone, email, linkedin, github, facebook, twitter } = contact;
+
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState({
+    loading: false,
+    ok: null,
+    message: "",
+  });
+
+  const handleChange = (e) =>
+    setForm((s) => ({ ...s, [e.target.name]: e.target.value }));
+
+  const copyToClipboard = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setStatus({
+        loading: false,
+        ok: true,
+        message: "Đã sao chép vào clipboard",
+      });
+      setTimeout(
+        () => setStatus({ loading: false, ok: null, message: "" }),
+        1500
+      );
+    } catch {
+      setStatus({ loading: false, ok: false, message: "Không thể sao chép" });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // basic client validation
+    if (!form.name || !form.email || !form.message) {
+      setStatus({
+        loading: false,
+        ok: false,
+        message: "Vui lòng điền đầy đủ thông tin",
+      });
+      return;
+    }
+    setStatus({ loading: true, ok: null, message: "" });
+    try {
+      // TODO: thay endpoint bằng API thật hoặc EmailJS
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Send failed");
+      setForm({ name: "", email: "", message: "" });
+      setStatus({
+        loading: false,
+        ok: true,
+        message: "Gửi thành công — cảm ơn bạn!",
+      });
+    } catch (err) {
+      setStatus({
+        loading: false,
+        ok: false,
+        message: "Gửi thất bại, thử lại sau.",
+      });
+    }
+  };
+
   return (
     <MainLayout title="Contact Me">
-      <div className="flex ">
-        <form className="bg-white p-8 rounded shadow-md mb-4 flex flex-col ">
-          <label className="mb-4 flex flex-col">
-            Name:
-            <input
-              className="border border-gray-300 p-2 rounded"
-              type="text"
-              name="name"
-              required
-            />
-          </label>
-          <label className="mb-4 flex flex-col">
-            Email:
-            <input
-              className="border border-gray-300 p-2 rounded"
-              type="email"
-              name="email"
-              required
-            />
-          </label>
-          <label className="mb-4 flex flex-col">
-            Message:
-            <textarea
-              className="border border-gray-300 p-2 rounded"
-              name="message"
-              required
-            ></textarea>
-          </label>
-          <Button type="submit" variant="success" size="medium">
-            Send
-          </Button>
-        </form>
-        <div className="flex flex-col items-center p-8 rounded-md mb-4 ml-8 bg-white">
-          <p>you can also contact me by</p>
-          <ul>
-            <li className="text-lg text-blue-600 mt-4 ">
-              <FontAwesomeIcon
-                className="text-gray-600 hover:text-gray-800"
-                icon="fa-solid fa-phone"
-              />
-              {phone}
-              <FontAwesomeIcon
-                icon="fa-solid fa-copy"
-                className="text-gray-600 ml-2 cursor-pointer"
-              />
-            </li>
-            <li className="text-lg mt-4 text-blue-600">
-              <FontAwesomeIcon
-                className="text-gray-600 hover:text-gray-800"
-                icon="fa-solid fa-envelope"
-              />
-              {email}
-              <FontAwesomeIcon
-                icon="fa-solid fa-copy"
-                className="text-gray-600 ml-2 cursor-pointer"
-              />
-            </li>
-          </ul>
-          <ul className="flex space-x-4 mt-4">
-            <li>
-              <Tooltip label="LinkedIn">
-                <a href={linkedin} target="_blank" rel="noopener noreferrer">
-                  <FontAwesomeIcon
-                    className="text-blue-600 hover:text-blue-800"
-                    icon="fa-brands fa-linkedin"
-                  />
-                </a>
-              </Tooltip>
-            </li>
-            <li>
-              <Tooltip label="GitHub">
-                <a href={github} target="_blank" rel="noopener noreferrer">
-                  <FontAwesomeIcon
-                    className="text-gray-800 hover:text-black"
-                    icon="fa-brands fa-github"
-                  />
-                </a>
-              </Tooltip>
-            </li>
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Form card */}
+          <form
+            onSubmit={handleSubmit}
+            className="lg:col-span-2 bg-white rounded-xl p-6 shadow-md"
+            aria-labelledby="contact-form-title"
+          >
+            <h2 id="contact-form-title" className="text-2xl font-semibold mb-4">
+              Liên hệ với tôi
+            </h2>
 
-            <li>
-              <Tooltip label="Facebook">
-                <a href={facebook} target="_blank" rel="noopener noreferrer">
+            <label className="block mb-3">
+              <span className="text-sm font-medium">Họ và tên</span>
+              <input
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                required
+                className="mt-1 block w-full rounded-md border-gray-300 bg-gray-100 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-300"
+                placeholder="Nguyễn Văn A"
+              />
+            </label>
+
+            <label className="block mb-3">
+              <span className="text-sm font-medium">Email</span>
+              <input
+                name="email"
+                type="email"
+                value={form.email}
+                onChange={handleChange}
+                required
+                className="mt-1 block w-full rounded-md border-gray-300 bg-gray-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-300"
+                placeholder="you@example.com"
+              />
+            </label>
+
+            <label className="block mb-4">
+              <span className="text-sm font-medium">Tin nhắn</span>
+              <textarea
+                name="message"
+                value={form.message}
+                onChange={handleChange}
+                required
+                rows={4}
+                className="mt-1 block w-full rounded-md border-gray-300 bg-gray-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-300"
+                placeholder="Viết tin nhắn..."
+              />
+            </label>
+
+            <div className="flex items-center space-x-3">
+              <Button
+                type="submit"
+                variant="cta"
+                size="md"
+                disabled={status.loading}
+              >
+                {status.loading ? "Đang gửi..." : "Gửi tin nhắn"}
+              </Button>
+
+              <Button
+                type="button"
+                variant="info"
+                size="md"
+                onClick={() => {
+                  setForm({ name: "", email: "", message: "" });
+                  setStatus({ loading: false, ok: null, message: "" });
+                }}
+              >
+                Làm lại
+              </Button>
+
+              {/* status live region */}
+              <div
+                aria-live="polite"
+                className={`ml-4 text-sm ${
+                  status.ok === true
+                    ? "text-green-600"
+                    : status.ok === false
+                    ? "text-red-600"
+                    : "text-gray-500"
+                }`}
+              >
+                {status.message}
+              </div>
+            </div>
+          </form>
+
+          {/* Contact info card */}
+          <aside className="bg-white rounded-xl p-6 shadow-md flex flex-col items-start">
+            <h3 className="text-lg font-semibold mb-3">Thông tin khác</h3>
+
+            <div className="mb-4 w-full">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
                   <FontAwesomeIcon
-                    className="text-blue-600 hover:text-blue-800"
-                    icon="fa-brands fa-facebook"
+                    icon={["fas", "phone"]}
+                    className="text-emerald-600"
                   />
-                </a>
-              </Tooltip>
-            </li>
-            <li>
-              <Tooltip label="Twitter">
-                <a href={twitter} target="_blank" rel="noopener noreferrer">
+                  <span className="font-medium">{phone}</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Tooltip label="Sao chép số">
+                    <button
+                      onClick={() => copyToClipboard(phone)}
+                      className="p-2 rounded-md"
+                    >
+                      <FontAwesomeIcon icon={["fas", "copy"]} />
+                    </button>
+                  </Tooltip>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between mt-3">
+                <div className="flex items-center space-x-3">
                   <FontAwesomeIcon
-                    className="text-blue-600 hover:text-blue-800"
-                    icon="fa-brands fa-twitter"
+                    icon={["fas", "envelope"]}
+                    className="text-emerald-600"
                   />
-                </a>
-              </Tooltip>
-            </li>
-          </ul>
+                  <a
+                    href={`mailto:${email}`}
+                    className="font-medium hover:underline"
+                  >
+                    {email}
+                  </a>
+                </div>
+                <Tooltip label="Sao chép email">
+                  <button
+                    onClick={() => copyToClipboard(email)}
+                    className="p-2 rounded-md"
+                  >
+                    <FontAwesomeIcon icon={["fas", "copy"]} />
+                  </button>
+                </Tooltip>
+              </div>
+            </div>
+
+            <div className="mt-2 w-full">
+              <p className="text-sm text-gray-500 mb-2">Kết nối với tôi</p>
+              <div className="flex space-x-3">
+                <Tooltip label="LinkedIn">
+                  <a
+                    href={linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-md"
+                  >
+                    <FontAwesomeIcon
+                      icon={["fab", "linkedin"]}
+                      className="text-blue-600"
+                    />
+                  </a>
+                </Tooltip>
+
+                <Tooltip label="GitHub">
+                  <a
+                    href={github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-md"
+                  >
+                    <FontAwesomeIcon icon={["fab", "github"]} />
+                  </a>
+                </Tooltip>
+
+                <Tooltip label="Facebook">
+                  <a
+                    href={facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-md"
+                  >
+                    <FontAwesomeIcon
+                      icon={["fab", "facebook"]}
+                      className="text-blue-600"
+                    />
+                  </a>
+                </Tooltip>
+
+                <Tooltip label="Twitter">
+                  <a
+                    href={twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-md"
+                  >
+                    <FontAwesomeIcon
+                      icon={["fab", "twitter"]}
+                      className="text-sky-500"
+                    />
+                  </a>
+                </Tooltip>
+              </div>
+            </div>
+
+            <div className="mt-6 text-xs text-gray-400">
+              <p>Thời gian phản hồi dự kiến: 1–3 ngày làm việc</p>
+            </div>
+          </aside>
         </div>
       </div>
     </MainLayout>
   );
 }
-export default Contact;
