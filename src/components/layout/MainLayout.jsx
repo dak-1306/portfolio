@@ -12,11 +12,11 @@ function MainLayout({ children, title }) {
         <h1 className="text-4xl font-bold mb-6 text-white">{title}</h1>
         <div
           style={{ background: "var(--color-card-background)" }}
-          className="group backdrop-blur-md border border-gray-200 
+          className=" backdrop-blur-md border border-gray-200 
                 dark:bg-gray-900 dark:border-gray-700
-                rounded-2xl p-6 shadow-lg hover:shadow-xl 
+                rounded-2xl p-8 shadow-lg hover:shadow-xl 
                 transition-all duration-300 
-                hover:-translate-y-1 cursor-pointer"
+                hover:-translate-y-1"
         >
           {children}
         </div>

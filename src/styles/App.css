@@ -23,15 +23,28 @@
   --color-warning-hover: #f57f17;
   --color-error: #c62828;
   --color-error-hover: #b71c1c;
-  --color-info: #0277bd;
 
   /* btn */
   --color-success: linear-gradient(45deg, #1b5e20 0%, #00ff09 100%);
   --color-success-hover: linear-gradient(45deg, #00ff09 0%, #1b5e20 100%);
+  --color-success-active: #004d40;
   --color-CV: linear-gradient(45deg, #f8ff00 0%, #ff8c00 100%);
   --color-CV-hover: linear-gradient(45deg, #ff8c00 0%, #f8ff00 100%);
+  --color-CV-active: #c79b00;
   --color-danger: linear-gradient(45deg, #ff0000 0%, #8b0000 100%);
   --color-danger-hover: linear-gradient(45deg, #8b0000 0%, #ff0000 100%);
+  --color-danger-active: #b71c1c;
+  --color-info: linear-gradient(45deg, #0288d1 0%, #81d4fa 100%);
+  --color-info-hover: linear-gradient(45deg, #81d4fa 0%, #0288d1 100%);
+  --color-info-active: #01579b;
+  --color-cta: linear-gradient(45deg, #7b2cff 0%, #ff4fd1 50%, #ff7a59 100%);
+  --color-cta-hover: linear-gradient(
+    45deg,
+    #ff7a59 0%,
+    #ff4fd1 50%,
+    #7b2cff 100%
+  );
+  --color-cta-active: #5e00b3;
 }
 
 .btn-success {
@@ -41,12 +54,18 @@
 .btn-success:hover {
   background: var(--color-success-hover);
 }
+.btn-success:active {
+  background: var(--color-success-active);
+}
 .btn-CV {
   background: var(--color-CV);
   color: var(--color-text);
 }
 .btn-CV:hover {
   background: var(--color-CV-hover);
+}
+.btn-CV:active {
+  background: var(--color-CV-active);
 }
 .btn-danger {
   background: var(--color-danger);
@@ -55,11 +74,32 @@
 .btn-danger:hover {
   background: var(--color-danger-hover);
 }
-.card {
-  background: var(--color-card-background);
-  box-shadow: 0 4px 6px var(--color-shadow);
+.btn-danger:active {
+  background: var(--color-danger-active);
 }
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 12px var(--color-shadow);
+.btn-info {
+  background: var(--color-info);
+  color: var(--color-text-light);
+}
+.btn-info:hover {
+  background: var(--color-info-hover);
+}
+.btn-info:active {
+  background: var(--color-info-active);
+}
+.btn-cta {
+  background: var(--color-cta);
+  color: var(--color-text-light);
+  text-shadow: 0 1px 2px var(--color-shadow);
+}
+
+.btn-cta:hover {
+  background: var(--color-cta-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(123, 44, 255, 0.22);
+}
+.btn-cta:active {
+  background: var(--color-cta-active);
+  transform: translateY(0);
+  box-shadow: none;
 }
