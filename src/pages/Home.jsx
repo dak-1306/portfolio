@@ -2,7 +2,7 @@ import MainLayout from "../components/layout/MainLayout";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../components/common/Button";
-import Card from "../components/common/card.jsx";
+import Card from "../components/common/Card";
 import { personalInfo } from "../data/dataPortfolio";
 function Home() {
   const { titleH2, avatar, fullName, titleH3, dateOfBirth, address, email } =
