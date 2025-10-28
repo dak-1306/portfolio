@@ -4,7 +4,7 @@ const personalInfo = {
   dateOfBirth: "13/06/2005",
   address: "123 Đường ABC, Quận Bình Thạnh, Thành phố HCM",
   email: "thd1306@gmail.com",
-  avatar: "/src/assets/img/avatar.jpg",
+  avatar: "/images/avatar.jpg",
   titleH2: "Welcome to My Portfolio",
   titleH3: "Thông tin cơ bản",
 };
@@ -18,10 +18,10 @@ const aboutMe = {
     "Luôn nỗ lực hết mình để mang lại giá trị tốt nhất cho dự án và đồng đội.",
 
   groupAvatar: [
-    "/src/assets/img/group1.jpg",
-    "/src/assets/img/group2.jpg",
-    "/src/assets/img/group3.jpg",
-    "/src/assets/img/group4.jpg",
+    "/images/group1.jpg",
+    "/images/group2.jpg",
+    "/images/group3.jpg",
+    "/images/group4.jpg",
   ],
 };
 
