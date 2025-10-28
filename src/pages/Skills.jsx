@@ -2,7 +2,7 @@ import MainLayout from "../components/layout/MainLayout";
 import Tooltip from "../components/common/Tooltip";
 import { Link } from "react-router-dom";
 import Button from "../components/common/Button";
-import Card from "../components/common/card.jsx";
+import Card from "../components/common/Card";
 import { skillsData } from "../data/dataPortfolio";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

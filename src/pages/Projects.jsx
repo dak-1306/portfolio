@@ -3,7 +3,7 @@ import MainLayout from "../components/layout/MainLayout";
 import { Link } from "react-router-dom";
 import Button from "../components/common/Button";
 import Tooltip from "../components/common/Tooltip";
-import Card from "../components/common/card.jsx";
+import Card from "../components/common/Card";
 import Timeline from "../components/projects/TimeLine";
 import { projects } from "../data/dataPortfolio";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
