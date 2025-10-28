@@ -126,7 +126,7 @@ const contact = {
   phone: "+84 839 479 440",
   email: "thd1306@gmail.com",
   linkedin: "https://www.linkedin.com/in/nguyenvana",
-  github: "https://github.com/username",
+  github: "https://github.com/dak-1306",
   socialMedia: {
     facebook: "https://www.facebook.com/nguyenvana",
     twitter: "https://twitter.com/nguyenvana",
