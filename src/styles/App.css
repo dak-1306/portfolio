@@ -1,51 +1,76 @@
+/* ===== DESIGN TOKENS - Portfolio Color Palette ===== */
 :root {
-  /* background */
+  /* === Fonts === */
+  --font-heading: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  /* === Background & Layout === */
   --color-background-light: #ffffff;
   --color-background-gradient: linear-gradient(
     -45deg,
-    #1e1e1e 28%,
-    #036109 63%,
-    #fff200 100%
+    #f8fffe 0%,
+    /* trắng xanh nhẹ */ #e6f7ed 45%,
+    /* xanh lá nhạt */ #d4f5db 80%,
+    /* xanh lá sáng */ #a7f3d0 100% /* xanh lá accent */
   );
-  --color-card-background: linear-gradient(45deg, #ffffff 0%, #a5d6a7 100%);
+  --color-card-background: linear-gradient(45deg, #ffffff 0%, #d1fae5 100%);
 
-  /* ui */
-  --color-header: #063919;
-  --color-footer: #001b01;
-  --color-shadow: rgba(0, 0, 0, 0.2);
+  /* === UI Components === */
+  --color-header: #065f46;
+  --color-footer: #042f2e;
+  --color-shadow: rgba(6, 95, 70, 0.15);
 
-  /* color text */
-  --color-h1: #063919;
-  --color-h2: #005005;
-  --color-text: #333333;
+  /* === Typography === */
+  --color-h1: #064e3b;
+  --color-h2: #065f46;
+  --color-text: #374151;
   --color-text-light: #ffffff;
-  --color-warning: #f9a825;
-  --color-warning-hover: #f57f17;
-  --color-error: #c62828;
-  --color-error-hover: #b71c1c;
+  --color-text-muted: #6b7280;
 
-  /* btn */
-  --color-success: linear-gradient(45deg, #1b5e20 0%, #00ff09 100%);
-  --color-success-hover: linear-gradient(45deg, #00ff09 0%, #1b5e20 100%);
-  --color-success-active: #004d40;
-  --color-CV: linear-gradient(45deg, #f8ff00 0%, #ff8c00 100%);
-  --color-CV-hover: linear-gradient(45deg, #ff8c00 0%, #f8ff00 100%);
-  --color-CV-active: #c79b00;
-  --color-danger: linear-gradient(45deg, #ff0000 0%, #8b0000 100%);
-  --color-danger-hover: linear-gradient(45deg, #8b0000 0%, #ff0000 100%);
-  --color-danger-active: #b71c1c;
-  --color-info: linear-gradient(45deg, #0288d1 0%, #81d4fa 100%);
-  --color-info-hover: linear-gradient(45deg, #81d4fa 0%, #0288d1 100%);
-  --color-info-active: #01579b;
-  --color-cta: linear-gradient(45deg, #7b2cff 0%, #ff4fd1 50%, #ff7a59 100%);
+  /* === Status Colors === */
+  --color-warning: #f59e0b;
+  --color-warning-hover: #d97706;
+  --color-error: #dc2626;
+  --color-error-hover: #b91c1c;
+
+  /* === Button Variants === */
+  /* Success - xanh lá chính */
+  --color-success: linear-gradient(90deg, #059669 0%, #10b981 100%);
+  --color-success-hover: linear-gradient(90deg, #047857 0%, #059669 100%);
+  --color-success-active: #065f46;
+
+  /* Info - xanh dương */
+  --color-info: linear-gradient(90deg, #0891b2 0%, #06b6d4 100%);
+  --color-info-hover: linear-gradient(90deg, #0e7490 0%, #0891b2 100%);
+  --color-info-active: #164e63;
+
+  /* CTA - xanh gradient chủ đạo */
+  --color-cta: linear-gradient(45deg, #059669 0%, #10b981 50%, #34d399 100%);
   --color-cta-hover: linear-gradient(
     45deg,
-    #ff7a59 0%,
-    #ff4fd1 50%,
-    #7b2cff 100%
+    #047857 0%,
+    #059669 50%,
+    #10b981 100%
   );
-  --color-cta-active: #5e00b3;
+  --color-cta-active: #065f46;
+
+  /* CV - vàng cam hài hòa */
+  --color-CV: linear-gradient(45deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
+  --color-CV-hover: linear-gradient(
+    45deg,
+    #b45309 0%,
+    #d97706 50%,
+    #f59e0b 100%
+  );
+  --color-CV-active: #92400e;
+
+  /* Danger - đỏ */
+  --color-danger: linear-gradient(45deg, #dc2626 0%, #b91c1c 100%);
+  --color-danger-hover: linear-gradient(45deg, #b91c1c 0%, #dc2626 100%);
+  --color-danger-active: #991b1b;
 }
+
+/* ===== BUTTON COMPONENTS ===== */
 
 .btn-success {
   background: var(--color-success);
@@ -96,7 +121,7 @@
 .btn-cta:hover {
   background: var(--color-cta-hover);
   transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(123, 44, 255, 0.22);
+  box-shadow: 0 10px 28px rgba(5, 150, 105, 0.25);
 }
 .btn-cta:active {
   background: var(--color-cta-active);

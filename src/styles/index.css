@@ -5,6 +5,7 @@
   --font-body: "Poppins", ui-sans-serif, system-ui, sans-serif;
 }
 
+/* ===== TAILWIND BASE LAYER ===== */
 @layer base {
   html,
   body {
@@ -21,6 +22,7 @@
   }
 }
 
+/* ===== COMPONENT-SPECIFIC STYLES ===== */
 @layer components {
   .tooltip {
     @apply absolute left-1/2 -translate-x-1/2 top-full mt-2
