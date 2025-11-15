@@ -3,9 +3,8 @@ import { motion } from "framer-motion";
 
 /*
   Card
-  - card reusable với hiệu ứng hover nâng + shadow
-  - giữ prop `as` để render thành li/a/div tùy nhu cầu
-  - props: as, className, hover (bool), hoverScale / hoverY
+  - reusable card with framer-motion hover
+  - uses subtle colored shadow (emerald/green) instead of plain gray
 */
 const cn = (...parts) => parts.filter(Boolean).join(" ");
 
@@ -22,13 +21,19 @@ export default function Card({
 }) {
   const MotionComp = motion[as] || motion.div;
 
+  // base visual (removed default Tailwind shadow to use colored boxShadow)
   const base =
-    "relative z-0 group bg-white rounded-lg p-5 shadow-md border border-transparent";
-  const hoverVisual = "hover:shadow-xl";
+    "relative z-0 group bg-white rounded-lg p-5 border border-transparent";
+
+  // subtle default shadow (emerald green, low opacity)
+  const defaultShadow = "0 8px 24px rgba(16, 185, 27, 0.16)"; // rgba of emerald-400
+
+  // stronger shadow on hover (still green-tinted)
+  const hoverShadow = "0 24px 48px rgba(16, 185, 30, 0.28)";
 
   const motionProps = hover
     ? {
-        whileHover: { y: hoverY, scale: hoverScale },
+        whileHover: { y: hoverY, scale: hoverScale, boxShadow: hoverShadow },
         whileTap: { y: tapY, scale: 0.997 },
         transition: { type: "spring", stiffness: 260, damping: 28 },
       }
@@ -37,8 +42,12 @@ export default function Card({
   return (
     <MotionComp
       {...motionProps}
-      className={cn(base, hover ? hoverVisual : "", className)}
-      style={{ willChange: "transform", ...style }}
+      className={cn(base, className)}
+      style={{
+        willChange: "transform, box-shadow",
+        boxShadow: defaultShadow,
+        ...style,
+      }}
       {...props}
     >
       {children}

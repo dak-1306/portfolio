@@ -13,11 +13,11 @@ export default function Section({
   className = "",
   innerClass = "bg-white rounded-2xl shadow-md p-6 flex flex-col items-center",
   style = { background: "var(--color-background-gradient)" },
-  minH = "min-h-[70vh] md:min-h-[75vh]",
+  minH = "min-h-[70vh]",
 }) {
   return (
-    <section id={id} className={`${minH} flex items-center py-8 ${className}`}>
-      <div className="w-full max-w-5xl mx-auto px-4">
+    <section id={id} className={`${minH} flex items-center ${className}`}>
+      <div className="w-full max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -27,7 +27,7 @@ export default function Section({
           style={style}
         >
           {title ? (
-            <h3 className="text-2xl md:text-3xl font-semibold mb-4">{title}</h3>
+            <h3 className="text-2xl md:text-3xl font-semibold mb-6">{title}</h3>
           ) : null}
           {children}
         </motion.div>

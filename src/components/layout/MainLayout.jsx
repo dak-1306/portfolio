@@ -1,10 +1,12 @@
 import Header from "./Header";
 import Footer from "./Footer";
+import Fireflies from "../common/Fireflies";
 
 /*
   MainLayout (gọn)
   - Header / Footer không cuộn (flex-none)
   - main là vùng cuộn (overflow-y-auto) — thanh cuộn chỉ xuất hiện ở đây
+  - Fireflies mount bên trong main, absolute inset, pointer-events-none để không che nội dung
 */
 export default function MainLayout({ children }) {
   return (
@@ -16,14 +18,18 @@ export default function MainLayout({ children }) {
       </div>
 
       {/* Main: chiếm phần còn lại, vùng cuộn duy nhất */}
+      {/* đặt relative để có thể mount layer absolute cho fireflies */}
       <main
         style={{ background: "var(--forest-day-bg)" }}
-        className="flex flex-col items-center w-full overflow-y-auto overscroll-contain flex-grow"
+        className="relative flex flex-col items-center w-full overflow-y-auto overscroll-contain"
       >
-        <h1 className="text-4xl font-bold mb-4 mt-4 text-[var(--color-h1)]">
-          Welcome to My Portfolio
-        </h1>
-        <div className="flex flex-col items-center w-full space-y-12">
+        {/* Fireflies: overlay trên nền nhưng dưới nội dung (z-0), không chặn sự kiện */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Fireflies count={12} />
+        </div>
+
+        {/* Nội dung chính ở z-10 để luôn nằm trên layer đom đóm */}
+        <div className="relative z-10 flex flex-col items-center w-full space-y-12">
           {children}
         </div>
       </main>

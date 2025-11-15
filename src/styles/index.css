@@ -31,81 +31,104 @@
                    bg-gray-800 text-white text-xs px-2 py-1 rounded-lg shadow-lg whitespace-nowrap z-50;
   }
 
+  /* Slogan: single element with animated overlay */
   .slogan {
-    position: relative;
-    overflow: hidden;
-    transition: color 0.3s ease;
-    border-radius: inherit; /* đảm bảo cùng bo góc với bg */
-  }
-
-  .slogan span {
-    position: relative;
-    z-index: 10;
     display: inline-block;
-    transition: color 0.3s ease;
+    position: relative;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.95),
+      rgba(255, 255, 255, 0.9)
+    );
+    box-shadow: 0 8px 20px var(--accent-shadow);
+    transition: transform var(--dur-base) ease, box-shadow var(--dur-base) ease;
+    will-change: transform;
   }
 
-  .slogan::after {
+  .slogan__text {
+    position: relative;
+    z-index: 2;
+    color: #022c24; /* dark-green text for contrast */
+    font-weight: 600;
+  }
+
+  .slogan::before {
     content: "";
     position: absolute;
     inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(
-      90deg,
-      rgba(6, 57, 25, 0.95),
-      rgba(0, 133, 50, 0.95),
-      rgba(6, 57, 25, 0.95)
-    );
-    transform: translateX(-100%);
-    transition: transform 0.5s ease;
-    z-index: 5; /* nằm dưới text nhưng trên background */
+    z-index: 1;
+    background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+    transform: translateX(-105%);
+    transition: transform var(--dur-medium) cubic-bezier(0.2, 0.9, 0.2, 1);
     pointer-events: none;
+    mix-blend-mode: multiply;
+    opacity: 0.95;
   }
 
-  .slogan:hover::after {
+  .slogan:hover,
+  .slogan:focus-within {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(6, 166, 122, 0.18);
+  }
+
+  .slogan:hover::before,
+  .slogan:focus-within::before {
     transform: translateX(0);
   }
 
-  .slogan:hover span {
-    color: white;
+  /* respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .slogan,
+    .slogan::before {
+      transition: none;
+      transform: none;
+    }
   }
 
-  /* Dòng thông tin (li): accent trái nhẹ, text tối để đảm bảo readability */
+  /* List item style (slogan-item) — compact card with left accent bar */
   .slogan-item {
-    position: relative;
-    overflow: hidden;
-    padding-left: 3rem; /* space cho accent bar */
-    transition: background-color 0.25s ease, transform 0.25s ease;
-    border-radius: 0.5rem;
-    color: #0f172a; /* slate-900 / đen xanh nhẹ */
+    display: block;
     background: white;
+    padding: 0.75rem 1rem;
+    border-radius: 0.6rem;
+    position: relative;
+    overflow: visible;
+    transition: transform var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+    box-shadow: 0 6px 16px rgba(2, 15, 10, 0.04);
   }
 
   .slogan-item::before {
     content: "";
     position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
+    left: 0.5rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
     width: 6px;
-    border-top-left-radius: inherit;
-    border-bottom-left-radius: inherit;
-    background: linear-gradient(180deg, #06b6a4, #054e3a); /* xanh dịu -> tối */
-    transform-origin: left;
+    border-radius: 6px;
+    background: linear-gradient(180deg, var(--accent-start), var(--accent-end));
   }
 
-  /* Hover: nhẹ làm sáng nền và giữ chữ tối hoặc đổi sang trắng nếu muốn mạnh */
-  .slogan-item:hover {
-    background: linear-gradient(
-      90deg,
-      rgba(6, 166, 122, 0.06),
-      rgba(255, 255, 255, 0)
-    );
-    transform: translateY(-2px);
+  .slogan-item + .slogan-item {
+    margin-top: 0.75rem;
   }
 
-  .slogan-item:hover span {
-    color: #042f2a; /* hơi tối hơn khi hover */
+  .slogan-item:hover,
+  .slogan-item:focus-within {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 36px rgba(6, 166, 122, 0.1);
+  }
+
+  .slogan-item .content {
+    margin-left: 1rem; /* space to clear left bar */
+  }
+
+  /* Small utility: subtle text color for meta */
+  .meta-muted {
+    color: #4b5563; /* gray-600 */
+    font-size: 0.9rem;
   }
 }
 
@@ -118,4 +141,13 @@ main {
 /* section nếu có class snap-align, không ép snap nếu main none */
 section {
   scroll-snap-align: none;
+}
+
+:root {
+  --accent-start: #06b6a4; /* emerald-400 */
+  --accent-end: #054e3a; /* deep green */
+  --accent-shadow: rgba(6, 166, 122, 0.12);
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-medium: 500ms;
 }

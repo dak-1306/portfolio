@@ -96,7 +96,7 @@ function Projects() {
           <p className="text-blue-600 italic text-center">
             Muốn xem thêm các dự án khác của tôi?
           </p>
-          <Link to="/contact">
+          <Link to="/#contact">
             <Button variant="cta" size="large">
               Liên hệ với tôi
             </Button>

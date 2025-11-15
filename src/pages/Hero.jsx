@@ -12,8 +12,8 @@ export default function Hero() {
   return (
     <>
       {/* HERO */}
-      <Section>
-        <div className="flex justify-center items-center space-x-10">
+      <Section id="hero" title="Welcome to My Portfolio" className="pt-16">
+        <div className="flex justify-center items-center py-8 space-x-10">
           <CardCircle size="w-70 h-70">
             <img
               src={avatar}
@@ -58,12 +58,12 @@ export default function Hero() {
             </ul>
 
             <div className="mt-4 flex gap-3">
-              <Link to="/contact">
+              <Link to="/#contact">
                 <Button variant="success" size="md">
                   Liên hệ
                 </Button>
               </Link>
-              <Link to="/about">
+              <Link to="/#about">
                 <Button variant="info" size="md">
                   Xem thêm
                 </Button>

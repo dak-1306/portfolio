@@ -10,7 +10,7 @@ import Section from "../components/layout/Section";
 
 export default function Skills() {
   return (
-    <Section title="Kỹ năng">
+    <Section title="My Skills">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {skillsData.map((skill) => {
           const meta = skill;
@@ -75,7 +75,7 @@ export default function Skills() {
           Kỹ năng chỉ là một phần của câu chuyện. Hãy khám phá thêm về những gì
           tôi thực hiện!
         </p>
-        <Link to="/projects">
+        <Link to="/#projects">
           <Button variant="success" size="large">
             Xem Dự Án Của Tôi
           </Button>

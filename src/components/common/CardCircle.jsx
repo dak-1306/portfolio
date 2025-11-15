@@ -5,11 +5,7 @@ import { motion } from "framer-motion";
   CardCircle
   - container hình tròn, overflow-hidden để ảnh cover gọn
   - dùng framer-motion cho hover/tap mượt
-  - props:
-    - size: lớp Tailwind cho kích thước (ví dụ "w-40 h-40")
-    - className: mở rộng class
-    - hover: bật/tắt hiệu ứng hover
-    - hoverY / hoverScale / tapY: điều chỉnh chuyển động
+  - giờ có colored shadow giống Card
 */
 const cn = (...parts) => parts.filter(Boolean).join(" ");
 
@@ -25,13 +21,17 @@ export default function CardCircle({
   ...props
 }) {
   const Motion = motion.div;
+  // bỏ shadow-md của Tailwind, dùng box-shadow màu xanh nhẹ
   const base =
-    "relative overflow-hidden rounded-full flex items-center justify-center bg-white shadow-md";
+    "relative overflow-hidden rounded-full flex items-center justify-center bg-white";
   const visual = "ring-offset-2";
+
+  const defaultShadow = "0 8px 24px rgba(16,185,27,0.16)"; // matching Card default
+  const hoverShadow = "0 20px 40px rgba(16,185,30,0.24)";
 
   const motionProps = hover
     ? {
-        whileHover: { y: hoverY, scale: hoverScale },
+        whileHover: { y: hoverY, scale: hoverScale, boxShadow: hoverShadow },
         whileTap: { y: tapY, scale: 0.995 },
         transition: { type: "spring", stiffness: 260, damping: 28 },
       }
@@ -41,7 +41,11 @@ export default function CardCircle({
     <Motion
       {...motionProps}
       className={cn(base, size, visual, "will-change-transform", className)}
-      style={{ willChange: "transform", ...style }}
+      style={{
+        willChange: "transform, box-shadow",
+        boxShadow: defaultShadow,
+        ...style,
+      }}
       {...props}
     >
       {/* nội dung luôn nằm trên (z-10) để tránh bị overlay pseudo hoặc sheen */}

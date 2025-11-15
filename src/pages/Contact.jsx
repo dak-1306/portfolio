@@ -71,7 +71,7 @@ export default function Contact() {
 
   return (
     // dùng Section thay vì MainLayout; innerClass p-0 bg-transparent để không thay đổi layout nội dung
-    <Section title="Liên hệ" minH="min-h-[70vh] md:min-h-[75vh]">
+    <Section title="Contact me">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Form card */}
