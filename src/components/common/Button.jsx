@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 // Bản đồ tên biến thể => class CSS (ở đây bạn dùng các class CSS riêng như .btn-success, .btn-cta)
 const btnStyle = {
@@ -34,14 +35,10 @@ export default function Button({
   // base: các lớp Tailwind chung cho mọi nút (layout, transitions, rounding...)
   const base =
     "group inline-flex items-center gap-2 relative overflow-visible rounded-md font-semibold select-none " +
-    "transition-transform duration-200 will-change-transform motion-safe:transform-gpu " +
-    "transform-gpu";
+    "transition-shadow duration-200 will-change-transform";
 
   // interaction: các lớp cho hover, active, focus, disabled
   const interaction =
-    // hover nâng nhẹ, active nhấn xuống, shadow khi hover
-    "motion-safe:hover:-translate-y-1 active:translate-y-0.5 " +
-    "hover:shadow-lg active:shadow-md " +
     // focus ring; màu ring cụ thể đặt trong CSS variant (.btn-*)
     "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 " +
     // disabled state
@@ -58,15 +55,32 @@ export default function Button({
   const sizeCls = btnSize[size] ?? btnSize.medium;
   const variantCls = btnStyle[variant] ?? btnStyle.cta;
 
+  const MotionComp = href ? motion.a : motion.button;
+
+  // prevent navigation when anchor is disabled
+  const handleClick = (e) => {
+    if (disabled) {
+      e.preventDefault();
+      return;
+    }
+    if (onClick) onClick(e);
+  };
+
+  const motionProps = {
+    whileHover: disabled ? {} : { y: -4, scale: 1.02 },
+    whileTap: disabled ? {} : { y: 1, scale: 0.995 },
+    transition: { type: "spring", stiffness: 320, damping: 28 },
+  };
+
   // nếu có href render <a>, ngược lại render <button>
   const Tag = href ? "a" : "button";
 
   return (
-    <Tag
-      {...(href ? { href } : {})}
-      type={href ? undefined : type} // a tag không cần type
-      onClick={onClick}
-      disabled={disabled && !href ? true : undefined}
+    <MotionComp
+      {...motionProps}
+      {...(href ? { href } : { type })}
+      onClick={handleClick}
+      aria-disabled={disabled ? "true" : undefined}
       className={cn(
         base,
         interaction,
@@ -82,13 +96,13 @@ export default function Button({
 
       {/* Icon nếu có (đặt trước text) */}
       {icon ? (
-        <span className="relative z-10 inline-flex items-center justify-center transition-transform duration-150 group-hover:-translate-y-0.5">
+        <span className="relative z-10 inline-flex items-center justify-center transition-transform duration-150">
           {icon}
         </span>
       ) : null}
 
       {/* Nội dung nút */}
       <span className="relative z-10">{children}</span>
-    </Tag>
+    </MotionComp>
   );
 }

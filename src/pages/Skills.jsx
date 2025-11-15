@@ -1,21 +1,25 @@
-import MainLayout from "../components/layout/MainLayout";
+import React from "react";
+
 import Tooltip from "../components/common/Tooltip";
 import { Link } from "react-router-dom";
 import Button from "../components/common/Button";
 import Card from "../components/common/Card";
 import { skillsData } from "../data/dataPortfolio";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Section from "../components/layout/Section";
 
-function Skills() {
+export default function Skills() {
   return (
-    <MainLayout title="My Skills">
+    <Section title="Kỹ năng">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {skillsData.map((skill) => {
           const meta = skill;
           return (
             <Card
               key={meta.id}
-              className="relative z-0 group bg-white rounded-lg p-5 shadow-md hover:shadow-xl transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:ring-1 hover:ring-green-200"
+              className="relative z-0 group bg-white rounded-lg p-5 shadow-md"
+              hoverY={-8}
+              hoverScale={1.02}
               aria-label={`${meta.name} skill card`}
             >
               <Tooltip label={meta.description}>
@@ -65,6 +69,7 @@ function Skills() {
           );
         })}
       </div>
+
       <div className="flex flex-col items-center space-y-4 mt-8">
         <p className="text-blue-600 italic text-center">
           Kỹ năng chỉ là một phần của câu chuyện. Hãy khám phá thêm về những gì
@@ -76,7 +81,6 @@ function Skills() {
           </Button>
         </Link>
       </div>
-    </MainLayout>
+    </Section>
   );
 }
-export default Skills;

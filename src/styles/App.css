@@ -13,15 +13,23 @@
     /* xanh lá nhạt */ #d4f5db 80%,
     /* xanh lá sáng */ #a7f3d0 100% /* xanh lá accent */
   );
+  --forest-day-bg: linear-gradient(
+    to bottom,
+    #1b5e20 0%,
+    /* Forest green sáng */ #2e7d32 40%,
+    /* Fresh leaf green */ #66bb6a 100% /* Light sunny green */
+  );
+  --forest-night-overlay: rgba(0, 20, 10, 0.55);
+
   --color-card-background: linear-gradient(45deg, #ffffff 0%, #d1fae5 100%);
 
   /* === UI Components === */
-  --color-header: #065f46;
-  --color-footer: #042f2e;
+  --color-header: #0f2f24;
+  --color-footer: #0f2f24;
   --color-shadow: rgba(6, 95, 70, 0.15);
 
   /* === Typography === */
-  --color-h1: #064e3b;
+  --color-h1: #ffffff;
   --color-h2: #065f46;
   --color-text: #374151;
   --color-text-light: #ffffff;

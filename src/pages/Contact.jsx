@@ -1,5 +1,5 @@
 import { useState } from "react";
-import MainLayout from "../components/layout/MainLayout";
+import Section from "../components/layout/Section";
 import Button from "../components/common/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Tooltip from "../components/common/Tooltip";
@@ -37,7 +37,6 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // basic client validation
     if (!form.name || !form.email || !form.message) {
       setStatus({
         loading: false,
@@ -71,7 +70,8 @@ export default function Contact() {
   };
 
   return (
-    <MainLayout title="Contact Me">
+    // dùng Section thay vì MainLayout; innerClass p-0 bg-transparent để không thay đổi layout nội dung
+    <Section title="Liên hệ" minH="min-h-[70vh] md:min-h-[75vh]">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Form card */}
@@ -273,6 +273,6 @@ export default function Contact() {
           </aside>
         </div>
       </div>
-    </MainLayout>
+    </Section>
   );
 }

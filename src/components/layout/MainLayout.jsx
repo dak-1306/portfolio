@@ -1,28 +1,37 @@
 import Header from "./Header";
 import Footer from "./Footer";
 
-function MainLayout({ children, title }) {
+/*
+  MainLayout (gọn)
+  - Header / Footer không cuộn (flex-none)
+  - main là vùng cuộn (overflow-y-auto) — thanh cuộn chỉ xuất hiện ở đây
+*/
+export default function MainLayout({ children }) {
   return (
-    <div
-      style={{ background: "var(--color-background-gradient)" }}
-      className="min-h-screen leading-relaxed antialiased flex flex-col items-center"
-    >
-      <Header />
-      <main className="flex flex-col justify-center items-center flex-grow w-full">
-        <h1 className="text-4xl font-bold mb-6 text-color-h1">{title}</h1>
-        <div
-          style={{ background: "var(--color-card-background)" }}
-          className=" backdrop-blur-md border border-green-200 
-                rounded-2xl p-8 shadow-lg hover:shadow-xl 
-                transition-all duration-300 
-                hover:-translate-y-1"
-        >
+    // dùng h-screen để toàn bộ layout khớp viewport
+    <div className="h-screen w-screen flex flex-col items-center">
+      {/* Header cố định trong flow, không bị cuộn */}
+      <div className="w-full flex-none z-20">
+        <Header />
+      </div>
+
+      {/* Main: chiếm phần còn lại, vùng cuộn duy nhất */}
+      <main
+        style={{ background: "var(--forest-day-bg)" }}
+        className="flex flex-col items-center w-full overflow-y-auto overscroll-contain flex-grow"
+      >
+        <h1 className="text-4xl font-bold mb-4 mt-4 text-[var(--color-h1)]">
+          Welcome to My Portfolio
+        </h1>
+        <div className="flex flex-col items-center w-full space-y-12">
           {children}
         </div>
       </main>
-      <Footer />
+
+      {/* Footer cố định trong flow, không bị cuộn */}
+      <div className="w-full flex-none z-20">
+        <Footer />
+      </div>
     </div>
   );
 }
-
-export default MainLayout;

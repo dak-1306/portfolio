@@ -108,3 +108,14 @@
     color: #042f2a; /* hơi tối hơn khi hover */
   }
 }
+
+/* đảm bảo main không dùng scroll-snap mặc định */
+main {
+  /* nếu bạn muốn bật snap, dùng 'proximity' thay vì 'mandatory' */
+  scroll-snap-type: none;
+}
+
+/* section nếu có class snap-align, không ép snap nếu main none */
+section {
+  scroll-snap-align: none;
+}
