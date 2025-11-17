@@ -18,18 +18,26 @@ export default function Home() {
     const id = idFromState || idFromHash;
     if (!id) return;
 
-    // small delay so nested components mount and elements exist
+    // delay nhẹ để DOM đã mount xong
     const t = setTimeout(() => {
       const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (!el) return;
 
-      // optional: clear history.state to avoid repeated scrolling on back/forward
+      // scroll target to vertical center of the nearest scrollable ancestor (main)
+      el.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "nearest",
+      });
+
+      // optional: clear history state/hash if you don't want repeated scroll on back
       try {
-        const url = window.location.pathname + (location.hash ? "" : "");
-        window.history.replaceState({}, document.title, url);
-      } catch (e) {
-        /* ignore */
-      }
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname + (idFromHash ? `#${idFromHash}` : "")
+        );
+      } catch {}
     }, 60);
 
     return () => clearTimeout(t);

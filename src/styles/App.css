@@ -1,58 +1,40 @@
 /* ===== DESIGN TOKENS - Portfolio Color Palette ===== */
 :root {
-  /* === Fonts === */
+  /* Design tokens */
   --font-heading: "Sora", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Poppins", ui-sans-serif, system-ui, sans-serif;
 
-  /* === Background & Layout === */
-  --color-background-light: #ffffff;
-  --color-background-gradient: linear-gradient(
-    -45deg,
-    #f8fffe 0%,
-    /* trắng xanh nhẹ */ #e6f7ed 45%,
-    /* xanh lá nhạt */ #d4f5db 80%,
-    /* xanh lá sáng */ #a7f3d0 100% /* xanh lá accent */
-  );
+  --accent-start: #06b6a4; /* emerald */
+  --accent-end: #054e3a; /* deep green */
+  --accent-shadow: rgba(6, 166, 122, 0.12);
+
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-medium: 500ms;
+
+  /* Background / theme */
   --forest-day-bg: linear-gradient(
     to bottom,
     #1b5e20 0%,
-    /* Forest green sáng */ #2e7d32 40%,
-    /* Fresh leaf green */ #66bb6a 100% /* Light sunny green */
+    #2e7d32 40%,
+    #66bb6a 100%
   );
-  --forest-night-overlay: rgba(0, 20, 10, 0.55);
-
   --color-card-background: linear-gradient(45deg, #ffffff 0%, #d1fae5 100%);
 
-  /* === UI Components === */
-  --color-header: #0f2f24;
-  --color-footer: #0f2f24;
-  --color-shadow: rgba(6, 95, 70, 0.15);
-
-  /* === Typography === */
+  /* Typography */
   --color-h1: #ffffff;
-  --color-h2: #065f46;
-  --color-text: #374151;
-  --color-text-light: #ffffff;
+  --color-text: #022c24;
   --color-text-muted: #6b7280;
 
-  /* === Status Colors === */
-  --color-warning: #f59e0b;
-  --color-warning-hover: #d97706;
-  --color-error: #dc2626;
-  --color-error-hover: #b91c1c;
-
-  /* === Button Variants === */
-  /* Success - xanh lá chính */
+  /* Buttons (gradients simplified to vars) */
   --color-success: linear-gradient(90deg, #059669 0%, #10b981 100%);
   --color-success-hover: linear-gradient(90deg, #047857 0%, #059669 100%);
   --color-success-active: #065f46;
 
-  /* Info - xanh dương */
   --color-info: linear-gradient(90deg, #0891b2 0%, #06b6d4 100%);
   --color-info-hover: linear-gradient(90deg, #0e7490 0%, #0891b2 100%);
   --color-info-active: #164e63;
 
-  /* CTA - xanh gradient chủ đạo */
   --color-cta: linear-gradient(45deg, #059669 0%, #10b981 50%, #34d399 100%);
   --color-cta-hover: linear-gradient(
     45deg,
@@ -62,7 +44,6 @@
   );
   --color-cta-active: #065f46;
 
-  /* CV - vàng cam hài hòa */
   --color-CV: linear-gradient(45deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%);
   --color-CV-hover: linear-gradient(
     45deg,
@@ -72,17 +53,17 @@
   );
   --color-CV-active: #92400e;
 
-  /* Danger - đỏ */
   --color-danger: linear-gradient(45deg, #dc2626 0%, #b91c1c 100%);
   --color-danger-hover: linear-gradient(45deg, #b91c1c 0%, #dc2626 100%);
   --color-danger-active: #991b1b;
 }
 
 /* ===== BUTTON COMPONENTS ===== */
-
+/* btn success */
 .btn-success {
   background: var(--color-success);
-  color: var(--color-text-light);
+  color: #ffffff;
+  border: none;
 }
 .btn-success:hover {
   background: var(--color-success-hover);
@@ -90,29 +71,11 @@
 .btn-success:active {
   background: var(--color-success-active);
 }
-.btn-CV {
-  background: var(--color-CV);
-  color: var(--color-text);
-}
-.btn-CV:hover {
-  background: var(--color-CV-hover);
-}
-.btn-CV:active {
-  background: var(--color-CV-active);
-}
-.btn-danger {
-  background: var(--color-danger);
-  color: var(--color-text-light);
-}
-.btn-danger:hover {
-  background: var(--color-danger-hover);
-}
-.btn-danger:active {
-  background: var(--color-danger-active);
-}
+/* btn info */
 .btn-info {
   background: var(--color-info);
-  color: var(--color-text-light);
+  color: #ffffff;
+  border: none;
 }
 .btn-info:hover {
   background: var(--color-info-hover);
@@ -120,10 +83,11 @@
 .btn-info:active {
   background: var(--color-info-active);
 }
+/* btn cta */
 .btn-cta {
   background: var(--color-cta);
-  color: var(--color-text-light);
-  text-shadow: 0 1px 2px var(--color-shadow);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 .btn-cta:hover {
@@ -135,4 +99,33 @@
   background: var(--color-cta-active);
   transform: translateY(0);
   box-shadow: none;
+}
+/* btn CV */
+.btn-CV {
+  background: var(--color-CV);
+  color: #1f2937;
+  border: none;
+}
+.btn-CV:hover {
+  background: var(--color-CV-hover);
+}
+.btn-CV:active {
+  background: var(--color-CV-active);
+}
+/* btn danger */
+.btn-danger {
+  background: var(--color-danger);
+  color: #ffffff;
+  border: none;
+}
+.btn-danger:hover {
+  background: var(--color-danger-hover);
+}
+.btn-danger:active {
+  background: var(--color-danger-active);
+}
+
+/* Small helpers */
+.bg-card {
+  background: var(--color-card-background);
 }

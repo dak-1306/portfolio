@@ -1,15 +1,12 @@
 @import "tailwindcss";
 
-@theme {
-  --font-heading: "Sora", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Poppins", ui-sans-serif, system-ui, sans-serif;
-}
-
-/* ===== TAILWIND BASE LAYER ===== */
+/* ===== BASE ===== */
 @layer base {
   html,
   body {
     font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
   }
 
   h1,
@@ -19,19 +16,20 @@
   h5,
   h6 {
     font-family: var(--font-heading);
+    margin: 0;
   }
 }
 
-/* ===== COMPONENT-SPECIFIC STYLES ===== */
+/* ===== COMPONENTS ===== */
 @layer components {
   .tooltip {
     @apply absolute left-1/2 -translate-x-1/2 top-full mt-2
-                   opacity-0 group-hover:opacity-100 pointer-events-none
-                   transition-opacity duration-200
-                   bg-gray-800 text-white text-xs px-2 py-1 rounded-lg shadow-lg whitespace-nowrap z-50;
+           opacity-0 group-hover:opacity-100 pointer-events-none
+           transition-opacity duration-200
+           bg-gray-800 text-white text-xs px-2 py-1 rounded-lg shadow-lg whitespace-nowrap z-50;
   }
 
-  /* Slogan: single element with animated overlay */
+  /* Slogan with animated accent overlay */
   .slogan {
     display: inline-block;
     position: relative;
@@ -51,7 +49,7 @@
   .slogan__text {
     position: relative;
     z-index: 2;
-    color: #022c24; /* dark-green text for contrast */
+    color: var(--color-text);
     font-weight: 600;
   }
 
@@ -79,7 +77,6 @@
     transform: translateX(0);
   }
 
-  /* respect reduced motion */
   @media (prefers-reduced-motion: reduce) {
     .slogan,
     .slogan::before {
@@ -88,14 +85,13 @@
     }
   }
 
-  /* List item style (slogan-item) — compact card with left accent bar */
+  /* Compact info item with left accent bar */
   .slogan-item {
     display: block;
     background: white;
     padding: 0.75rem 1rem;
     border-radius: 0.6rem;
     position: relative;
-    overflow: visible;
     transition: transform var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
     box-shadow: 0 6px 16px rgba(2, 15, 10, 0.04);
   }
@@ -122,32 +118,20 @@
   }
 
   .slogan-item .content {
-    margin-left: 1rem; /* space to clear left bar */
+    margin-left: 1rem;
   }
 
-  /* Small utility: subtle text color for meta */
   .meta-muted {
-    color: #4b5563; /* gray-600 */
+    color: #4b5563;
     font-size: 0.9rem;
   }
 }
 
-/* đảm bảo main không dùng scroll-snap mặc định */
+/* Ensure page-level scrolling behavior controlled elsewhere (no forced snap) */
 main {
-  /* nếu bạn muốn bật snap, dùng 'proximity' thay vì 'mandatory' */
+  scroll-behavior: smooth;
   scroll-snap-type: none;
 }
-
-/* section nếu có class snap-align, không ép snap nếu main none */
 section {
   scroll-snap-align: none;
-}
-
-:root {
-  --accent-start: #06b6a4; /* emerald-400 */
-  --accent-end: #054e3a; /* deep green */
-  --accent-shadow: rgba(6, 166, 122, 0.12);
-  --dur-fast: 180ms;
-  --dur-base: 320ms;
-  --dur-medium: 500ms;
 }

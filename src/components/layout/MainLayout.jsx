@@ -21,7 +21,7 @@ export default function MainLayout({ children }) {
       {/* đặt relative để có thể mount layer absolute cho fireflies */}
       <main
         style={{ background: "var(--forest-day-bg)" }}
-        className="relative flex flex-col items-center w-full overflow-y-auto overscroll-contain"
+        className="relative flex flex-col items-center w-full overflow-y-auto overscroll-contain pt-6 pb-6 flex-1"
       >
         {/* Fireflies: overlay trên nền nhưng dưới nội dung (z-0), không chặn sự kiện */}
         <div className="absolute inset-0 z-0 pointer-events-none">
@@ -29,7 +29,7 @@ export default function MainLayout({ children }) {
         </div>
 
         {/* Nội dung chính ở z-10 để luôn nằm trên layer đom đóm */}
-        <div className="relative z-10 flex flex-col items-center w-full space-y-12">
+        <div className="relative z-10 flex flex-col items-center w-full space-y-14 ">
           {children}
         </div>
       </main>
