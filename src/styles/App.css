@@ -13,6 +13,13 @@
   --dur-medium: 500ms;
 
   /* Background / theme */
+  --color-header: #014d40;
+  --color-footer: #012f27;
+  --color-background-gradient: linear-gradient(
+    to bottom,
+    #e8f4fc 0%,
+    #c1efca 100%
+  );
   --forest-day-bg: linear-gradient(
     to bottom,
     #1b5e20 0%,

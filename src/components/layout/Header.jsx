@@ -16,35 +16,45 @@ export default function Header() {
 
       <nav>
         <ul className="flex space-x-7 text-sm mr-6 list-none">
-          <Tooltip label={home}>
-            <Link to="/" aria-label={home}>
-              <FontAwesomeIcon icon={["fas", "home"]} />
-            </Link>
-          </Tooltip>
+          <li>
+            <Tooltip label={home}>
+              <Link to="/" aria-label={home}>
+                <FontAwesomeIcon icon={["fas", "home"]} />
+              </Link>
+            </Tooltip>
+          </li>
 
-          <Tooltip label={about}>
-            <Link to="/#about" aria-label={about}>
-              <FontAwesomeIcon icon={["fas", "user"]} />
-            </Link>
-          </Tooltip>
+          <li>
+            <Tooltip label={about}>
+              <Link to="/#about" aria-label={about}>
+                <FontAwesomeIcon icon={["fas", "user"]} />
+              </Link>
+            </Tooltip>
+          </li>
 
-          <Tooltip label={skills}>
-            <Link to="/#skills" aria-label={skills}>
-              <FontAwesomeIcon icon={["fas", "code"]} />
-            </Link>
-          </Tooltip>
+          <li>
+            <Tooltip label={skills}>
+              <Link to="/#skills" aria-label={skills}>
+                <FontAwesomeIcon icon={["fas", "code"]} />
+              </Link>
+            </Tooltip>
+          </li>
 
-          <Tooltip label={projects}>
-            <Link to="/#projects" aria-label={projects}>
-              <FontAwesomeIcon icon={["fas", "briefcase"]} />
-            </Link>
-          </Tooltip>
+          <li>
+            <Tooltip label={projects}>
+              <Link to="/#projects" aria-label={projects}>
+                <FontAwesomeIcon icon={["fas", "briefcase"]} />
+              </Link>
+            </Tooltip>
+          </li>
 
-          <Tooltip label={contact}>
-            <Link to="/#contact" aria-label={contact}>
-              <FontAwesomeIcon icon={["fas", "envelope"]} />
-            </Link>
-          </Tooltip>
+          <li>
+            <Tooltip label={contact}>
+              <Link to="/#contact" aria-label={contact}>
+                <FontAwesomeIcon icon={["fas", "envelope"]} />
+              </Link>
+            </Tooltip>
+          </li>
         </ul>
       </nav>
     </header>

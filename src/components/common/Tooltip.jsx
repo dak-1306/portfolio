@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
-export default function Tooltip({ children, label, visible }) {
+export default function Tooltip({ children, label, visible, as = "span" }) {
   const [open, setOpen] = useState(false);
   const controlled = typeof visible === "boolean";
   const show = controlled ? visible : open;
@@ -29,8 +29,10 @@ export default function Tooltip({ children, label, visible }) {
         })()
       : { display: "none" };
 
+  const Tag = as;
+
   return (
-    <li
+    <Tag
       className="relative inline-flex"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
@@ -52,6 +54,6 @@ export default function Tooltip({ children, label, visible }) {
         </div>,
         elRef.current
       )}
-    </li>
+    </Tag>
   );
 }
