@@ -1,4 +1,4 @@
-import CosmicLayout from "@/components/cosmic/CosmicLayout";
+import CosmicLayout from "@/components/layouts/CosmicLayout";
 import HeroSection from "@/pages/HeroSection";
 export default function HomePage() {
   return (

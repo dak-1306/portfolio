@@ -1,9 +1,9 @@
 import { Canvas } from "@react-three/fiber";
 import { Environment, Float, OrbitControls, Stars } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
-import Planet from "./planets/Planet";
-import PlanetLights from "./planets/PlanetLights";
-import FloatingParticles from "./planets/FloatingParticles";
+import Planet from "./background/Planet";
+import PlanetLights from "./background/PlanetLights";
+import FloatingParticles from "./background/FloatingParticles";
 export default function CosmicPlanetScene() {
   return (
     <div className="relative h-[700px] w-full">
