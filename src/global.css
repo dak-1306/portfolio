@@ -1,0 +1,29 @@
+@layer utilities {
+  /* .glass {
+    @apply border border-white/10 bg-white/5 backdrop-blur-xl;
+  } */
+  .cosmic-border {
+    position: relative;
+  }
+  .cosmic-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      rgba(168, 85, 247, 0.5),
+      rgba(34, 211, 238, 0.3),
+      transparent
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  .text-glow {
+    text-shadow: 0 0 20px rgba(168, 85, 247, 0.45);
+  }
+}
