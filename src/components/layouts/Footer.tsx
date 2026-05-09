@@ -1,19 +1,19 @@
 import { Mail, Orbit } from "lucide-react";
-import github from "@/assets/icons/github.svg";
-import facebook from "@/assets/icons/facebook.svg";
-import instagram from "@/assets/icons/instagram.svg";
+import Github from "@/assets/icons/github.svg?react";
+import Facebook from "@/assets/icons/facebook.svg?react";
+import Instagram from "@/assets/icons/instagram.svg?react";
 
 const socials = [
   {
-    icon: <img src={github} alt="GitHub" className="size-5 text-primary" />,
+    icon: <Github className="size-5" />,
     href: "#",
   },
   {
-    icon: <img src={facebook} alt="Facebook" className="size-5" />,
+    icon: <Facebook className="size-5" />,
     href: "#",
   },
   {
-    icon: <img src={instagram} alt="Instagram" className="size-5" />,
+    icon: <Instagram className="size-5" />,
     href: "#",
   },
   {
