@@ -47,7 +47,7 @@ export default function AboutSection() {
             >
               <CosmicCard
                 icon={item.icon}
-                title={item.title}
+                name={item.title}
                 description={item.description}
               />
             </motion.div>
