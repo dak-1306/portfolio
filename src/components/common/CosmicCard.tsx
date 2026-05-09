@@ -5,7 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 interface SkillCardProps {
-  icon: ReactNode;
+  icon?: ReactNode;
   name: string;
   level?: number;
   description: string;
@@ -48,10 +48,11 @@ export default function SkillCard({
         {/* Header */}{" "}
         <div className="flex items-start justify-between gap-4">
           {" "}
-          <div className=" flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-primary transition-all duration-300 group-hover:scale-110 ">
-            {" "}
-            {icon}{" "}
-          </div>
+          {icon && (
+            <div className=" flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-primary transition-all duration-300 group-hover:scale-110 ">
+              {icon}
+            </div>
+          )}
           {level !== undefined && (
             <Badge
               variant="secondary"

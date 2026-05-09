@@ -64,27 +64,27 @@ export default function Header() {
         {/* Desktop navigation */}
         <nav className="relative z-10 hidden items-center gap-2 lg:flex">
           {navItems.map((item) => (
-            <Link
+            <a
               key={item.label}
-              to={item.href}
+              href={item.href}
               className="group relative rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-all duration-300 hover:bg-secondary/10 hover:text-secondary"
             >
               <div className="absolute inset-0 rounded-full bg-secondary/0 opacity-0 blur-xl transition-all duration-300 group-hover:bg-secondary/10 group-hover:opacity-100" />
 
               <span className="relative z-10">{item.label}</span>
-            </Link>
+            </a>
           ))}
         </nav>
 
         {/* Right actions */}
         <div className="relative z-10 flex items-center gap-3">
           {/* CTA */}
-          <Link
-            to="#contact"
+          <a
+            href="#contact"
             className="hidden rounded-full bg-gradient-to-r from-secondary to-primary px-5 py-2.5 text-sm font-semibold text-background transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)] lg:block"
           >
             Let&apos;s Talk
-          </Link>
+          </a>
 
           {/* Mobile menu */}
           <Sheet>
@@ -97,13 +97,13 @@ export default function Header() {
             <SheetContent className="border-border bg-background/95 backdrop-blur-2xl">
               <div className="mt-10 flex flex-col gap-2">
                 {navItems.map((item) => (
-                  <Link
+                  <a
                     key={item.label}
-                    to={item.href}
+                    href={item.href}
                     className="rounded-xl px-4 py-3 text-muted-foreground transition-all duration-300 hover:bg-secondary/10 hover:text-secondary"
                   >
                     {item.label}
-                  </Link>
+                  </a>
                 ))}
 
                 <Link

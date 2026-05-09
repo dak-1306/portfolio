@@ -7,34 +7,51 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-const planets = [
-  {
-    name: "Mercury",
-    orbit: "orbit-mercury",
-    planet: "planet-mercury",
-    size: "size-5",
-    icon: <Sparkles className="size-3" />,
-    slug: "mercury-project",
-  },
-  {
-    name: "Venus",
-    orbit: "orbit-venus",
-    planet: "planet-venus",
-    size: "size-7",
-    icon: <Orbit className="size-4" />,
-    slug: "venus-project",
-  },
-  {
-    name: "Mars",
-    orbit: "orbit-mars",
-    planet: "planet-mars",
-    size: "size-6",
-    icon: <Rocket className="size-4" />,
-    slug: "mars-project",
-  },
-];
-
-export default function SolarSystem() {
+type Project = {
+  id: string;
+  name: string;
+  description: string;
+  slug: string;
+};
+export default function SolarSystem({
+  projectData,
+}: {
+  projectData: Project[];
+}) {
+  const projectPlanets = [
+    {
+      id: projectData[0].id,
+      name: projectData[0].name,
+      description: projectData[0].description,
+      orbit: "orbit-mercury",
+      planet: "planet-mercury",
+      size: "size-5",
+      icon: <Sparkles className="size-3" />,
+      slug: projectData[0].slug,
+    },
+    {
+      id: projectData[1].id,
+      name: projectData[1].name,
+      description: projectData[1].description,
+      orbit: "orbit-venus",
+      planet: "planet-venus",
+      size: "size-7",
+      icon: <Orbit className="size-4" />,
+      slug: projectData[1].slug,
+    },
+    {
+      id: projectData[0].id,
+      name: projectData[0].name,
+      description:
+        projectData[0].description ||
+        "A mysterious project orbiting in the red planet's path.",
+      orbit: "orbit-mars",
+      planet: "planet-mars",
+      size: "size-6",
+      icon: <Rocket className="size-4" />,
+      slug: projectData[0].slug,
+    },
+  ];
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
       {/* Main Solar System */}
@@ -63,7 +80,7 @@ export default function SolarSystem() {
         </motion.div>
 
         {/* Planets */}
-        {planets.map((planet) => (
+        {projectPlanets.map((planet) => (
           <div key={planet.name} className={`orbit ${planet.orbit}`}>
             <Link to={`/project/${planet.slug}`}>
               <motion.div
@@ -79,8 +96,9 @@ export default function SolarSystem() {
                       {planet.icon}
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent className="bg-background/90 text-foreground">
-                    {planet.name}
+                  <TooltipContent className="bg-background/90 text-foreground flex flex-col items-start rounded-lg p-4 shadow-lg">
+                    <p className="font-bold">{planet.name}</p>
+                    <p className="text-sm">{planet.description}</p>
                   </TooltipContent>
                 </Tooltip>
               </motion.div>

@@ -3,7 +3,10 @@ import SaturnScene from "@/components/cosmic/planets/SaturnScene";
 import { Button } from "@/components/ui/button";
 export default function HeroSection() {
   return (
-    <div className="relative flex min-h-screen items-center justify-center">
+    <section
+      id="hero"
+      className="relative flex min-h-screen items-center justify-center"
+    >
       <div className="grid grid-cols-12 gap-8 px-10">
         <div className="relative z-10 col-span-12 md:col-span-5 flex flex-col justify-center space-y-6">
           <p className=" text-sm uppercase tracking-[0.3em] text-primary mb-4">
@@ -28,6 +31,6 @@ export default function HeroSection() {
           <SaturnScene />
         </div>
       </div>
-    </div>
+    </section>
   );
 }

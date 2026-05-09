@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema } from "@/lib/schema";
 import type { ContactFormData } from "@/lib/schema";
+import StarIcon from "@/components/common/StarIcon";
 
 import {
   Field,
@@ -39,7 +40,10 @@ export default function ContactSection() {
     // Xử lý gửi API ở đây
   };
   return (
-    <div className="container relative z-10 mx-auto px-4 space-y-12">
+    <section
+      id="contact"
+      className="container relative z-10 mx-auto px-4 space-y-12"
+    >
       {" "}
       <SectionHeading
         badge="Contact"
@@ -48,36 +52,39 @@ export default function ContactSection() {
       />{" "}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="flex flex-col items-center gap-6">
-          <a
-            href="mailto:your.email@example.com"
-            className="text-xl font-medium text-primary hover:text-primary/80"
-          >
-            your.email@example.com
-          </a>
+          <div className="flex items-center gap-4">
+            <StarIcon />
+            <a
+              href="mailto:thd13062005@gmail.com"
+              className="text-xl font-medium text-white hover:text-primary"
+            >
+              thd13062005@gmail.com
+            </a>
+          </div>
           <a
             href="tel:0839479440"
-            className="text-lg font-medium text-primary hover:text-primary/80"
+            className="text-lg font-medium text-white hover:text-primary"
           >
-            <span className="font-bold">SDT</span>0839479440
+            <span className="font-bold mr-2">SDT</span>0839479440
           </a>
           <div className="flex items-center gap-6">
             <a
-              href="https://www.facebook.com/yourprofile"
+              href="https://www.facebook.com/tran.dang.913442/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-lg font-medium text-primary hover:text-primary/80"
+              className="flex items-center gap-2 text-lg font-medium text-white hover:text-primary"
             >
               <Facebook className="w-8 h-8 " />
-              <p>Facebook</p>
+              <p>Dang Tran</p>
             </a>
             <a
-              href="https://www.github.com/yourprofile"
+              href="https://github.com/dak-1306"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-lg font-medium text-primary hover:text-primary/80"
+              className="flex items-center gap-2 text-lg font-medium text-white hover:text-primary"
             >
               <Github className="w-8 h-8 " />
-              <p>GitHub</p>
+              <p>dak-1306</p>
             </a>
           </div>
         </div>
@@ -126,6 +133,7 @@ export default function ContactSection() {
                 />
                 <FieldError>{errors.comment?.message}</FieldError>
               </Field>
+              <FieldSeparator />
               <Field orientation="horizontal">
                 <Button size="lg" type="submit" disabled={isSubmitting}>
                   Submit
@@ -135,6 +143,6 @@ export default function ContactSection() {
           </FieldSet>
         </form>
       </div>
-    </div>
+    </section>
   );
 }

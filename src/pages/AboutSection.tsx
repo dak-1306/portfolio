@@ -28,7 +28,7 @@ const features = [
 
 export default function AboutSection() {
   return (
-    <section className="space-y-16">
+    <section id="about" className="space-y-16">
       <div className="container relative z-10 mx-auto px-4 space-y-16">
         <SectionHeading
           badge="About The Universe"

@@ -37,7 +37,7 @@ const skills = [
 ];
 export default function SkillSection() {
   return (
-    <div className="container relative z-10 mx-auto px-4  space-y-16">
+    <section id="skills" className="container relative z-10 mx-auto px-4 space-y-16">
       {" "}
       {/* Heading */}{" "}
       <SectionHeading
@@ -59,6 +59,6 @@ export default function SkillSection() {
           />
         ))}{" "}
       </div>{" "}
-    </div>
+    </section>
   );
 }
