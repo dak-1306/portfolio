@@ -1,11 +1,12 @@
 import CosmicLayout from "@/components/layouts/CosmicLayout";
 import HeroSection from "@/pages/HeroSection";
+import AboutSection from "@/pages/AboutSection";
 export default function HomePage() {
   return (
     <CosmicLayout>
       {" "}
       <HeroSection />
-      <section className="min-h-screen"> Projects </section>{" "}
+      <AboutSection />{" "}
     </CosmicLayout>
   );
 }
