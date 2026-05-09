@@ -1,5 +1,5 @@
 import { Atom, Code2, Palette, Sparkles } from "lucide-react";
-import SkillCard from "@/components/skills/CardSkill";
+import CosmicCard from "@/components/common/CosmicCard";
 import SectionHeading from "@/components/common/SectionHeading";
 const skills = [
   {
@@ -37,30 +37,28 @@ const skills = [
 ];
 export default function SkillSection() {
   return (
-    <section className="relative overflow-hidden py-24">
-      <div className="container relative z-10 mx-auto px-4">
+    <div className="container relative z-10 mx-auto px-4  space-y-16">
+      {" "}
+      {/* Heading */}{" "}
+      <SectionHeading
+        badge="Skills"
+        title="My Cosmic Toolbox"
+        description="A glimpse into the technologies and skills that power my cosmic creations."
+      />{" "}
+      {/* Grid */}{" "}
+      <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4 ">
         {" "}
-        {/* Heading */}{" "}
-        <SectionHeading
-          badge="Skills"
-          title="My Cosmic Toolbox"
-          description="A glimpse into the technologies and skills that power my cosmic creations."
-        />{" "}
-        {/* Grid */}{" "}
-        <div className=" mt-16 grid gap-6 sm:grid-cols-2 xl:grid-cols-4 ">
-          {" "}
-          {skills.map((skill) => (
-            <SkillCard
-              key={skill.name}
-              icon={skill.icon}
-              name={skill.name}
-              level={skill.level}
-              description={skill.description}
-              tags={skill.tags}
-            />
-          ))}{" "}
-        </div>{" "}
+        {skills.map((skill) => (
+          <CosmicCard
+            key={skill.name}
+            icon={skill.icon}
+            name={skill.name}
+            level={skill.level}
+            description={skill.description}
+            tags={skill.tags}
+          />
+        ))}{" "}
       </div>{" "}
-    </section>
+    </div>
   );
 }

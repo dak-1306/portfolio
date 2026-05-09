@@ -24,9 +24,6 @@ export default function SectionHeading({
       className={center ? "text-center" : "text-left"}
     >
       {badge && (
-        // <div className="mb-4 inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-4 py-1 text-sm text-primary backdrop-blur-md">
-        //   ✦ {badge}
-        // </div>
         <Badge variant="default" className="mb-4">
           <Star className="size-3 mr-1" />
           {badge}

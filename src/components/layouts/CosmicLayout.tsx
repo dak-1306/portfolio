@@ -9,7 +9,8 @@ export default function CosmicLayout({ children }: CosmicLayoutProps) {
     <main className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
       {" "}
       <CosmicBackground /> <Header />
-      <div className="relative z-10 isolate"> {children} </div> <Footer />
+      <div className="relative z-10 isolate space-y-24 pb-24"> {children} </div>
+      <Footer />
     </main>
   );
 }

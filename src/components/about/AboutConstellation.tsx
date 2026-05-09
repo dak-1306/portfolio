@@ -4,8 +4,6 @@ import { motion } from "framer-motion";
 
 import { Code2, Database, FileCode2, Sparkles, Star } from "lucide-react";
 
-import SectionHeading from "@/components/common/SectionHeading";
-
 import {
   Tooltip,
   TooltipContent,
@@ -55,19 +53,11 @@ const milestones = [
 
 export default function AboutConstellation() {
   return (
-    <div className="container relative z-10 mx-auto px-4 pt-32">
-      {/* Heading */}
-      <SectionHeading
-        badge="Constellation of Growth"
-        title="My Frontend Journey"
-        description="Một hành trình khám phá và phát triển kỹ năng frontend qua từng năm."
-        center={true}
-      />
-
+    <div className="container relative z-10 mx-auto px-4">
       {/* Constellation */}
       <div
         className="
-          relative mx-auto mt-28
+          relative mx-auto
           h-[900px]
           max-w-6xl
         "
@@ -308,18 +298,7 @@ export default function AboutConstellation() {
               </TooltipTrigger>
 
               {/* Tooltip */}
-              <TooltipContent
-                side="top"
-                className="
-                  max-w-xs
-
-                  border border-white/10
-
-                  bg-card/95
-
-                  backdrop-blur-xl
-                "
-              >
+              <TooltipContent side="top">
                 <div>
                   <h4
                     className="

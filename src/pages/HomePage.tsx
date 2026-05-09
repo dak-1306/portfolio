@@ -3,6 +3,7 @@ import HeroSection from "@/pages/HeroSection";
 import AboutSection from "@/pages/AboutSection";
 import ProjectSection from "@/pages/ProjectSection";
 import SkillSection from "@/pages/SkillSection";
+import ContactSection from "@/pages/ContactSection";
 export default function HomePage() {
   return (
     <CosmicLayout>
@@ -10,6 +11,7 @@ export default function HomePage() {
       <AboutSection />
       <ProjectSection />
       <SkillSection />
+      <ContactSection />
     </CosmicLayout>
   );
 }

@@ -28,15 +28,15 @@ const features = [
 
 export default function AboutSection() {
   return (
-    <section className="relative overflow-hidden py-24">
-      <div className="container relative z-10 mx-auto px-4">
+    <section className="space-y-16">
+      <div className="container relative z-10 mx-auto px-4 space-y-16">
         <SectionHeading
           badge="About The Universe"
           title="Exploring Digital Galaxies"
           description="Xây dựng trải nghiệm web mang cảm giác không gian vũ trụ hiện đại, huyền bí và cao cấp."
         />
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {features.map((item, index) => (
             <motion.div
               key={item.title}
@@ -54,6 +54,12 @@ export default function AboutSection() {
           ))}
         </div>
       </div>
+      <SectionHeading
+        badge="Constellation of Growth"
+        title="My Frontend Journey"
+        description="Một hành trình khám phá và phát triển kỹ năng frontend qua từng năm."
+        center={true}
+      />
       <AboutConstellation />
     </section>
   );
