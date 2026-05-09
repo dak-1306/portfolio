@@ -3,6 +3,7 @@ import { Sparkles, Rocket, Globe2 } from "lucide-react";
 
 import CosmicCard from "@/components/common/CosmicCard";
 import SectionHeading from "@/components/common/SectionHeading";
+import AboutConstellation from "@/components/about/AboutConstellation";
 
 const features = [
   {
@@ -53,6 +54,7 @@ export default function AboutSection() {
           ))}
         </div>
       </div>
+      <AboutConstellation />
     </section>
   );
 }

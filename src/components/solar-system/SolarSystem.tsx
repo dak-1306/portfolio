@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
 import { Rocket, Sparkles, Orbit } from "lucide-react";
 import { Link } from "react-router-dom";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const planets = [
   {
@@ -68,9 +73,16 @@ export default function SolarSystem() {
               >
                 <div className="planet-glow" />
 
-                <div className="relative z-10 text-white/90">{planet.icon}</div>
-
-                <div className="planet-tooltip">{planet.name}</div>
+                <Tooltip>
+                  <TooltipTrigger className="absolute z-10">
+                    <div className="relative z-10 text-white/90">
+                      {planet.icon}
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-background/90 text-foreground">
+                    {planet.name}
+                  </TooltipContent>
+                </Tooltip>
               </motion.div>
             </Link>
           </div>

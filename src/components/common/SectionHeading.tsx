@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { Star } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 interface SectionHeadingProps {
   badge?: string;
@@ -22,9 +24,13 @@ export default function SectionHeading({
       className={center ? "text-center" : "text-left"}
     >
       {badge && (
-        <div className="mb-4 inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-4 py-1 text-sm text-primary backdrop-blur-md">
-          ✦ {badge}
-        </div>
+        // <div className="mb-4 inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-4 py-1 text-sm text-primary backdrop-blur-md">
+        //   ✦ {badge}
+        // </div>
+        <Badge variant="default" className="mb-4">
+          <Star className="size-3 mr-1" />
+          {badge}
+        </Badge>
       )}
 
       <h2 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">

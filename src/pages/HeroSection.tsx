@@ -1,4 +1,5 @@
-import CosmicMarsScene from "@/components/layouts/CosmicMarsScene";
+// import CosmicMarsScene from "@/components/layouts/CosmicMarsScene";
+import SaturnScene from "@/components/cosmic/planets/SaturnScene";
 import { Button } from "@/components/ui/button";
 export default function HeroSection() {
   return (
@@ -23,7 +24,8 @@ export default function HeroSection() {
           </div>
         </div>
         <div className="col-span-12 md:col-span-7">
-          <CosmicMarsScene />
+          {/* <CosmicMarsScene /> */}
+          <SaturnScene />
         </div>
       </div>
     </div>

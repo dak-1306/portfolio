@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import CosmicBackground from "@/components/cosmic/background/CosmicBackground";
+
 import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
 type CosmicLayoutProps = { children: ReactNode };

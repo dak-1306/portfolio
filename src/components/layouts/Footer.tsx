@@ -27,7 +27,7 @@ export default function Footer() {
     <footer className="relative overflow-hidden border-t border-white/10 bg-card/40 backdrop-blur-xl">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(99,102,241,0.12),transparent_40%)]" />
 
-      <div className="container relative z-10 mx-auto px-4 py-12">
+      <div className="container relative z-10 mx-auto p-6">
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
           <div>
             <div className="flex items-center gap-3">

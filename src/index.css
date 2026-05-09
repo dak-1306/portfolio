@@ -17,11 +17,11 @@
   --popover-foreground: oklch(0.96 0.01 260);
 
   /* Cosmic Violet */
-  --primary: oklch(0.68 0.22 285);
+  --primary: oklch(66.489% 0.18875 287.427);
   --primary-foreground: oklch(0.98 0.01 260);
 
   /* Cyan Glow */
-  --secondary: oklch(0.72 0.14 220);
+  --secondary: oklch(72.499% 0.13339 221.43);
   --secondary-foreground: oklch(0.98 0.01 260);
 
   /* Surface */

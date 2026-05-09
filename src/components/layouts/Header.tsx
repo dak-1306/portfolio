@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
+import Logo from "@/assets/icons/logo.svg";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -43,7 +44,7 @@ export default function Header() {
             <div className="absolute h-10 w-10 rounded-full bg-secondary/20 blur-xl" />
 
             {/* Core */}
-            <div className="relative h-3 w-3 rounded-full bg-gradient-to-br from-secondary to-primary" />
+            <img src={Logo} alt="DAK Logo" className="h-8 w-8" />
 
             {/* Orbit */}
             <div className="absolute h-10 w-10 rotate-[-20deg] rounded-full border border-secondary/40" />
