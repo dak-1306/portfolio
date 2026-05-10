@@ -30,14 +30,14 @@ export default function SolarSystem({
       slug: projectData[0].slug,
     },
     {
-      id: projectData[1].id,
-      name: projectData[1].name,
-      description: projectData[1].description,
+      id: projectData[0].id,
+      name: projectData[0].name,
+      description: projectData[0].description,
       orbit: "orbit-venus",
       planet: "planet-venus",
       size: "size-7",
       icon: <Orbit className="size-4" />,
-      slug: projectData[1].slug,
+      slug: projectData[0].slug,
     },
     {
       id: projectData[0].id,

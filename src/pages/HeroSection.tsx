@@ -1,6 +1,8 @@
 // import CosmicMarsScene from "@/components/layouts/CosmicMarsScene";
 import SaturnScene from "@/components/cosmic/planets/SaturnScene";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { projects } from "@/data/project";
 export default function HeroSection() {
   return (
     <section
@@ -16,14 +18,19 @@ export default function HeroSection() {
             DAK
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-            Crafting immersive digital experiences with React, TypeScript,
-            animation systems, and modern frontend architecture.
+            I build intuitive, performance-driven web interfaces using React. By
+            integrating AI into my workflow, I optimize my coding process and
+            extend my capabilities seamlessly across the full stack
           </p>
           <div className="space-x-4">
-            <Button variant="outline" size="lg">
-              View Projects
-            </Button>
-            <Button size="lg">Contact Me</Button>
+            <Link to={`/project/${projects[0].slug}`}>
+              <Button variant="outline" size="lg">
+                View Projects
+              </Button>
+            </Link>
+            <a href="#contact">
+              <Button size="lg">Contact Me</Button>
+            </a>
           </div>
         </div>
         <div className="col-span-12 md:col-span-7">

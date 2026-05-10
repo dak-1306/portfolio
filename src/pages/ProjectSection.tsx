@@ -8,17 +8,17 @@ import { Link } from "react-router-dom";
 
 export default function ProjectSection() {
   const projectData = projects.map((project) => ({
-    id: project.id || "0",
-    name: project.title || "Unnamed Project",
-    slug: project.slug || "unnamed-project",
-    description: project.description || "No description available.",
+    id: project.id,
+    name: project.title,
+    slug: project.slug,
+    description: project.description,
   }));
   return (
     <section id="projects">
       <SectionHeading
-        title="Projects"
-        badge="My Work"
-        description="A collection of my recent projects and contributions."
+        title="My Works"
+        badge="Turning Ideas Into Digital Reality"
+        description="A showcase of my projects, where creativity meets code to bring innovative web experiences to life."
       />
 
       <Tabs defaultValue="solar">

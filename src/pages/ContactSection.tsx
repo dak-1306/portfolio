@@ -47,8 +47,8 @@ export default function ContactSection() {
       {" "}
       <SectionHeading
         badge="Contact"
-        title="Let's Connect in the Cosmos"
-        description="Whether you have a project in mind or just want to say hi, I'm always open to new connections and collaborations. Let's create something cosmic together!"
+        title="Let’s Build Something Great Together"
+        description="Whether you have a project in mind, want to collaborate, or just want to say hi, feel free to reach out. I’m always open to new opportunities and connections in the tech community."
       />{" "}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="flex flex-col items-center gap-6">

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-import { Code2, Database, FileCode2, Sparkles, Star } from "lucide-react";
+import { Star } from "lucide-react";
 
 import {
   Tooltip,
@@ -10,48 +10,19 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-const milestones = [
-  {
-    year: "Năm 1",
-    title: "HTML, CSS, JavaScript",
-    description:
-      "Bắt đầu hành trình frontend với nền tảng xây dựng giao diện web cơ bản.",
-    icon: <FileCode2 className="size-5" />,
-    x: 120,
-    y: 140,
-  },
-
-  {
-    year: "Năm 2",
-    title: "React.js & TailwindCSS",
-    description:
-      "Tiếp cận component-based architecture và modern UI development.",
-    icon: <Sparkles className="size-5" />,
-    x: 520,
-    y: 280,
-  },
-
-  {
-    year: "Cuối năm 2 - Đầu năm 3",
-    title: "Express.js & MongoDB",
-    description: "Tìm hiểu backend cơ bản, REST API và database NoSQL.",
-    icon: <Database className="size-5" />,
-    x: 280,
-    y: 540,
-  },
-
-  {
-    year: "Năm 3 - Hiện tại",
-    title: "TypeScript • React.ts • shadcn/ui",
-    description:
-      "Tập trung vào scalable frontend architecture và modern design systems.",
-    icon: <Code2 className="size-5" />,
-    x: 780,
-    y: 750,
-  },
-];
-
-export default function AboutConstellation() {
+type Milestone = {
+  title: string;
+  description: string;
+  year: string;
+  icon: React.ReactNode;
+  x: number;
+  y: number;
+};
+export default function AboutConstellation({
+  milestones,
+}: {
+  milestones: Milestone[];
+}) {
   return (
     <div className="container relative z-10 mx-auto px-4">
       {/* Constellation */}

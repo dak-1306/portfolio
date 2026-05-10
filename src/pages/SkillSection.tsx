@@ -1,49 +1,82 @@
-import { Atom, Code2, Palette, Sparkles } from "lucide-react";
+import { Atom, Code2, Palette, Sparkles, Database, Flame } from "lucide-react";
+import Figma from "@/assets/icons/figma.svg?react";
 import CosmicCard from "@/components/common/CosmicCard";
 import SectionHeading from "@/components/common/SectionHeading";
 const skills = [
+  // Frontend Group - Core Strength
   {
     icon: <Atom className="size-7" />,
     name: "React",
-    level: 90,
+    level: 85,
     description:
-      "Building scalable component-based user interfaces with modern React ecosystem.",
-    tags: ["Hooks", "Context API", "React Router", "React Query"],
+      "Building modern, component-based user interfaces with a focus on performance optimization.",
+    tags: ["Hooks", "Context API", "React Router", "shadcn/ui"],
   },
   {
     icon: <Code2 className="size-7" />,
-    name: "TypeScript",
-    level: 85,
+    name: "JavaScript/TypeScript",
+    level: 70,
     description:
-      "Developing type-safe applications with maintainable and scalable architecture.",
-    tags: ["Types", "Interfaces", "Generics", "Zod"],
+      "Crafting smooth logic and transitioning towards type-safe development for cleaner codebases.",
+    tags: ["ES6+", "DOM", "Basic Types", "Interfaces"],
   },
   {
     icon: <Palette className="size-7" />,
     name: "TailwindCSS",
-    level: 92,
+    level: 90,
     description:
-      "Crafting responsive modern UI with utility-first styling and design systems.",
-    tags: ["Responsive", "Animations", "Dark Mode", "shadcn/ui"],
+      "Designing responsive and aesthetic interfaces rapidly using a utility-first CSS approach.",
+    tags: ["Responsive Design", "Custom Themes", "Animations"],
   },
+
+  // AI & Backend Group - Extended Capabilities
   {
     icon: <Sparkles className="size-7" />,
-    name: "Framer Motion",
-    level: 80,
+    name: "AI-Native Workflow",
+    level: 95,
     description:
-      "Creating smooth and immersive animations for modern interactive experiences.",
-    tags: ["Motion", "Gestures", "Transitions", "Scroll Reveal"],
+      "Leveraging AI (Claude, GPT, Copilot) to optimize code quality and accelerate Full-stack development.",
+    tags: ["Prompt Engineering", "Code Optimization", "Rapid Prototyping"],
+  },
+  {
+    icon: <Database className="size-7" />,
+    name: "Express & MongoDB",
+    level: 60,
+    description:
+      "Developing essential backend systems and RESTful APIs with strong AI-assisted logic.",
+    tags: ["RESTful API", "CRUD operations", "Mongoose"],
+  },
+
+  // Tools & Infrastructure
+  {
+    icon: <Flame className="size-7" />,
+    name: "Firebase",
+    level: 65,
+    description:
+      "Integrating cloud services for real-world applications and academic projects.",
+    tags: ["Authentication", "Firestore", "Storage"],
+  },
+  {
+    icon: <Figma className="size-7" />,
+    name: "Figma",
+    level: 75,
+    description:
+      "Translating design mockups into pixel-perfect code while ensuring UI/UX consistency.",
+    tags: ["UI/UX Design", "Prototyping", "Design-to-Code"],
   },
 ];
 export default function SkillSection() {
   return (
-    <section id="skills" className="container relative z-10 mx-auto px-4 space-y-16">
+    <section
+      id="skills"
+      className="container relative z-10 mx-auto px-4 space-y-16"
+    >
       {" "}
       {/* Heading */}{" "}
       <SectionHeading
-        badge="Skills"
-        title="My Cosmic Toolbox"
-        description="A glimpse into the technologies and skills that power my cosmic creations."
+        badge="Tech Stack"
+        title="Core Expertise & AI Integration"
+        description="A comprehensive overview of my technical skills, highlighting my core frontend expertise and my ability to leverage AI for enhanced development capabilities."
       />{" "}
       {/* Grid */}{" "}
       <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4 ">
