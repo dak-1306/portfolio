@@ -14,8 +14,8 @@ function App() {
         <Routes>
           <Route element={<CosmicLayout />}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/project/:slug" element={<ProjectDetail />} />
           </Route>
+          <Route path="/project/:slug" element={<ProjectDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

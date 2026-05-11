@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Home, ArrowLeft, Search, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { projects } from "@/data/project";
+import { projectSample } from "@/data/project";
 import CosmicBackground from "@/components/cosmic/background/CosmicBackground";
 
 const NotFound = () => {
@@ -69,7 +69,7 @@ const NotFound = () => {
             </Button>
           </Link>
 
-          <Link to={`/project/${projects[0]?.slug}`}>
+          <Link to={`/project/${projectSample[0]?.slug}`}>
             <Button
               variant="outline"
               size="lg"

@@ -18,7 +18,7 @@ export interface Project {
   accentColor?: string; // Tùy chọn để tùy biến màu sắc riêng cho mỗi project
 }
 
-export const projects: Project[] = [
+export const projectSample: Project[] = [
   {
     id: "1",
     title: "TeamTaskManager",

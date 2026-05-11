@@ -1,6 +1,4 @@
 import SectionHeading from "@/components/common/SectionHeading";
-import Facebook from "@/assets/icons/facebook.svg?react";
-import Github from "@/assets/icons/github.svg?react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
@@ -8,7 +6,17 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema } from "@/lib/schema";
 import type { ContactFormData } from "@/lib/schema";
-import StarIcon from "@/components/common/StarIcon";
+
+import { useState } from "react";
+
+import contactMethods from "@/constants/contact";
+
+import {
+  Alert,
+  AlertAction,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert";
 
 import {
   Field,
@@ -21,8 +29,16 @@ import {
   FieldSet,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { InfoIcon } from "lucide-react";
+
+import { contact } from "@/constants/headingSection";
+
+import { motion as Motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
+import React from "react";
 
 export default function ContactSection() {
+  const [showAlert, setShowAlert] = useState(false);
   const {
     register,
     handleSubmit,
@@ -38,7 +54,9 @@ export default function ContactSection() {
   const onSubmit = (data: ContactFormData) => {
     console.log("Form Data:", data);
     // Xử lý gửi API ở đây
+    setShowAlert(true);
   };
+
   return (
     <section
       id="contact"
@@ -46,49 +64,56 @@ export default function ContactSection() {
     >
       {" "}
       <SectionHeading
-        badge="Contact"
-        title="Let’s Build Something Great Together"
-        description="Whether you have a project in mind, want to collaborate, or just want to say hi, feel free to reach out. I’m always open to new opportunities and connections in the tech community."
+        badge={contact.badge}
+        title={contact.title}
+        description={contact.description}
       />{" "}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="flex flex-col items-center gap-6">
-          <div className="flex items-center gap-4">
-            <StarIcon />
-            <a
-              href="mailto:thd13062005@gmail.com"
-              className="text-xl font-medium text-white hover:text-primary"
-            >
-              thd13062005@gmail.com
-            </a>
-          </div>
-          <a
-            href="tel:0839479440"
-            className="text-lg font-medium text-white hover:text-primary"
-          >
-            <span className="font-bold mr-2">SDT</span>0839479440
-          </a>
-          <div className="flex items-center gap-6">
-            <a
-              href="https://www.facebook.com/tran.dang.913442/"
+        <div className="flex flex-col  space-y-4 w-full max-w-md mx-auto my-auto">
+          {contactMethods.map((method, index) => (
+            <Motion.a
+              key={method.id}
+              href={method.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-lg font-medium text-white hover:text-primary"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{
+                backgroundColor: "rgba(var(--primary), 0.1)",
+                borderColor: "oklch(var(--primary))",
+              }}
+              className="group relative flex items-center p-4 gap-4 rounded-2xl border border-border bg-card/30 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_20px_rgba(107,70,255,0.2)]"
             >
-              <Facebook className="w-8 h-8 " />
-              <p>Dang Tran</p>
-            </a>
-            <a
-              href="https://github.com/dak-1306"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-lg font-medium text-white hover:text-primary"
-            >
-              <Github className="w-8 h-8 " />
-              <p>dak-1306</p>
-            </a>
-          </div>
-        </div>
+              {/* Icon Wrapper with Glow */}
+              <div className="relative flex items-center justify-center p-3 rounded-xl bg-muted/50 text-muted-foreground group-hover:text-primary transition-colors">
+                <div className="absolute inset-0 bg-primary/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative z-10">
+                  {/* Ép kích thước icon nếu cần */}
+                  {React.cloneElement(method.icon as React.ReactElement, {
+                    size: 24,
+                  })}
+                </div>
+              </div>
 
+              {/* Text Info */}
+              <div className="flex flex-col">
+                <span className="text-xs uppercase tracking-widest text-muted-foreground font-bold">
+                  {method.id}
+                </span>
+                <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate max-w-[150px]">
+                  {method.name}
+                </span>
+              </div>
+
+              {/* Decorative arrow */}
+              <ExternalLink
+                size={14}
+                className="absolute right-4 top-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1"
+              />
+            </Motion.a>
+          ))}
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FieldSet className="w-full max-w-md mx-auto bg-background/50 border border-primary/20 rounded-lg p-6">
             <FieldLegend>Form contact</FieldLegend>
@@ -143,6 +168,22 @@ export default function ContactSection() {
           </FieldSet>
         </form>
       </div>
+      {showAlert && (
+        <Alert>
+          <InfoIcon />
+          <AlertTitle>Notification!!!</AlertTitle>
+          <AlertDescription>
+            This is a demo form. The data you entered will not be sent anywhere.
+            Please contact me via email or social media for any inquiries. Thank
+            you for understanding!
+          </AlertDescription>
+          <AlertAction>
+            <Button variant="outline" onClick={() => setShowAlert(false)}>
+              OK!!!!
+            </Button>
+          </AlertAction>
+        </Alert>
+      )}
     </section>
   );
 }

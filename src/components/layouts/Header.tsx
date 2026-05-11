@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
-import Logo from "@/assets/icons/logo.svg";
+import LogoIcon from "@/components/common/Logo";
+import { projectSample } from "@/data/project";
+import { HashLink } from "react-router-hash-link";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -8,10 +10,6 @@ const navItems = [
   {
     label: "Home",
     href: "#hero",
-  },
-  {
-    label: "Projects",
-    href: "#projects",
   },
   {
     label: "Skills",
@@ -39,16 +37,7 @@ export default function Header() {
 
         {/* Logo */}
         <Link to="/" className="relative z-10 flex items-center gap-3">
-          <div className="relative flex items-center justify-center mr-2">
-            {/* Glow */}
-            <div className="absolute h-10 w-10 rounded-full bg-secondary/20 blur-xl" />
-
-            {/* Core */}
-            <img src={Logo} alt="DAK Logo" className="h-8 w-8" />
-
-            {/* Orbit */}
-            <div className="absolute h-10 w-10 rotate-[-20deg] rounded-full border border-secondary/40" />
-          </div>
+          <LogoIcon />
 
           <div className="flex flex-col">
             <span className="text-sm font-semibold tracking-[0.25em] text-foreground">
@@ -64,27 +53,27 @@ export default function Header() {
         {/* Desktop navigation */}
         <nav className="relative z-10 hidden items-center gap-2 lg:flex">
           {navItems.map((item) => (
-            <a
+            <HashLink
               key={item.label}
-              href={item.href}
+              to={item.href}
               className="group relative rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-all duration-300 hover:bg-secondary/10 hover:text-secondary"
             >
               <div className="absolute inset-0 rounded-full bg-secondary/0 opacity-0 blur-xl transition-all duration-300 group-hover:bg-secondary/10 group-hover:opacity-100" />
 
               <span className="relative z-10">{item.label}</span>
-            </a>
+            </HashLink>
           ))}
         </nav>
 
         {/* Right actions */}
         <div className="relative z-10 flex items-center gap-3">
           {/* CTA */}
-          <a
-            href="#contact"
+          <Link
+            to={`project/${projectSample[0].slug}`}
             className="hidden rounded-full bg-gradient-to-r from-secondary to-primary px-5 py-2.5 text-sm font-semibold text-background transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)] lg:block"
           >
-            Let&apos;s Talk
-          </a>
+            My Projects
+          </Link>
 
           {/* Mobile menu */}
           <Sheet>
@@ -97,20 +86,20 @@ export default function Header() {
             <SheetContent className="border-border bg-background/95 backdrop-blur-2xl">
               <div className="mt-10 flex flex-col gap-2">
                 {navItems.map((item) => (
-                  <a
+                  <HashLink
                     key={item.label}
-                    href={item.href}
+                    to={item.href}
                     className="rounded-xl px-4 py-3 text-muted-foreground transition-all duration-300 hover:bg-secondary/10 hover:text-secondary"
                   >
                     {item.label}
-                  </a>
+                  </HashLink>
                 ))}
 
                 <Link
-                  to="#contact"
+                  to={`project/${projectSample[0].slug}`}
                   className="mt-4 rounded-xl bg-gradient-to-r from-secondary to-primary px-4 py-3 text-center font-semibold text-background"
                 >
-                  Let&apos;s Talk
+                  My Projects
                 </Link>
               </div>
             </SheetContent>

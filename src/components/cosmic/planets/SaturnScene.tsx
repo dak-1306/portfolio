@@ -1,12 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-// Nâng cấp lớp Particle cho độ chi tiết và perspective
 class Particle {
   angle: number;
-  radius: number;
+  baseRadius: number;
   speed: number;
-  size: number;
+  baseParticleSize: number;
   color: string;
   perspective: number;
   opacity: number;
@@ -15,45 +14,34 @@ class Particle {
   constructor(ring: string) {
     this.ring = ring;
     this.angle = Math.random() * Math.PI * 2;
-    this.perspective = 0.2; // Độ dẹt elip
+    this.perspective = 0.2;
 
-    // Định nghĩa các dải vành đai và mật độ hạt
     if (ring === "C") {
-      // Vành trong cùng
-      this.radius = 120 + Math.random() * 30;
+      this.baseRadius = 120 + Math.random() * 30;
       this.speed = 0.001 + Math.random() * 0.003;
-      this.size = Math.random() * 1.2 + 0.3;
-      this.color = "#bfb3a5"; // Nâu xám
+      this.baseParticleSize = Math.random() * 1.2 + 0.3;
+      this.color = "#bfb3a5";
       this.opacity = Math.random() * 0.4 + 0.1;
     } else if (ring === "B") {
-      // Vành mật độ cao
-      this.radius = 150 + Math.random() * 90;
+      this.baseRadius = 150 + Math.random() * 90;
       this.speed = 0.003 + Math.random() * 0.005;
-      this.size = Math.random() * 1.8 + 0.5;
+      this.baseParticleSize = Math.random() * 1.8 + 0.5;
       const colors = ["#e2d5b8", "#d0bfa0", "#bfab8a", "#ede6d1", "#ffffff"];
       this.color = colors[Math.floor(Math.random() * colors.length)];
       this.opacity = Math.random() * 0.8 + 0.2;
     } else if (ring === "A") {
-      // Vành ngoài Cassini
-      this.radius = 260 + Math.random() * 60;
+      this.baseRadius = 260 + Math.random() * 60;
       this.speed = 0.001 + Math.random() * 0.004;
-      this.size = Math.random() * 1.5 + 0.4;
+      this.baseParticleSize = Math.random() * 1.5 + 0.4;
       const colors = ["#d7cdc0", "#c2b7a9", "#f0e6d6"];
       this.color = colors[Math.floor(Math.random() * colors.length)];
       this.opacity = Math.random() * 0.6 + 0.1;
-    } else if (ring === "F") {
-      // Vành rất mỏng ngoài cùng
-      this.radius = 330 + Math.random() * 5;
+    } else {
+      this.baseRadius = 330 + Math.random() * 5;
       this.speed = 0.0005 + Math.random() * 0.002;
-      this.size = Math.random() * 1.0 + 0.2;
+      this.baseParticleSize = Math.random() * 1.0 + 0.2;
       this.color = "#e2dcca";
       this.opacity = Math.random() * 0.3 + 0.05;
-    } else {
-      this.radius = 0;
-      this.speed = 0;
-      this.size = 0;
-      this.color = "";
-      this.opacity = 0;
     }
   }
 
@@ -61,30 +49,73 @@ class Particle {
     this.angle += this.speed;
   }
 
-  draw(ctx: CanvasRenderingContext2D, centerX: number, centerY: number) {
-    // Tính toán vị trí elip
-    const x = Math.cos(this.angle) * this.radius;
-    const y = Math.sin(this.angle) * this.radius * this.perspective;
+  draw(
+    ctx: CanvasRenderingContext2D,
+    centerX: number,
+    centerY: number,
+    scale: number,
+  ) {
+    // Tính toán vị trí elip dựa trên tỉ lệ scale hiện tại
+    const currentRadius = this.baseRadius * scale;
+    const currentSize = this.baseParticleSize * scale;
 
-    // Hiệu ứng mờ dần khi đi ra sau (sin < 0)
+    const x = Math.cos(this.angle) * currentRadius;
+    const y = Math.sin(this.angle) * currentRadius * this.perspective;
+
     let currentOpacity = this.opacity;
     if (Math.sin(this.angle) < 0) {
-      currentOpacity *= 0.4; // Giảm opacity khi ở phía sau
+      currentOpacity *= 0.4;
     }
 
     ctx.beginPath();
-    ctx.arc(centerX + x, centerY + y, this.size, 0, Math.PI * 2);
+    ctx.arc(centerX + x, centerY + y, currentSize, 0, Math.PI * 2);
     ctx.fillStyle = this.color;
     ctx.globalAlpha = currentOpacity;
     ctx.fill();
-    ctx.globalAlpha = 1; // Reset opacity
+    ctx.globalAlpha = 1;
   }
 }
 
 const SaturnAdvanced: React.FC = () => {
   const canvasBackRef = useRef<HTMLCanvasElement>(null);
   const canvasFrontRef = useRef<HTMLCanvasElement>(null);
+  const [baseSize, setBaseSize] = useState(750);
+  const particles = useRef<Particle[]>([]);
 
+  // 1. Xử lý Resize linh hoạt
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 640)
+        setBaseSize(width - 40); // Mobile
+      else if (width < 1024)
+        setBaseSize(600); // Tablet
+      else setBaseSize(750); // Desktop
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    // Khởi tạo hạt một lần duy nhất
+    if (particles.current.length === 0) {
+      const count = 1800;
+      for (let i = 0; i < count; i++) {
+        let ring =
+          i < 0.1 * count
+            ? "C"
+            : i < 0.6 * count
+              ? "B"
+              : i < 0.95 * count
+                ? "A"
+                : "F";
+        particles.current.push(new Particle(ring));
+      }
+    }
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // 2. Logic vẽ Canvas
   useEffect(() => {
     const canvasBack = canvasBackRef.current;
     const canvasFront = canvasFrontRef.current;
@@ -94,96 +125,81 @@ const SaturnAdvanced: React.FC = () => {
     const ctxFront = canvasFront.getContext("2d");
     if (!ctxBack || !ctxFront) return;
 
-    // Kích thước canvas lớn hơn
-    const size = 750;
-    const devicePixelRatio = window.devicePixelRatio || 1;
+    const dpr = window.devicePixelRatio || 1;
+    const scaleFactor = baseSize / 750; // Hệ số tỉ lệ
 
-    // Nâng cấp độ sắc nét (Retina)
-    canvasBack.width = size * devicePixelRatio;
-    canvasBack.height = size * devicePixelRatio;
-    canvasBack.style.width = `${size}px`;
-    canvasBack.style.height = `${size}px`;
-    ctxBack.scale(devicePixelRatio, devicePixelRatio);
+    // Cấu hình Canvas sắc nét theo DPR
+    [canvasBack, canvasFront].forEach((canvas) => {
+      canvas.width = baseSize * dpr;
+      canvas.height = baseSize * dpr;
+      canvas.style.width = `${baseSize}px`;
+      canvas.style.height = `${baseSize}px`;
+    });
 
-    canvasFront.width = size * devicePixelRatio;
-    canvasFront.height = size * devicePixelRatio;
-    canvasFront.style.width = `${size}px`;
-    canvasFront.style.height = `${size}px`;
-    ctxFront.scale(devicePixelRatio, devicePixelRatio);
+    ctxBack.scale(dpr, dpr);
+    ctxFront.scale(dpr, dpr);
 
-    const particles: Particle[] = [];
-    const particleCount = 1800; // Tăng số lượng hạt
-
-    // Phân bố hạt vào các vành đai
-    for (let i = 0; i < particleCount; i++) {
-      let ring;
-      if (i < 0.1 * particleCount) ring = "C";
-      else if (i < 0.6 * particleCount) ring = "B";
-      else if (i < 0.95 * particleCount) ring = "A";
-      else ring = "F";
-      particles.push(new Particle(ring));
-    }
+    let animationFrameId: number;
 
     const animate = () => {
-      ctxBack.clearRect(0, 0, size, size);
-      ctxFront.clearRect(0, 0, size, size);
+      ctxBack.clearRect(0, 0, baseSize, baseSize);
+      ctxFront.clearRect(0, 0, baseSize, baseSize);
 
-      const centerX = size / 2;
-      const centerY = size / 2;
+      const centerX = baseSize / 2;
+      const centerY = baseSize / 2;
 
-      particles.forEach((p) => {
+      particles.current.forEach((p) => {
         p.update();
-        // Tách hạt trước/sau dựa trên sin(angle)
-        // Nếu perspective làm elip dẹt y, giá trị y lớn là trước. y nhỏ là sau.
-        // x = Rcos, y = Rsin * perspective.
-        // y > 0 => sin > 0 => Phía trước
         if (Math.sin(p.angle) < 0) {
-          p.draw(ctxBack, centerX, centerY); // Vẽ lên canvas phía sau
+          p.draw(ctxBack, centerX, centerY, scaleFactor);
         } else {
-          p.draw(ctxFront, centerX, centerY); // Vẽ lên canvas phía trước
+          p.draw(ctxFront, centerX, centerY, scaleFactor);
         }
       });
 
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
 
     animate();
-  }, []);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [baseSize]);
+
+  // 3. Tính toán kích thước hành tinh tỉ lệ thuận
+  const planetSize = (224 * baseSize) / 750; // w-56 gốc là 224px
 
   return (
-    <div className="relative flex items-center justify-center w-full h-[750px] overflow-hidden">
-      {/* Container nghiêng toàn bộ hệ thống */}
+    <div
+      className="relative flex items-center justify-center w-full overflow-hidden"
+      style={{ height: `${baseSize}px` }}
+    >
       <div
-        className="relative flex items-center justify-center w-[750px] h-[750px]"
-        style={{ transform: "rotateX(10deg) rotateZ(-15deg)" }}
+        className="relative flex items-center justify-center transition-all duration-500"
+        style={{
+          width: `${baseSize}px`,
+          height: `${baseSize}px`,
+          transform: "rotateX(10deg) rotateZ(-15deg)",
+        }}
       >
-        {/* Canvas cho vành đai phía sau */}
         <canvas
           ref={canvasBackRef}
           className="absolute z-0 pointer-events-none"
         />
 
-        {/* Hành tinh Sao Thổ SVG nâng cấp */}
         <motion.div
-          animate={{ y: [0, -15, 0] }}
+          animate={{ y: [0, -10, 0] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="relative z-10 w-56 h-56 rounded-full" // Thêm bóng hào quang
+          className="relative z-10 rounded-full"
+          style={{ width: `${planetSize}px`, height: `${planetSize}px` }}
         >
-          <svg
-            viewBox="0 0 130 130"
-            className="w-full h-full drop-shadow-[0_10px_20px_rgba(0,0,0,0.4)]"
-          >
+          <svg viewBox="0 0 130 130" className="w-full h-full drop-shadow-2xl">
             <defs>
               <radialGradient id="saturnGradient" cx="25%" cy="25%" r="75%">
-                <stop offset="0%" stopColor="#fdf4df" />{" "}
-                {/* Ánh sáng mạnh hơn */}
+                <stop offset="0%" stopColor="#fdf4df" />
                 <stop offset="35%" stopColor="#e2c199" />
                 <stop offset="60%" stopColor="#cbb07c" />
                 <stop offset="85%" stopColor="#a5937d" />
-                <stop offset="100%" stopColor="#755a3f" />{" "}
-                {/* Bóng tối sâu hơn */}
+                <stop offset="100%" stopColor="#755a3f" />
               </radialGradient>
-
               <filter
                 id="innerShadow"
                 x="-20%"
@@ -217,8 +233,6 @@ const SaturnAdvanced: React.FC = () => {
                 <feComposite in="shadow" in2="SourceGraphic" operator="over" />
               </filter>
             </defs>
-
-            {/* Thân hành tinh */}
             <circle
               cx="65"
               cy="65"
@@ -226,71 +240,48 @@ const SaturnAdvanced: React.FC = () => {
               fill="url(#saturnGradient)"
               filter="url(#innerShadow)"
             />
-
-            {/* Các dải mây khí quyển chi tiết */}
-            <path
-              d="M10,48 Q65,55 120,48"
-              fill="none"
-              stroke="#dcbfa0"
-              strokeWidth="1.2"
-              opacity="0.6"
-            />
-            <path
-              d="M7,58 Q65,65 123,58"
-              fill="none"
-              stroke="#cca67c"
-              strokeWidth="1.5"
-              opacity="0.5"
-            />
-            <path
-              d="M5,70 Q65,78 125,70"
-              fill="none"
-              stroke="#bca083"
-              strokeWidth="1.0"
-              opacity="0.4"
-            />
-            <path
-              d="M8,80 Q65,86 122,80"
-              fill="none"
-              stroke="#ac9272"
-              strokeWidth="0.8"
-              opacity="0.3"
-            />
-            <path
-              d="M15,90 Q65,95 115,90"
-              fill="none"
-              stroke="#9c8461"
-              strokeWidth="0.6"
-              opacity="0.25"
-            />
-            <path
-              d="M25,100 Q65,103 105,100"
-              fill="none"
-              stroke="#8c7650"
-              strokeWidth="0.5"
-              opacity="0.2"
-            />
-
-            {/* Cơn bão nhỏ (giả lục giác) */}
-            <path
-              d="M60,15 L68,13 L75,15 L78,21 L75,27 L68,29 L60,27 L57,21 Z"
-              fill="none"
-              stroke="#ede1cf"
-              strokeWidth="1.0"
-              opacity="0.5"
-            />
-            <circle cx="67" cy="21" r="2.5" fill="#e8ddd1" opacity="0.4" />
+            <g opacity="0.5">
+              <path
+                d="M10,48 Q65,55 120,48"
+                fill="none"
+                stroke="#dcbfa0"
+                strokeWidth="1.2"
+              />
+              <path
+                d="M7,58 Q65,65 123,58"
+                fill="none"
+                stroke="#cca67c"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M5,70 Q65,78 125,70"
+                fill="none"
+                stroke="#bca083"
+                strokeWidth="1"
+              />
+              <path
+                d="M8,80 Q65,86 122,80"
+                fill="none"
+                stroke="#ac9272"
+                strokeWidth="0.8"
+              />
+            </g>
           </svg>
         </motion.div>
 
-        {/* Canvas cho vành đai phía trước */}
         <canvas
           ref={canvasFrontRef}
           className="absolute z-20 pointer-events-none"
         />
 
-        {/* Hào quang phía sau lớn hơn */}
-        <div className="absolute w-[850px] h-[850px] rounded-full opacity-15 -z-10" />
+        {/* Hào quang cũng co giãn theo baseSize */}
+        <div
+          className="absolute rounded-full opacity-10 -z-10 blur-[100px]"
+          style={{
+            width: `${baseSize * 1.1}px`,
+            height: `${baseSize * 1.1}px`,
+          }}
+        />
       </div>
     </div>
   );

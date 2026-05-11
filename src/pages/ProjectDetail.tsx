@@ -15,11 +15,12 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-import { projects } from "@/data/project"; // Import data
+import { projectSample } from "@/data/project"; // Import data
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import CosmicBackground from "@/components/cosmic/background/CosmicBackground";
 import {
   Carousel,
   CarouselContent,
@@ -38,12 +39,12 @@ const ProjectDetail: React.FC = () => {
   const navigate = useNavigate();
 
   // Tìm project hiện tại
-  const project = projects.find((p) => p.slug === slug);
+  const project = projectSample.find((p) => p.slug === slug);
   const id = project?.id; // Lấy ID để tính toán dự án tiếp theo
 
   // Logic chuyển sang project tiếp theo
   const nextId = (parseInt(id || "1") + 1).toString();
-  const nextProject = projects.find((p) => p.id === nextId);
+  const nextProject = projectSample.find((p) => p.id === nextId);
   const nextSlug = nextProject ? nextProject.slug : null;
 
   // Xử lý khi không tìm thấy project (ID sai)
@@ -61,12 +62,13 @@ const ProjectDetail: React.FC = () => {
 
   return (
     <AnimatePresence mode="wait">
+      <CosmicBackground />
       <motion.div
         key={id} // Quan trọng: Re-animate khi ID thay đổi
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="min-h-screen text-foreground pt-24 py-12 "
+        className="min-h-screen text-foreground py-12 px-4 md:px-8 relative z-10"
       >
         <div className="relative z-10 max-w-7xl mx-auto">
           {/* Header Nav */}
@@ -74,13 +76,13 @@ const ProjectDetail: React.FC = () => {
           <Button
             variant="ghost"
             className="gap-2 group"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/")}
           >
             <ArrowLeft
               size={18}
               className="group-hover:-translate-x-1 transition-transform"
             />
-            Dự án
+            Home
           </Button>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -90,7 +92,7 @@ const ProjectDetail: React.FC = () => {
                 <motion.h1
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  className="text-5xl lg:text-7xl font-heading font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary"
+                  className="text-4xl lg:text-6xl font-heading font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary"
                 >
                   {project.title}
                 </motion.h1>
@@ -104,23 +106,24 @@ const ProjectDetail: React.FC = () => {
                 </div>
               </header>
 
-              <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-2xl aspect-video">
-                <Carousel plugins={[plugin.current]}>
-                  <CarouselContent>
-                    {project.image.map((img, i) => (
-                      <CarouselItem key={i}>
-                        <img
-                          src={img}
-                          alt={project.title}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                        />
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </Carousel>
-              </div>
+              <Carousel
+                className="rounded-lg overflow-hidden border border-border bg-card shadow-lg"
+                plugins={[plugin.current]}
+              >
+                <CarouselContent>
+                  {project.image.map((img, i) => (
+                    <CarouselItem key={i}>
+                      <img
+                        src={img}
+                        alt={project.title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
 
               <div className="space-y-12">
                 <section className="space-y-4">

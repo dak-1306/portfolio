@@ -1,24 +1,27 @@
 import SolarSystem from "@/components/cosmic/planets/SolarSystem";
 import SectionHeading from "@/components/common/SectionHeading";
-import { projects } from "@/data/project";
+import { projectSample } from "@/data/project";
 import StarIcon from "@/components/common/StarIcon";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CosmicCard from "@/components/common/CosmicCard";
 import { Link } from "react-router-dom";
 
+import { projects } from "@/constants/headingSection";
+
 export default function ProjectSection() {
-  const projectData = projects.map((project) => ({
+  const projectData = projectSample.map((project) => ({
     id: project.id,
     name: project.title,
     slug: project.slug,
     description: project.description,
   }));
+
   return (
     <section id="projects">
       <SectionHeading
-        title="My Works"
-        badge="Turning Ideas Into Digital Reality"
-        description="A showcase of my projects, where creativity meets code to bring innovative web experiences to life."
+        title={projects.title}
+        badge={projects.badge}
+        description={projects.description}
       />
 
       <Tabs defaultValue="solar">

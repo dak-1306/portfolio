@@ -2,7 +2,9 @@ import { Atom, Code2, Palette, Sparkles, Database, Flame } from "lucide-react";
 import Figma from "@/assets/icons/figma.svg?react";
 import CosmicCard from "@/components/common/CosmicCard";
 import SectionHeading from "@/components/common/SectionHeading";
-const skills = [
+
+import { skills } from "@/constants/headingSection";
+const skillsData = [
   // Frontend Group - Core Strength
   {
     icon: <Atom className="size-7" />,
@@ -74,14 +76,14 @@ export default function SkillSection() {
       {" "}
       {/* Heading */}{" "}
       <SectionHeading
-        badge="Tech Stack"
-        title="Core Expertise & AI Integration"
-        description="A comprehensive overview of my technical skills, highlighting my core frontend expertise and my ability to leverage AI for enhanced development capabilities."
+        badge={skills.badge}
+        title={skills.title}
+        description={skills.description}
       />{" "}
       {/* Grid */}{" "}
       <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4 ">
         {" "}
-        {skills.map((skill) => (
+        {skillsData.map((skill) => (
           <CosmicCard
             key={skill.name}
             icon={skill.icon}
