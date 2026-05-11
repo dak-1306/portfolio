@@ -35,7 +35,6 @@ import { contact } from "@/constants/headingSection";
 
 import { motion as Motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
-import React from "react";
 
 import { sectionReveal } from "@/motion/section";
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Autoplay from "embla-carousel-autoplay";
@@ -33,8 +33,13 @@ import { pageTransition } from "@/motion/page";
 const ProjectDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
 
-  const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true }),
+  const plugin = useMemo(
+    () =>
+      Autoplay({
+        delay: 2000,
+        stopOnInteraction: true,
+      }),
+    [],
   );
 
   const navigate = useNavigate();
@@ -108,7 +113,7 @@ const ProjectDetail: React.FC = () => {
 
               <Carousel
                 className="rounded-lg overflow-hidden border border-border bg-card shadow-lg"
-                plugins={[plugin.current]}
+                plugins={[plugin]}
               >
                 <CarouselContent>
                   {project.image.map((img, i) => (
