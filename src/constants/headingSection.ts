@@ -2,33 +2,42 @@ const about = {
   badge: "About Me",
   title: "Who am I?",
   description:
-    "A passionate frontend developer with a love for clean code, high performance, and visually stunning user interfaces. I thrive in collaborative environments and am always eager to learn and adapt to new technologies.",
+    "Frontend developer focused on clean code, performance, and modern user experiences.",
 };
+
 const contact = {
   badge: "Contact",
   title: "Let’s Build Something Great Together",
   description:
-    "Whether you have a project in mind, want to collaborate, or just want to say hi, feel free to reach out. I’m always open to new opportunities and connections in the tech community.",
+    "Open to collaborations, freelance projects, and new opportunities in tech.",
 };
+
 const hero = {
   badge: "Frontend Developer",
   title: "DAK",
   description:
-    "I build intuitive, performance-driven web interfaces using React. By integrating AI into my workflow, I optimize my coding process and extend my capabilities seamlessly across the full stack",
+    "Building modern, high-performance web interfaces with React and AI-powered workflows.",
 };
 
 const projects = {
   badge: "My Works",
   title: "Turning Ideas Into Digital Reality",
   description:
-    "A showcase of my projects, where creativity meets code to bring innovative web experiences to life.",
+    "A collection of projects crafted with creativity, performance, and attention to detail.",
 };
 
 const skills = {
   badge: "Tech Stack",
   title: "Core Expertise & AI Integration",
   description:
-    "A comprehensive overview of my technical skills, highlighting my core frontend expertise and my ability to leverage AI for enhanced development capabilities.",
+    "Frontend technologies, modern tools, and AI-assisted development workflows.",
 };
 
-export { about, contact, hero, projects, skills };
+const journey = {
+  badge: "My Journey",
+  title: "The Journey of Code & Discipline",
+  description:
+    "A continuous journey of learning, growth, and mastering modern frontend development.",
+};
+
+export { about, contact, hero, projects, skills, journey };

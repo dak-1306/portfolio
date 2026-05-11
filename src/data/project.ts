@@ -26,16 +26,16 @@ export const projectSample: Project[] = [
     subtitle: "Full-stack Project & Task Management System",
     description:
       "A collaborative platform designed to streamline team workflows and enhance productivity. Developed with a focus on seamless data synchronization and intuitive user experience, this project demonstrates the integration of modern frontend patterns with a robust backend architecture, accelerated by AI-native development workflows.",
-    role: "Frontend Developer & System Architect",
+    role: "Full-Stack Developer",
     duration: "Mar 2026 - Present",
-    status: "In Progress", // Vì bạn nói đã hoàn thiện tầm 50%
+    status: "In Progress",
     techStack: [
       "React",
+      "TypeScript",
       "TailwindCSS",
       "Express.js",
       "MongoDB",
-      "Lucide Icons",
-      "AI-Assisted Logic",
+      "shadcn ui",
     ],
     features: [
       "Secure Authentication system (Register/Login/Logout)",

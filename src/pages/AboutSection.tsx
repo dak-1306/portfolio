@@ -5,7 +5,7 @@ import CosmicCard from "@/components/common/CosmicCard";
 import SectionHeading from "@/components/common/SectionHeading";
 import AboutConstellation from "@/components/about/AboutConstellation";
 
-import { about } from "@/constants/headingSection";
+import { about, journey } from "@/constants/headingSection";
 import { sectionReveal } from "@/motion/section";
 
 const features = [
@@ -65,10 +65,9 @@ export default function AboutSection() {
         </div>
       </div>
       <SectionHeading
-        badge="My Journey"
-        title="The Journey of Code & Discipline"
-        description="From my humble beginnings in IT to my current passion for frontend development, my journey has been one of continuous learning and growth. I am deeply committed to honing my skills, embracing new challenges, and contributing to projects that push the boundaries of what's possible in web development."
-        center={true}
+        badge={journey.badge}
+        title={journey.title}
+        description={journey.description}
       />
       <AboutConstellation />
     </motion.section>

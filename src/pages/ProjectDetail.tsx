@@ -53,10 +53,8 @@ const ProjectDetail: React.FC = () => {
     return (
       <div className="h-screen flex flex-col items-center justify-center gap-4 bg-background text-foreground">
         <AlertCircle size={48} className="text-destructive animate-pulse" />
-        <h2 className="text-2xl font-bold">Dự án không tồn tại</h2>
-        <Button onClick={() => navigate("/projects")}>
-          Quay lại danh sách
-        </Button>
+        <h2 className="text-2xl font-bold">Project not found</h2>
+        <Button onClick={() => navigate("/projects")}>Back to list</Button>
       </div>
     );
   }
@@ -130,7 +128,7 @@ const ProjectDetail: React.FC = () => {
               <div className="space-y-12">
                 <section className="space-y-4">
                   <h3 className="text-2xl font-heading font-bold text-secondary flex items-center gap-3">
-                    <Terminal size={24} /> Tổng quan kỹ thuật
+                    <Terminal size={24} /> Project overview
                   </h3>
                   <p className="text-muted-foreground text-lg leading-relaxed">
                     {project.description}
@@ -139,7 +137,7 @@ const ProjectDetail: React.FC = () => {
 
                 <section className="space-y-6">
                   <h3 className="text-2xl font-heading font-bold text-accent flex items-center gap-3">
-                    <Rocket size={24} /> Tính năng chính
+                    <Rocket size={24} /> Project features
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {project.features.map((f, i) => (
@@ -162,14 +160,14 @@ const ProjectDetail: React.FC = () => {
                 <Card className="bg-card/40 backdrop-blur-xl border-border shadow-2xl">
                   <CardHeader>
                     <CardTitle className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-bold">
-                      Chi tiết triển khai
+                      Implementation details
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div className="space-y-4">
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-muted-foreground flex items-center gap-2">
-                          <User size={14} /> Vai trò
+                          <User size={14} /> Role
                         </span>
                         <span className="text-sm font-semibold">
                           {project.role}
@@ -178,7 +176,7 @@ const ProjectDetail: React.FC = () => {
                       <Separator className="opacity-50" />
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-muted-foreground flex items-center gap-2">
-                          <Calendar size={14} /> Thời gian
+                          <Calendar size={14} /> Duration
                         </span>
                         <span className="text-sm font-semibold">
                           {project.duration}
@@ -204,12 +202,16 @@ const ProjectDetail: React.FC = () => {
                     </div>
 
                     <div className="pt-4 space-y-3">
-                      <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-12 rounded-xl gap-2 shadow-lg shadow-primary/20">
+                      <Button
+                        onClick={() => window.open(project.liveUrl, "_blank")}
+                        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-12 rounded-xl gap-2 shadow-lg shadow-primary/20 cursor-pointer"
+                      >
                         <ExternalLink size={18} /> Live Demo
                       </Button>
                       <Button
+                        onClick={() => window.open(project.githubUrl, "_blank")}
                         variant="outline"
-                        className="w-full h-12 rounded-xl gap-2 border-border"
+                        className="w-full h-12 rounded-xl gap-2 border-border cursor-pointer"
                       >
                         <Github className="w-4 h-4" /> GitHub Repo
                       </Button>
@@ -226,7 +228,7 @@ const ProjectDetail: React.FC = () => {
                     >
                       <div className="flex justify-between items-center text-primary mb-1">
                         <span className="text-[10px] uppercase font-bold tracking-widest">
-                          Dự án tiếp theo
+                          Next project
                         </span>
                         <ChevronRight size={16} />
                       </div>
