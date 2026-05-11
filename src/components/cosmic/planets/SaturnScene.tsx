@@ -101,7 +101,7 @@ const SaturnAdvanced: React.FC = () => {
     if (particles.current.length === 0) {
       const count = 1800;
       for (let i = 0; i < count; i++) {
-        let ring =
+        const ring =
           i < 0.1 * count
             ? "C"
             : i < 0.6 * count

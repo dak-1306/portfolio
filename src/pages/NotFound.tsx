@@ -99,30 +99,6 @@ const NotFound = () => {
           Quay lại trang trước đó
         </button>
       </motion.div>
-
-      {/* Các hạt nhỏ lơ lửng xung quanh (Canvas Particle nhẹ) */}
-      <div className="absolute inset-0 pointer-events-none -z-10">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white rounded-full"
-            initial={{
-              x: Math.random() * 100 + "%",
-              y: Math.random() * 100 + "%",
-              opacity: Math.random(),
-            }}
-            animate={{
-              y: [null, Math.random() * -100 - 50],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: Math.random() * 5 + 5,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
-        ))}
-      </div>
     </motion.div>
   );
 };
