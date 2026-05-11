@@ -69,50 +69,50 @@ export default function ContactSection() {
         description={contact.description}
       />{" "}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="flex flex-col  space-y-4 w-full max-w-md mx-auto my-auto">
-          {contactMethods.map((method, index) => (
-            <Motion.a
-              key={method.id}
-              href={method.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{
-                backgroundColor: "rgba(var(--primary), 0.1)",
-                borderColor: "oklch(var(--primary))",
-              }}
-              className="group relative flex items-center p-4 gap-4 rounded-2xl border border-border bg-card/30 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_20px_rgba(107,70,255,0.2)]"
-            >
-              {/* Icon Wrapper with Glow */}
-              <div className="relative flex items-center justify-center p-3 rounded-xl bg-muted/50 text-muted-foreground group-hover:text-primary transition-colors">
-                <div className="absolute inset-0 bg-primary/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="relative z-10">
-                  {/* Ép kích thước icon nếu cần */}
-                  {React.cloneElement(method.icon as React.ReactElement, {
-                    size: 24,
-                  })}
+        <div className="flex flex-col space-y-4 w-full max-w-md mx-auto my-auto">
+          {contactMethods.map((method, index) => {
+            // Lấy Component icon ra
+            const Icon = method.icon;
+
+            return (
+              <Motion.a
+                key={method.id}
+                href={method.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{
+                  backgroundColor: "rgba(var(--primary), 0.1)",
+                  borderColor: "oklch(var(--primary))",
+                }}
+                className="group relative flex items-center p-4 gap-4 rounded-2xl border border-border bg-card/30 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_20px_rgba(107,70,255,0.2)]"
+              >
+                <div className="relative flex items-center justify-center p-3 rounded-xl bg-muted/50 text-muted-foreground group-hover:text-primary transition-colors">
+                  <div className="absolute inset-0 bg-primary/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="relative z-10">
+                    {/* Render trực tiếp dưới dạng Component và truyền prop size */}
+                    <Icon className="h-5 w-5" />
+                  </div>
                 </div>
-              </div>
 
-              {/* Text Info */}
-              <div className="flex flex-col">
-                <span className="text-xs uppercase tracking-widest text-muted-foreground font-bold">
-                  {method.id}
-                </span>
-                <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate max-w-[150px]">
-                  {method.name}
-                </span>
-              </div>
+                <div className="flex flex-col">
+                  <span className="text-xs uppercase tracking-widest text-muted-foreground font-bold">
+                    {method.id}
+                  </span>
+                  <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate max-w-[150px]">
+                    {method.name}
+                  </span>
+                </div>
 
-              {/* Decorative arrow */}
-              <ExternalLink
-                size={14}
-                className="absolute right-4 top-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1"
-              />
-            </Motion.a>
-          ))}
+                <ExternalLink
+                  size={14}
+                  className="absolute right-4 top-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1"
+                />
+              </Motion.a>
+            );
+          })}
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FieldSet className="w-full max-w-md mx-auto bg-background/50 border border-primary/20 rounded-lg p-6">

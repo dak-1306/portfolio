@@ -11,7 +11,6 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3">
               <LogoIcon />
-
               <div>
                 <h3 className="font-heading text-xl font-bold">
                   Cosmic Portfolio
@@ -24,15 +23,21 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-3">
-            {ContactMethods.map((item, index) => (
-              <a
-                key={index}
-                href={item.url}
-                className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-muted-foreground transition-all duration-300 hover:border-primary/30 hover:bg-primary/10 hover:text-primary"
-              >
-                {item.icon}
-              </a>
-            ))}
+            {ContactMethods.map((item, index) => {
+              // Lấy Component icon ra
+              const Icon = item.icon;
+
+              return (
+                <a
+                  key={index}
+                  href={item.url}
+                  className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-muted-foreground transition-all duration-300 hover:border-primary/30 hover:bg-primary/10 hover:text-primary"
+                >
+                  {/* Truyền kích thước cho icon đồng nhất */}
+                  <Icon className="h-5 w-5" />
+                </a>
+              );
+            })}
           </div>
         </div>
 
