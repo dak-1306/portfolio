@@ -4,10 +4,17 @@ import { Home, ArrowLeft, Search, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { projectSample } from "@/data/project";
 import CosmicBackground from "@/components/cosmic/background/CosmicBackground";
+import { pageTransition } from "@/motion/page";
 
 const NotFound = () => {
   return (
-    <div className="relative min-h-screen flex flex-col items-center overflow-x-hidden justify-center text-center px-6">
+    <motion.div
+      variants={pageTransition}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="relative min-h-screen flex flex-col items-center overflow-x-hidden justify-center text-center px-6"
+    >
       <CosmicBackground />
       {/* Cảnh báo lỗi 404 với hiệu ứng Glitch giả lập */}
       <div className="relative">
@@ -116,7 +123,7 @@ const NotFound = () => {
           />
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

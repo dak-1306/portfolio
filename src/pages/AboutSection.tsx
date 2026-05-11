@@ -6,6 +6,7 @@ import SectionHeading from "@/components/common/SectionHeading";
 import AboutConstellation from "@/components/about/AboutConstellation";
 
 import { about } from "@/constants/headingSection";
+import { sectionReveal } from "@/motion/section";
 
 const features = [
   {
@@ -30,7 +31,14 @@ const features = [
 
 export default function AboutSection() {
   return (
-    <section id="about" className="space-y-16">
+    <motion.section
+      variants={sectionReveal}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      id="about"
+      className="space-y-16"
+    >
       <div className="container relative z-10 mx-auto px-4 space-y-16">
         <SectionHeading
           badge={about.badge}
@@ -63,6 +71,6 @@ export default function AboutSection() {
         center={true}
       />
       <AboutConstellation />
-    </section>
+    </motion.section>
   );
 }

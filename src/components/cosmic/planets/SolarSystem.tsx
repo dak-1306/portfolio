@@ -7,6 +7,7 @@ import {
   TooltipTrigger,
   TooltipProvider,
 } from "@/components/ui/tooltip";
+import { sectionReveal } from "@/motion/section";
 
 type Project = {
   id: string;
@@ -53,7 +54,13 @@ export default function SolarSystem({
 
   return (
     <TooltipProvider>
-      <section className="relative flex min-h-[500px] md:min-h-screen items-center justify-center overflow-hidden py-20">
+      <motion.section
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="relative flex min-h-[500px] md:min-h-screen items-center justify-center overflow-hidden py-20"
+      >
         {/* Main Solar System Wrapper */}
         <motion.div
           initial={{ opacity: 0, scale: 0.7 }}
@@ -120,7 +127,7 @@ export default function SolarSystem({
         <div className="absolute inset-0 pointer-events-none">
           <div className="stars-overlay opacity-30" />
         </div>
-      </section>
+      </motion.section>
     </TooltipProvider>
   );
 }

@@ -7,6 +7,7 @@ import {
   TooltipTrigger,
   TooltipProvider,
 } from "@/components/ui/tooltip";
+import { sectionReveal } from "@/motion/section";
 
 type Milestone = {
   title: string;
@@ -78,7 +79,13 @@ export default function AboutConstellation() {
 
   return (
     <TooltipProvider>
-      <div className="container relative z-10 mx-auto px-4 overflow-hidden">
+      <motion.div
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="container relative z-10 mx-auto px-4 overflow-hidden"
+      >
         {/* Constellation Container với tỷ lệ khung hình cố định */}
         <div className="relative mx-auto w-full max-w-5xl aspect-[10/12] md:aspect-[10/9]">
           {/* SVG Lines - Tự động co giãn theo ViewBox */}
@@ -166,7 +173,7 @@ export default function AboutConstellation() {
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </TooltipProvider>
   );
 }

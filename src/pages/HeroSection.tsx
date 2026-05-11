@@ -4,9 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { projectSample } from "@/data/project";
 import { hero } from "@/constants/headingSection";
+import { motion } from "framer-motion";
+import { sectionReveal } from "@/motion/section";
+
 export default function HeroSection() {
   return (
-    <section
+    <motion.section
+      variants={sectionReveal}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
       id="hero"
       className="relative flex min-h-screen items-center justify-center mt-12 md:mt-0"
     >
@@ -37,6 +44,6 @@ export default function HeroSection() {
           <SaturnScene />
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -4,6 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
+import { cardReveal, cardHover } from "@/motion/card";
+
 interface SkillCardProps {
   icon?: ReactNode;
   name: string;
@@ -12,7 +14,9 @@ interface SkillCardProps {
   tags?: string[];
   className?: string;
 }
+
 const MotionCard = motion(Card);
+
 export default function SkillCard({
   icon,
   name,
@@ -23,8 +27,11 @@ export default function SkillCard({
 }: SkillCardProps) {
   return (
     <MotionCard
-      whileHover={{ y: -8 }}
-      transition={{ duration: 0.25 }}
+      variants={cardReveal}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      whileHover={{ ...cardHover.whileHover, transition: cardHover.transition }}
       className={cn(
         "group relative overflow-hidden",
         "border border-white/10",

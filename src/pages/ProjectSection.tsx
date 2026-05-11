@@ -7,6 +7,8 @@ import CosmicCard from "@/components/common/CosmicCard";
 import { Link } from "react-router-dom";
 
 import { projects } from "@/constants/headingSection";
+import { motion } from "framer-motion";
+import { sectionReveal } from "@/motion/section";
 
 export default function ProjectSection() {
   const projectData = projectSample.map((project) => ({
@@ -17,7 +19,13 @@ export default function ProjectSection() {
   }));
 
   return (
-    <section id="projects">
+    <motion.section
+      variants={sectionReveal}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      id="projects"
+    >
       <SectionHeading
         title={projects.title}
         badge={projects.badge}
@@ -51,6 +59,6 @@ export default function ProjectSection() {
           </div>
         </TabsContent>
       </Tabs>
-    </section>
+    </motion.section>
   );
 }

@@ -28,6 +28,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { pageTransition } from "@/motion/page";
 
 const ProjectDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -65,9 +66,10 @@ const ProjectDetail: React.FC = () => {
       <CosmicBackground />
       <motion.div
         key={id} // Quan trọng: Re-animate khi ID thay đổi
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        variants={pageTransition}
+        initial="initial"
+        animate="animate"
+        exit="exit"
         className="min-h-screen text-foreground py-12 px-4 md:px-8 relative z-10"
       >
         <div className="relative z-10 max-w-7xl mx-auto">

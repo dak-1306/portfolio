@@ -4,6 +4,9 @@ import CosmicCard from "@/components/common/CosmicCard";
 import SectionHeading from "@/components/common/SectionHeading";
 
 import { skills } from "@/constants/headingSection";
+import { motion } from "framer-motion";
+import { sectionReveal } from "@/motion/section";
+
 const skillsData = [
   // Frontend Group - Core Strength
   {
@@ -69,7 +72,11 @@ const skillsData = [
 ];
 export default function SkillSection() {
   return (
-    <section
+    <motion.section
+      variants={sectionReveal}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
       id="skills"
       className="container relative z-10 mx-auto px-4 space-y-16"
     >
@@ -94,6 +101,6 @@ export default function SkillSection() {
           />
         ))}{" "}
       </div>{" "}
-    </section>
+    </motion.section>
   );
 }

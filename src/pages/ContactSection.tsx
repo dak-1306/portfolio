@@ -37,6 +37,8 @@ import { motion as Motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import React from "react";
 
+import { sectionReveal } from "@/motion/section";
+
 export default function ContactSection() {
   const [showAlert, setShowAlert] = useState(false);
   const {
@@ -58,7 +60,11 @@ export default function ContactSection() {
   };
 
   return (
-    <section
+    <Motion.section
+      variants={sectionReveal}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
       id="contact"
       className="container relative z-10 mx-auto px-4 space-y-12"
     >
@@ -184,6 +190,6 @@ export default function ContactSection() {
           </AlertAction>
         </Alert>
       )}
-    </section>
+    </Motion.section>
   );
 }

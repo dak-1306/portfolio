@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { sectionReveal } from "@/motion/section";
 
 class Particle {
   angle: number;
@@ -168,7 +169,11 @@ const SaturnAdvanced: React.FC = () => {
   const planetSize = (224 * baseSize) / 750; // w-56 gốc là 224px
 
   return (
-    <div
+    <motion.div
+      variants={sectionReveal}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
       className="relative flex items-center justify-center w-full overflow-hidden"
       style={{ height: `${baseSize}px` }}
     >
@@ -283,7 +288,7 @@ const SaturnAdvanced: React.FC = () => {
           }}
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
