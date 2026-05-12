@@ -114,5 +114,7 @@
   html {
     @apply font-sans;
     scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.18) #020617;
   }
 }
