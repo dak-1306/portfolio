@@ -1,6 +1,6 @@
 import { Atom, Code2, Palette, Sparkles, Database, Flame } from "lucide-react";
 import Figma from "@/assets/icons/figma.svg?react";
-import OpenAi from "@/assets/icons/openAi.svg?react";
+import OpenAi from "@/assets/icons/openAI.svg?react";
 import CosmicCard from "@/components/common/CosmicCard";
 import SectionHeading from "@/components/common/SectionHeading";
 
