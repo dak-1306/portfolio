@@ -1,7 +1,7 @@
 import ttmLanding from "@/assets/images/landing.webp";
 import ttmDashboard from "@/assets/images/dashboard.webp";
 import ttmTask from "@/assets/images/task.webp";
-import ttmChat from "@/assets/images/chat.webp";
+import ttmChat from "@/assets/images/chatTTm.webp";
 
 import bikevnHome from "@/assets/images/home_bikevn.webp";
 import bikevnDetail from "@/assets/images/productDetail_bikevn.webp";
