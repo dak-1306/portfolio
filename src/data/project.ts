@@ -1,6 +1,11 @@
 import ttmLanding from "@/assets/images/landing.webp";
 import ttmDashboard from "@/assets/images/dashboard.webp";
 import ttmTask from "@/assets/images/task.webp";
+import ttmChat from "@/assets/images/chat.webp";
+
+import bikevnHome from "@/assets/images/home_bikevn.webp";
+import bikevnDetail from "@/assets/images/productDetail_bikevn.webp";
+import bikevnProfile from "@/assets/images/profile_bikvn.webp";
 export interface Project {
   id: string;
   title: string;
@@ -25,29 +30,77 @@ export const projectSample: Project[] = [
     slug: "team-task-manager",
     subtitle: "Full-stack Project & Task Management System",
     description:
-      "A collaborative platform designed to streamline team workflows and enhance productivity. Developed with a focus on seamless data synchronization and intuitive user experience, this project demonstrates the integration of modern frontend patterns with a robust backend architecture, accelerated by AI-native development workflows.",
+      "A full-stack project and task management platform that helps teams organize projects, assign tasks, track progress, and collaborate efficiently. The application focuses on scalable frontend architecture, responsive user experience, and seamless integration with backend services.",
     role: "Full-Stack Developer",
-    duration: "Mar 2026 - Present",
-    status: "In Progress",
+    duration: "2025 - 2026",
+    status: "Completed",
     techStack: [
       "React",
       "TypeScript",
-      "TailwindCSS",
+      "TanStack Query",
+      "Zustand",
+      "React Hook Form",
+      "Zod",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Framer Motion",
+      "Recharts",
       "Express.js",
       "MongoDB",
-      "shadcn ui",
     ],
     features: [
-      "Secure Authentication system (Register/Login/Logout)",
-      "Comprehensive Project-based Task Management",
-      "Full CRUD operations for projects and individual tasks",
-      "Dynamic User Profile management with password updates",
-      "Modern Theme Switching (Dark/Light mode) support",
-      "Account deletion functionality for user privacy",
+      "JWT-based authentication and account management",
+      "Project and task collaboration system",
+      "Advanced search, filtering, and task organization",
+      "Interactive dashboard with analytics and charts",
+      "Responsive UI with dark/light theme support",
     ],
     liveUrl: "https://team-task-manager-three.vercel.app/",
     githubUrl: "https://github.com/dak-1306/teamTaskManager",
-    image: [ttmLanding, ttmDashboard, ttmTask],
+    image: [ttmLanding, ttmDashboard, ttmTask, ttmChat],
     accentColor: "#3b82f6", // Màu xanh dương chủ đạo cho tech/management
+  },
+  {
+    id: "2",
+    title: "BikeVN",
+    slug: "bikevn",
+    subtitle: "Motorbike Rental Management Platform",
+
+    description:
+      "A full-stack motorbike rental platform that enables vehicle booking, payment processing, rental management, and customer engagement. As the frontend developer, I designed and implemented the entire frontend architecture, focusing on scalability, maintainability, and seamless integration with backend services.",
+
+    role: "Frontend Developer",
+
+    duration: "2026",
+
+    status: "In Progress",
+
+    techStack: [
+      "React",
+      "TypeScript",
+      "TanStack Query",
+      "Zustand",
+      "Zod",
+      "React Router",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Vite",
+      "Spring Boot API",
+    ],
+
+    features: [
+      "Customer-facing motorbike rental platform",
+      "Admin dashboard for vehicle and booking management",
+      "Booking workflow and rental lifecycle management",
+      "Authentication and role-based access control",
+      "Real-time state management and API integration",
+      "Feature-first architecture with monorepo structure",
+    ],
+
+    liveUrl: "",
+    githubUrl: "https://github.com/DATTCNPM/BikeVN",
+    image: [bikevnHome, bikevnDetail, bikevnProfile],
+
+    accentColor: "#b0b910",
   },
 ];

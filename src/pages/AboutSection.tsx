@@ -11,21 +11,21 @@ import { sectionReveal } from "@/motion/section";
 const features = [
   {
     icon: <Rocket className="size-7" />,
-    title: "Passionate Coder",
+    title: "Frontend Development",
     description:
-      "My IT journey started in my first year, but it was late in that year when I wrote my first lines of HTML, CSS, and JavaScript that my true passion was ignited. Soon after, I discovered React—its component-based architecture, logical flow, and massive ecosystem immediately captivated me",
+      "My journey into web development began with HTML, CSS, and JavaScript, and quickly evolved into a strong focus on React. I enjoy building responsive, interactive, and user-friendly web applications while continuously improving my technical skills.",
   },
   {
     icon: <Sparkles className="size-7" />,
     title: "Performance-Driven Development",
     description:
-      "When I code, I prioritize three things: clean architecture, high performance, and visually optimized user interfaces. I believe good code shouldn't just work; it should provide a seamless experience for the user and be easy to scale.",
+      "I focus on writing maintainable code, building scalable architectures, and creating smooth user experiences. For me, good software is not only functional but also easy to understand and extend.",
   },
   {
     icon: <Globe2 className="size-7" />,
     title: "Adaptable Team Player",
     description:
-      "Beyond the code, I am a highly disciplined and cheerful team player. I am deeply adaptable and always ready to dive into new technologies if a project demands it. Currently, I am seeking a dynamic internship opportunity where I can contribute my frontend skills, learn from experienced mentors, and grow in a real-world environment.",
+      "I enjoy collaborating with others, learning from feedback, and adapting to new technologies when needed. Currently, I am seeking a frontend internship where I can contribute, learn, and grow in a professional environment.",
   },
 ];
 

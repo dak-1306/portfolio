@@ -225,24 +225,25 @@ const ProjectDetail: React.FC = () => {
                 </Card>
 
                 {/* Next Project Card (Logic + 1) */}
-                {nextProject && (
-                  <Link to={`/project/${nextSlug}`}>
-                    <motion.div
-                      whileHover={{ x: 5 }}
-                      className="p-6 rounded-2xl border border-dashed border-primary/30 bg-primary/5 group cursor-pointer transition-all hover:bg-primary/10"
-                    >
-                      <div className="flex justify-between items-center text-primary mb-1">
-                        <span className="text-[10px] uppercase font-bold tracking-widest">
-                          Next project
-                        </span>
-                        <ChevronRight size={16} />
-                      </div>
-                      <h4 className="font-heading font-bold text-lg group-hover:text-secondary transition-colors">
-                        {nextProject.title}
-                      </h4>
-                    </motion.div>
-                  </Link>
-                )}
+
+                <Link
+                  to={`${nextProject ? `/project/${nextSlug}` : `/project/${projectSample[0].slug}`}`}
+                >
+                  <motion.div
+                    whileHover={{ x: 5 }}
+                    className="p-6 rounded-2xl border border-dashed border-primary/30 bg-primary/5 group cursor-pointer transition-all hover:bg-primary/10"
+                  >
+                    <div className="flex justify-between items-center text-primary mb-1">
+                      <span className="text-[10px] uppercase font-bold tracking-widest">
+                        Next project
+                      </span>
+                      <ChevronRight size={16} />
+                    </div>
+                    <h4 className="font-heading font-bold text-lg group-hover:text-secondary transition-colors">
+                      {nextProject?.title || projectSample[0].title}
+                    </h4>
+                  </motion.div>
+                </Link>
               </div>
             </aside>
           </div>

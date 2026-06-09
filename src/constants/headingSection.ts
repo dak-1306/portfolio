@@ -7,37 +7,37 @@ const about = {
 
 const contact = {
   badge: "Contact",
-  title: "Let’s Build Something Great Together",
+  title: "Let's Connect",
   description:
-    "Open to collaborations, freelance projects, and new opportunities in tech.",
+    "Open to internship opportunities, collaborations, and frontend development projects.",
 };
 
 const hero = {
   badge: "Frontend Developer",
-  title: "DAK",
+  title: "Trần Hải Đăng",
   description:
-    "Building modern, high-performance web interfaces with React and AI-powered workflows.",
+    "Building modern, high-performance web applications with React, TypeScript, and a focus on great user experiences.",
 };
 
 const projects = {
   badge: "My Works",
-  title: "Turning Ideas Into Digital Reality",
+  title: "Featured Projects",
   description:
-    "A collection of projects crafted with creativity, performance, and attention to detail.",
+    "Projects that demonstrate my skills in frontend development, problem-solving, and application architecture.",
 };
 
 const skills = {
   badge: "Tech Stack",
-  title: "Core Expertise & AI Integration",
+  title: "Core Skills & Technologies",
   description:
-    "Frontend technologies, modern tools, and AI-assisted development workflows.",
+    "Frontend technologies, development tools, and practices I use to build modern web applications.",
 };
 
 const journey = {
   badge: "My Journey",
-  title: "The Journey of Code & Discipline",
+  title: "Learning & Growth",
   description:
-    "A continuous journey of learning, growth, and mastering modern frontend development.",
+    "A continuous journey of learning modern technologies, building projects, and improving as a frontend developer.",
 };
 
 export { about, contact, hero, projects, skills, journey };

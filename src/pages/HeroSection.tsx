@@ -22,7 +22,7 @@ export default function HeroSection() {
           <p className=" text-sm uppercase tracking-[0.3em] text-primary mb-4">
             {hero.badge}
           </p>
-          <h1 className="text-glow text-6xl font-black leading-tight lg:text-8xl">
+          <h1 className="text-glow text-4xl font-black leading-tight lg:text-6xl">
             {hero.title}
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">

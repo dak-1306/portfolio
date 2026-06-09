@@ -31,33 +31,37 @@ export default function AboutConstellation() {
 
   const milestones: Milestone[] = [
     {
-      year: "Year 1",
-      title: "Foundations",
-      description: "Mastering HTML, CSS, and JS.",
+      year: "2024",
+      title: "Web Foundations",
+      description:
+        "Started learning HTML, CSS, JavaScript and fundamental web development concepts.",
       icon: <FileCode2 className="size-4 md:size-5" />,
       x: isMobile ? 50 : 15, // Mobile: Căn giữa | Desktop: 15%
       y: isMobile ? 10 : 15,
     },
     {
-      year: "Year 2",
-      title: "React.js & Modern UI",
-      description: "Deep dive into component architecture.",
+      year: "2025",
+      title: "React Ecosystem",
+      description:
+        "Built modern frontend applications using React, TypeScript, Tailwind CSS, and component-based architecture.",
       icon: <Sparkles className="size-4 md:size-5" />,
       x: isMobile ? 50 : 55,
       y: isMobile ? 35 : 30,
     },
     {
-      year: "Year 2-3",
-      title: "Backend Fundamentals",
-      description: "Express.js, APIs and MongoDB.",
+      year: "2025-2026",
+      title: "Full-Stack Development",
+      description:
+        "Developed full-stack projects with Express.js, MongoDB, authentication, and REST APIs.",
       icon: <Database className="size-4 md:size-5" />,
       x: isMobile ? 50 : 30,
       y: isMobile ? 65 : 60,
     },
     {
       year: "Present",
-      title: "Advanced Systems",
-      description: "TypeScript and Design Systems.",
+      title: "Scalable Frontend Systems",
+      description:
+        "Applying TanStack Query, Zustand, React Hook Form, Zod, and modern frontend architecture patterns.",
       icon: <Code2 className="size-4 md:size-5" />,
       x: isMobile ? 50 : 80,
       y: isMobile ? 90 : 80,
