@@ -3,7 +3,7 @@ import SaturnScene from "@/components/cosmic/planets/SaturnScene";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { projectSample } from "@/data/project";
-import { hero } from "@/constants/headingSection";
+import { hero } from "@/data/hero";
 import { motion } from "framer-motion";
 import { sectionReveal } from "@/motion/section";
 

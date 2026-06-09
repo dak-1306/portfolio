@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CosmicCard from "@/components/common/CosmicCard";
 import { Link } from "react-router-dom";
 
-import { projects } from "@/constants/headingSection";
+import { projectsHeading } from "@/data/project";
 import { motion } from "framer-motion";
 import { sectionReveal } from "@/motion/section";
 
@@ -27,9 +27,9 @@ export default function ProjectSection() {
       id="projects"
     >
       <SectionHeading
-        title={projects.title}
-        badge={projects.badge}
-        description={projects.description}
+        title={projectsHeading.title}
+        badge={projectsHeading.badge}
+        description={projectsHeading.description}
       />
 
       <Tabs defaultValue="solar">

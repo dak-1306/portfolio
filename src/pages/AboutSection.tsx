@@ -1,33 +1,11 @@
 import { motion } from "framer-motion";
-import { Sparkles, Rocket, Globe2 } from "lucide-react";
 
 import CosmicCard from "@/components/common/CosmicCard";
 import SectionHeading from "@/components/common/SectionHeading";
 import AboutConstellation from "@/components/about/AboutConstellation";
-
-import { about, journey } from "@/constants/headingSection";
 import { sectionReveal } from "@/motion/section";
 
-const features = [
-  {
-    icon: <Rocket className="size-7" />,
-    title: "Frontend Development",
-    description:
-      "My journey into web development began with HTML, CSS, and JavaScript, and quickly evolved into a strong focus on React. I enjoy building responsive, interactive, and user-friendly web applications while continuously improving my technical skills.",
-  },
-  {
-    icon: <Sparkles className="size-7" />,
-    title: "Performance-Driven Development",
-    description:
-      "I focus on writing maintainable code, building scalable architectures, and creating smooth user experiences. For me, good software is not only functional but also easy to understand and extend.",
-  },
-  {
-    icon: <Globe2 className="size-7" />,
-    title: "Adaptable Team Player",
-    description:
-      "I enjoy collaborating with others, learning from feedback, and adapting to new technologies when needed. Currently, I am seeking a frontend internship where I can contribute, learn, and grow in a professional environment.",
-  },
-];
+import { about, features, journey } from "@/data/about";
 
 export default function AboutSection() {
   return (

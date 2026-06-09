@@ -9,7 +9,7 @@ import type { ContactFormData } from "@/lib/schema";
 
 import { useState } from "react";
 
-import contactMethods from "@/constants/contact";
+import contactMethods from "@/components/contact/contact";
 
 import {
   Alert,
@@ -31,7 +31,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { InfoIcon } from "lucide-react";
 
-import { contact } from "@/constants/headingSection";
+import { contact } from "@/data/contact";
 
 import { motion as Motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";

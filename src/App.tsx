@@ -1,5 +1,5 @@
-import "./global.css";
-import "./solarSystem.css";
+import "./styles/global.css";
+import "./styles/solarSystem.css";
 import HomePage from "@/pages/HomePage";
 import ProjectDetail from "@/pages/ProjectDetail";
 import CosmicLayout from "@/components/layouts/CosmicLayout";

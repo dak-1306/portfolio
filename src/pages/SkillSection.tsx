@@ -4,7 +4,7 @@ import OpenAi from "@/assets/icons/openAI.svg?react";
 import CosmicCard from "@/components/common/CosmicCard";
 import SectionHeading from "@/components/common/SectionHeading";
 
-import { skills } from "@/constants/headingSection";
+import { skills } from "@/data/skills";
 import { motion } from "framer-motion";
 import { sectionReveal } from "@/motion/section";
 

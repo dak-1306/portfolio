@@ -23,6 +23,13 @@ export interface Project {
   accentColor?: string; // Tùy chọn để tùy biến màu sắc riêng cho mỗi project
 }
 
+export const projectsHeading = {
+  badge: "My Works",
+  title: "Featured Projects",
+  description:
+    "Projects that demonstrate my skills in frontend development, problem-solving, and application architecture.",
+};
+
 export const projectSample: Project[] = [
   {
     id: "1",
