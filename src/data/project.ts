@@ -6,10 +6,11 @@ import ttmChat from "@/assets/images/chatTTm.webp";
 import bikevnHome from "@/assets/images/home_bikevn.webp";
 import bikevnDetail from "@/assets/images/productDetail_bikevn.webp";
 import bikevnProfile from "@/assets/images/profile_bikvn.webp";
+
 export interface Project {
   id: string;
   title: string;
-  slug: string; // Thêm trường slug để tạo URL thân thiện
+  slug: string;
   subtitle: string;
   description: string;
   role: string;
@@ -18,9 +19,10 @@ export interface Project {
   techStack: string[];
   features: string[];
   liveUrl: string;
+  adminUrl?: string; // Bổ sung thêm link admin riêng cho BikeVN
   githubUrl: string;
   image: string[];
-  accentColor?: string; // Tùy chọn để tùy biến màu sắc riêng cho mỗi project
+  accentColor?: string;
 }
 
 export const projectsHeading = {
@@ -37,7 +39,7 @@ export const projectSample: Project[] = [
     slug: "team-task-manager",
     subtitle: "Full-stack Project & Task Management System",
     description:
-      "A full-stack project and task management platform that helps teams organize projects, assign tasks, track progress, and collaborate efficiently. The application focuses on scalable frontend architecture, responsive user experience, and seamless integration with backend services.",
+      "A robust project and task management platform designed to streamline team collaboration and workflow tracking. The application emphasizes scalable frontend architecture, real-time client-server synchronization, and intuitive user experiences with high-performance interactive dashboards.",
     role: "Full-Stack Developer",
     duration: "2025 - 2026",
     status: "Completed",
@@ -56,58 +58,53 @@ export const projectSample: Project[] = [
       "MongoDB",
     ],
     features: [
-      "JWT-based authentication and account management",
-      "Project and task collaboration system",
-      "Advanced search, filtering, and task organization",
-      "Interactive dashboard with analytics and charts",
-      "Responsive UI with dark/light theme support",
+      "Secure JWT-based authentication with account management and role control",
+      "Dynamic project workspaces with granular task tracking and assignment",
+      "Advanced data filtering, multi-criteria searching, and task organization",
+      "Analytical dashboards equipped with interactive charts and productivity reports",
+      "Responsive, accessible UI featuring seamless dark and light theme toggles",
     ],
     liveUrl: "https://team-task-manager-three.vercel.app/",
     githubUrl: "https://github.com/dak-1306/teamTaskManager",
     image: [ttmLanding, ttmDashboard, ttmTask, ttmChat],
-    accentColor: "#3b82f6", // Màu xanh dương chủ đạo cho tech/management
+    accentColor: "#3b82f6",
   },
   {
     id: "2",
     title: "BikeVN",
     slug: "bikevn",
-    subtitle: "Motorbike Rental Management Platform",
-
+    subtitle: "Motorbike Rental & Administrative Management Platform",
     description:
-      "A full-stack motorbike rental platform that enables vehicle booking, payment processing, rental management, and customer engagement. As the frontend developer, I designed and implemented the entire frontend architecture, focusing on scalability, maintainability, and seamless integration with backend services.",
-
-    role: "Frontend Developer",
-
-    duration: "2026",
-
+      "A comprehensive digital marketplace facilitating motorbike rentals, flexible booking lifecycles, and secure online payment flows. Responsibilities included spearheading the entire frontend architecture, enforcing strict multi-role access controls, and designing a modular administrative system.",
+    role: "Lead Frontend Developer",
+    duration: "2026 - Present",
     status: "In Progress",
-
     techStack: [
-      "React",
+      "React 19",
       "TypeScript",
       "TanStack Query",
       "Zustand",
+      "React Hook Form",
       "Zod",
       "React Router",
       "Tailwind CSS",
       "shadcn/ui",
       "Vite",
       "Spring Boot API",
+      "MySQL",
     ],
-
     features: [
-      "Customer-facing motorbike rental platform",
-      "Admin dashboard for vehicle and booking management",
-      "Booking workflow and rental lifecycle management",
-      "Authentication and role-based access control",
-      "Real-time state management and API integration",
-      "Feature-first architecture with monorepo structure",
+      "Customer-facing portal optimized for seamless vehicle discovery and catalog browsing",
+      "Dedicated, feature-rich admin dashboard tailored for fleet and booking management",
+      "End-to-end automated booking workflow coupled with structural rental lifecycle states",
+      "Secure multi-role authentication system managing client vs. staff views",
+      "High-performance caching and predictive server-state management via TanStack Query",
+      "Clean, scalable, feature-first codebase organized in a structural monorepo approach",
     ],
-
-    liveUrl: "",
+    liveUrl: "https://bike-vn.vercel.app", // Bổ sung đầy đủ link live
+    adminUrl: "https://bike-vn-admin.vercel.app", // Bổ sung link admin dashboard
     githubUrl: "https://github.com/DATTCNPM/BikeVN",
     image: [bikevnHome, bikevnDetail, bikevnProfile],
-
     accentColor: "#b0b910",
   },
 ];
