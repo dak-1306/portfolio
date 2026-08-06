@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Rocket, Sparkles, Orbit, Globe } from "lucide-react";
+import { Rocket, Sparkles, Orbit } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   Tooltip,
@@ -29,12 +29,6 @@ const PLANET_CONFIGS = [
     planet: "planet-venus",
     size: "size-7 md:size-9",
     icon: Orbit,
-  },
-  {
-    orbit: "orbit-earth",
-    planet: "planet-earth",
-    size: "size-8 md:size-10",
-    icon: Globe,
   },
   {
     orbit: "orbit-mars",

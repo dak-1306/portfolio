@@ -7,6 +7,10 @@ import bikevnHome from "@/assets/images/home_bikevn.webp";
 import bikevnDetail from "@/assets/images/productDetail_bikevn.webp";
 import bikevnProfile from "@/assets/images/profile_bikvn.webp";
 
+import supportflowDashboard from "@/assets/images/DashboradSPF.webp";
+import supportflowChat from "@/assets/images/ChatSPF.webp";
+import supportflowWorkspace from "@/assets/images/WorkspaceSPF.webp";
+
 export interface Project {
   id: string;
   title: string;
@@ -106,5 +110,44 @@ export const projectSample: Project[] = [
     githubUrl: "https://github.com/DATTCNPM/BikeVN",
     image: [bikevnHome, bikevnDetail, bikevnProfile],
     accentColor: "#b0b910",
+  },
+  {
+    id: "3", // Bạn có thể điều chỉnh id tùy theo thứ tự trong mảng projects của bạn
+    title: "SupportFlow AI",
+    slug: "supportflow-ai",
+    subtitle: "AI Customer Support & Omnichannel Live Chat Platform",
+    description:
+      "An enterprise-grade Customer Support Monorepo platform featuring an embeddable AI chatbot, Retrieval-Augmented Generation (RAG) capabilities, and real-time human handoff. Built with modular frontend architecture and high-performance backend pipelines to automate customer service seamlessly.",
+    role: "Full-Stack Developer (Personal)",
+    duration: "2026",
+    status: "Completed",
+    techStack: [
+      "React",
+      "TypeScript",
+      "Turborepo",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Zustand",
+      "React Query",
+      "Node.js",
+      "Express.js",
+      "Socket.io",
+      "Google Gemini",
+      "Qdrant Vector DB",
+      "MongoDB",
+    ],
+    features: [
+      "Embeddable Lightweight Widget seamlessly integration via 2-line script tags",
+      "RAG-powered AI auto-responses using Google Gemini and Qdrant Vector Database",
+      "Interactive Knowledge Base management supporting dynamic document parsing (.pdf, .docx)",
+      "RAG Playground environment for testing vector context retrieval and response quality",
+      "Seamless real-time human agent handoff via Socket.io when AI resolution fails",
+      "Workspace management and multi-tenant admin dashboard built in Turborepo",
+    ],
+    liveUrl: "https://supportflow-ai-admin.vercel.app", // Link Live Demo (Admin Dashboard)
+    adminUrl: "https://supportflow-ai-admin.vercel.app",
+    githubUrl: "https://github.com/dak-1306/supportflow-ai.git",
+    image: [supportflowDashboard, supportflowWorkspace, supportflowChat], // Thay tên biến import ảnh của bạn vào đây
+    accentColor: "#8E75B2", // Mã màu xược theo tông Google Gemini / Brand AI của project
   },
 ];
