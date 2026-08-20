@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Home, ArrowLeft, Search, Rocket } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { projectSample } from "@/data/project";
 import CosmicBackground from "@/components/cosmic/background/CosmicBackground";
-import { pageTransition } from "@/motion/page";
+import { pageTransition } from "@/motion";
 
 const NotFound = () => {
   return (
@@ -16,7 +17,7 @@ const NotFound = () => {
       className="relative min-h-screen flex flex-col items-center overflow-x-hidden justify-center text-center px-6"
     >
       <CosmicBackground />
-      {/* Cảnh báo lỗi 404 với hiệu ứng Glitch giả lập */}
+
       <div className="relative">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -30,7 +31,6 @@ const NotFound = () => {
           404
         </motion.h1>
 
-        {/* Lớp phủ chữ phát sáng bên trên */}
         <motion.div
           animate={{
             x: [0, -2, 2, -1, 0],
@@ -43,7 +43,6 @@ const NotFound = () => {
         </motion.div>
       </div>
 
-      {/* Thông điệp lỗi */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -64,7 +63,6 @@ const NotFound = () => {
           từng tồn tại trong hệ thống này.
         </p>
 
-        {/* Nhóm nút điều hướng */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
           <Link to="/">
             <Button

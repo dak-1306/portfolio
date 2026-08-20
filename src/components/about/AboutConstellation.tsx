@@ -7,21 +7,20 @@ import {
   TooltipTrigger,
   TooltipProvider,
 } from "@/components/ui/tooltip";
-import { sectionReveal } from "@/motion/section";
+import { sectionReveal, DEFAULT_VIEWPORT } from "@/motion";
 
 type Milestone = {
   title: string;
   description: string;
   year: string;
   icon: React.ReactNode;
-  x: number; // % từ 0 - 100
-  y: number; // % từ 0 - 100
+  x: number;
+  y: number;
 };
 
 export default function AboutConstellation() {
   const [isMobile, setIsMobile] = useState(false);
 
-  // Kiểm tra breakpoint để thay đổi tọa độ hoặc cách hiển thị
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -36,7 +35,7 @@ export default function AboutConstellation() {
       description:
         "Started learning HTML, CSS, JavaScript and fundamental web development concepts.",
       icon: <FileCode2 className="size-4 md:size-5" />,
-      x: isMobile ? 50 : 15, // Mobile: Căn giữa | Desktop: 15%
+      x: isMobile ? 50 : 15,
       y: isMobile ? 10 : 15,
     },
     {
@@ -68,14 +67,12 @@ export default function AboutConstellation() {
     },
   ];
 
-  // Tạo đường dẫn SVG linh hoạt dựa trên tọa độ milestones
   const getPathData = () => {
     if (milestones.length < 2) return "";
-    let d = `M ${milestones[0].x * 10} ${milestones[0].y * 9}`; // Nhân 10 và 9 vì viewBox="0 0 1000 900"
+    let d = `M ${milestones[0].x * 10} ${milestones[0].y * 9}`;
     for (let i = 1; i < milestones.length; i++) {
       const prev = milestones[i - 1];
       const curr = milestones[i];
-      // Tạo đường cong mềm mại
       d += ` C ${prev.x * 10} ${(prev.y + (curr.y - prev.y) / 2) * 9}, ${curr.x * 10} ${(prev.y + (curr.y - prev.y) / 2) * 9}, ${curr.x * 10} ${curr.y * 9}`;
     }
     return d;
@@ -87,12 +84,10 @@ export default function AboutConstellation() {
         variants={sectionReveal}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
+        viewport={DEFAULT_VIEWPORT}
         className="container relative z-10 mx-auto px-4 overflow-hidden"
       >
-        {/* Constellation Container với tỷ lệ khung hình cố định */}
         <div className="relative mx-auto w-full max-w-5xl aspect-[10/12] md:aspect-[10/9]">
-          {/* SVG Lines - Tự động co giãn theo ViewBox */}
           <svg
             className="absolute inset-0 h-full w-full"
             viewBox="0 0 1000 900"
@@ -122,7 +117,6 @@ export default function AboutConstellation() {
             />
           </svg>
 
-          {/* Stars */}
           {milestones.map((milestone, index) => (
             <motion.div
               key={milestone.title}
@@ -136,12 +130,10 @@ export default function AboutConstellation() {
                 left: `${milestone.x}%`,
               }}
             >
-              {/* Year Label */}
               <div className="absolute left-1/2 top-[-30px] md:top-[-42px] -translate-x-1/2 whitespace-nowrap text-[10px] md:text-sm font-medium text-white/60">
                 {milestone.year}
               </div>
 
-              {/* Glow Behind Star */}
               <div className="absolute left-1/2 top-1/2 h-16 w-16 md:h-28 md:w-28 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/10 blur-2xl" />
 
               <Tooltip>

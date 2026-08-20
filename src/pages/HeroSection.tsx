@@ -1,11 +1,11 @@
-// import CosmicMarsScene from "@/components/layouts/CosmicMarsScene";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
 import SaturnScene from "@/components/cosmic/planets/SaturnScene";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import { projectSample } from "@/data/project";
 import { hero } from "@/data/hero";
-import { motion } from "framer-motion";
-import { sectionReveal } from "@/motion/section";
+import { sectionReveal, DEFAULT_VIEWPORT } from "@/motion";
 
 export default function HeroSection() {
   return (
@@ -13,13 +13,13 @@ export default function HeroSection() {
       variants={sectionReveal}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}
+      viewport={DEFAULT_VIEWPORT}
       id="hero"
       className="relative flex min-h-screen items-center justify-center mt-12 md:mt-0"
     >
       <div className="grid grid-cols-12 gap-8">
         <div className="relative z-10 col-span-12 md:col-span-5 flex flex-col justify-center space-y-6">
-          <p className=" text-sm uppercase tracking-[0.3em] text-primary mb-4">
+          <p className="text-sm uppercase tracking-[0.3em] text-primary mb-4">
             {hero.badge}
           </p>
           <h1 className="text-glow text-4xl font-black leading-tight lg:text-6xl">
@@ -40,7 +40,6 @@ export default function HeroSection() {
           </div>
         </div>
         <div className="col-span-12 md:col-span-7">
-          {/* <CosmicMarsScene /> */}
           <SaturnScene />
         </div>
       </div>

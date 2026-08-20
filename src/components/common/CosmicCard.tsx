@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
-import { cardReveal, cardHover } from "@/motion/card";
+import { cardReveal, cardHover, DEFAULT_VIEWPORT } from "@/motion";
 
 interface SkillCardProps {
   icon?: ReactNode;
@@ -30,8 +30,9 @@ export default function SkillCard({
       variants={cardReveal}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ ...cardHover.whileHover, transition: cardHover.transition }}
+      viewport={DEFAULT_VIEWPORT}
+      whileHover={cardHover.whileHover}
+      transition={cardHover.transition}
       className={cn(
         "group relative overflow-hidden",
         "border border-white/10",
@@ -43,71 +44,64 @@ export default function SkillCard({
         className,
       )}
     >
-      {" "}
-      {/* Cosmic Glow */}{" "}
+      {/* Cosmic Glow */}
       <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-        {" "}
-        <div className="absolute -left-16 top-0 h-32 w-32 rounded-full bg-primary/20 blur-3xl" />{" "}
-        <div className="absolute bottom-0 right-0 h-32 w-32 rounded-full bg-secondary/20 blur-3xl" />{" "}
-      </div>{" "}
+        <div className="absolute -left-16 top-0 h-32 w-32 rounded-full bg-primary/20 blur-3xl" />
+        <div className="absolute bottom-0 right-0 h-32 w-32 rounded-full bg-secondary/20 blur-3xl" />
+      </div>
+
       <CardContent className="relative z-10 p-6">
-        {" "}
-        {/* Header */}{" "}
+        {/* Header */}
         <div className="flex items-start justify-between gap-4">
-          {" "}
           {icon && (
-            <div className=" flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-primary transition-all duration-300 group-hover:scale-110 ">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-primary transition-all duration-300 group-hover:scale-110">
               {icon}
             </div>
           )}
           {level !== undefined && (
             <Badge
               variant="secondary"
-              className=" border border-primary/20 bg-primary/10 text-primary backdrop-blur-md "
+              className="border border-primary/20 bg-primary/10 text-primary backdrop-blur-md"
             >
               {level}%
             </Badge>
           )}
-        </div>{" "}
-        {/* Content */}{" "}
+        </div>
+
+        {/* Content */}
         <div className="mt-5">
-          {" "}
           <h3 className="font-heading text-2xl font-semibold tracking-tight">
-            {" "}
-            {name}{" "}
-          </h3>{" "}
+            {name}
+          </h3>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            {" "}
-            {description}{" "}
-          </p>{" "}
-        </div>{" "}
-        {/* Progress */}{" "}
+            {description}
+          </p>
+        </div>
+
+        {/* Progress */}
         {level !== undefined && (
           <div className="mt-6">
-            {" "}
             <div className="mb-2 flex items-center justify-between text-sm">
-              {" "}
-              <span className="text-muted-foreground"> Skill Level </span>{" "}
-              <span className="font-medium text-primary"> {level}% </span>{" "}
-            </div>{" "}
-            <Progress value={level} className="h-2 bg-white/10" />{" "}
+              <span className="text-muted-foreground">Skill Level</span>
+              <span className="font-medium text-primary">{level}%</span>
+            </div>
+            <Progress value={level} className="h-2 bg-white/10" />
           </div>
         )}
-        {/* Tags */}{" "}
+
+        {/* Tags */}
         <div className="mt-6 flex flex-wrap gap-2">
-          {" "}
           {tags?.map((tag) => (
             <Badge
               key={tag}
               variant="outline"
-              className=" border-white/10 bg-white/5 text-muted-foreground transition-colors duration-300 hover:border-primary/20 hover:bg-primary/10 hover:text-primary "
+              className="border-white/10 bg-white/5 text-muted-foreground transition-colors duration-300 hover:border-primary/20 hover:bg-primary/10 hover:text-primary"
             >
-              {" "}
-              {tag}{" "}
+              {tag}
             </Badge>
-          ))}{" "}
-        </div>{" "}
-      </CardContent>{" "}
+          ))}
+        </div>
+      </CardContent>
     </MotionCard>
   );
 }

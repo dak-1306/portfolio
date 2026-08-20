@@ -1,14 +1,18 @@
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
 import SolarSystem from "@/components/cosmic/planets/SolarSystem";
 import SectionHeading from "@/components/common/SectionHeading";
-import { projectSample } from "@/data/project";
 import StarIcon from "@/components/common/StarIcon";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CosmicCard from "@/components/common/CosmicCard";
-import { Link } from "react-router-dom";
-
-import { projectsHeading } from "@/data/project";
-import { motion } from "framer-motion";
-import { sectionReveal } from "@/motion/section";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { projectSample, projectsHeading } from "@/data/project";
+import {
+  sectionReveal,
+  staggerContainer,
+  staggerItem,
+  DEFAULT_VIEWPORT,
+} from "@/motion";
 
 export default function ProjectSection() {
   const projectData = projectSample.map((project) => ({
@@ -23,7 +27,7 @@ export default function ProjectSection() {
       variants={sectionReveal}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={DEFAULT_VIEWPORT}
       id="projects"
     >
       <SectionHeading
@@ -46,17 +50,24 @@ export default function ProjectSection() {
           <SolarSystem projectData={projectData} />
         </TabsContent>
         <TabsContent value="card">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto max-w-7xl mt-10">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={DEFAULT_VIEWPORT}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto max-w-7xl mt-10"
+          >
             {projectData.map((project) => (
-              <Link to={`/project/${project.slug}`} key={project.id}>
-                <CosmicCard
-                  key={project.id}
-                  name={project.name}
-                  description={project.description}
-                />
-              </Link>
+              <motion.div key={project.id} variants={staggerItem}>
+                <Link to={`/project/${project.slug}`}>
+                  <CosmicCard
+                    name={project.name}
+                    description={project.description}
+                  />
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </TabsContent>
       </Tabs>
     </motion.section>

@@ -5,4 +5,6 @@ const skills = {
     "Frontend technologies, development tools, and practices I use to build modern web applications.",
 };
 
+
+
 export { skills };

@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
   TooltipProvider,
 } from "@/components/ui/tooltip";
-import { sectionReveal } from "@/motion/section";
+import { sectionReveal, DEFAULT_VIEWPORT } from "@/motion";
 
 type Project = {
   id: string;
@@ -16,7 +16,6 @@ type Project = {
   slug: string;
 };
 
-// Cấu hình các hành tinh để map dữ liệu linh hoạt hơn
 const PLANET_CONFIGS = [
   {
     orbit: "orbit-mercury",
@@ -43,7 +42,6 @@ export default function SolarSystem({
 }: {
   projectData: Project[];
 }) {
-  // Tránh lỗi nếu data rỗng
   if (!projectData || projectData.length === 0) return null;
 
   return (
@@ -52,7 +50,7 @@ export default function SolarSystem({
         variants={sectionReveal}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
+        viewport={DEFAULT_VIEWPORT}
         className="relative flex min-h-[500px] md:min-h-screen items-center justify-center overflow-hidden py-20"
       >
         {/* Main Solar System Wrapper */}
@@ -60,7 +58,6 @@ export default function SolarSystem({
           initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          // Kỹ thuật then chốt: Scale nhỏ lại trên mobile và lớn dần trên màn hình lớn
           className="relative flex items-center justify-center scale-[0.5] sm:scale-[0.8] md:scale-[1.1] lg:scale-[1.3] transition-transform duration-500"
         >
           {/* Sun Glow */}
@@ -117,7 +114,7 @@ export default function SolarSystem({
           })}
         </motion.div>
 
-        {/* Ambient background particles (Optional) */}
+        {/* Ambient background particles */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="stars-overlay opacity-30" />
         </div>

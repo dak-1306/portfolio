@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { sectionReveal } from "@/motion/section";
+import { sectionReveal, DEFAULT_VIEWPORT } from "@/motion";
 
 class Particle {
   angle: number;
@@ -56,7 +56,6 @@ class Particle {
     centerY: number,
     scale: number,
   ) {
-    // Tính toán vị trí elip dựa trên tỉ lệ scale hiện tại
     const currentRadius = this.baseRadius * scale;
     const currentSize = this.baseParticleSize * scale;
 
@@ -83,21 +82,17 @@ const SaturnAdvanced: React.FC = () => {
   const [baseSize, setBaseSize] = useState(750);
   const particles = useRef<Particle[]>([]);
 
-  // 1. Xử lý Resize linh hoạt
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      if (width < 640)
-        setBaseSize(width - 40); // Mobile
-      else if (width < 1024)
-        setBaseSize(600); // Tablet
-      else setBaseSize(750); // Desktop
+      if (width < 640) setBaseSize(width - 40);
+      else if (width < 1024) setBaseSize(600);
+      else setBaseSize(750);
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
 
-    // Khởi tạo hạt một lần duy nhất
     if (particles.current.length === 0) {
       const count = 1800;
       for (let i = 0; i < count; i++) {
@@ -116,7 +111,6 @@ const SaturnAdvanced: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // 2. Logic vẽ Canvas
   useEffect(() => {
     const canvasBack = canvasBackRef.current;
     const canvasFront = canvasFrontRef.current;
@@ -127,9 +121,8 @@ const SaturnAdvanced: React.FC = () => {
     if (!ctxBack || !ctxFront) return;
 
     const dpr = window.devicePixelRatio || 1;
-    const scaleFactor = baseSize / 750; // Hệ số tỉ lệ
+    const scaleFactor = baseSize / 750;
 
-    // Cấu hình Canvas sắc nét theo DPR
     [canvasBack, canvasFront].forEach((canvas) => {
       canvas.width = baseSize * dpr;
       canvas.height = baseSize * dpr;
@@ -165,15 +158,14 @@ const SaturnAdvanced: React.FC = () => {
     return () => cancelAnimationFrame(animationFrameId);
   }, [baseSize]);
 
-  // 3. Tính toán kích thước hành tinh tỉ lệ thuận
-  const planetSize = (224 * baseSize) / 750; // w-56 gốc là 224px
+  const planetSize = (224 * baseSize) / 750;
 
   return (
     <motion.div
       variants={sectionReveal}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={DEFAULT_VIEWPORT}
       className="relative flex items-center justify-center w-full overflow-hidden"
       style={{ height: `${baseSize}px` }}
     >
@@ -279,7 +271,6 @@ const SaturnAdvanced: React.FC = () => {
           className="absolute z-20 pointer-events-none"
         />
 
-        {/* Hào quang cũng co giãn theo baseSize */}
         <div
           className="absolute rounded-full opacity-10 -z-10 blur-[100px]"
           style={{

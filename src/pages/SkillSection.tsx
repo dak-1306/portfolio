@@ -1,12 +1,17 @@
+import { motion } from "framer-motion";
 import { Atom, Code2, Palette, Sparkles, Database, Flame } from "lucide-react";
+
 import Figma from "@/assets/icons/figma.svg?react";
 import OpenAi from "@/assets/icons/openAI.svg?react";
 import CosmicCard from "@/components/common/CosmicCard";
 import SectionHeading from "@/components/common/SectionHeading";
-
 import { skills } from "@/data/skills";
-import { motion } from "framer-motion";
-import { sectionReveal } from "@/motion/section";
+import {
+  sectionReveal,
+  staggerContainer,
+  staggerItem,
+  DEFAULT_VIEWPORT,
+} from "@/motion";
 
 const skillsData = [
   {
@@ -16,7 +21,6 @@ const skillsData = [
       "Building modern, component-based web applications with reusable architecture and responsive user interfaces.",
     tags: ["Hooks", "Context API", "React Router", "Component Design"],
   },
-
   {
     icon: <Code2 className="size-7" />,
     name: "TypeScript",
@@ -24,7 +28,6 @@ const skillsData = [
       "Developing maintainable and type-safe applications with improved code quality and scalability.",
     tags: ["Interfaces", "Types", "Generics", "Type Safety"],
   },
-
   {
     icon: <Palette className="size-7" />,
     name: "Tailwind CSS",
@@ -32,7 +35,6 @@ const skillsData = [
       "Creating responsive and visually appealing user interfaces using a utility-first styling approach.",
     tags: ["Responsive Design", "Custom Themes", "UI Development"],
   },
-
   {
     icon: <Sparkles className="size-7" />,
     name: "State & Data Management",
@@ -40,7 +42,6 @@ const skillsData = [
       "Managing application state, server state, and asynchronous data efficiently in modern React applications.",
     tags: ["TanStack Query", "Zustand", "Caching", "Server State"],
   },
-
   {
     icon: <Database className="size-7" />,
     name: "Backend Fundamentals",
@@ -48,7 +49,6 @@ const skillsData = [
       "Building RESTful APIs, authentication flows, and database operations for full-stack applications.",
     tags: ["Express.js", "MongoDB", "JWT", "Mongoose"],
   },
-
   {
     icon: <Flame className="size-7" />,
     name: "Firebase",
@@ -56,7 +56,6 @@ const skillsData = [
       "Integrating cloud services for authentication, database, and file storage solutions.",
     tags: ["Authentication", "Firestore", "Storage"],
   },
-
   {
     icon: <Figma className="size-7" />,
     name: "Figma",
@@ -79,30 +78,34 @@ export default function SkillSection() {
       variants={sectionReveal}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={DEFAULT_VIEWPORT}
       id="skills"
       className="container relative z-10 mx-auto px-4 space-y-16"
     >
-      {" "}
-      {/* Heading */}{" "}
       <SectionHeading
         badge={skills.badge}
         title={skills.title}
         description={skills.description}
-      />{" "}
-      {/* Grid */}{" "}
-      <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4 ">
-        {" "}
+      />
+
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={DEFAULT_VIEWPORT}
+        className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4"
+      >
         {skillsData.map((skill) => (
-          <CosmicCard
-            key={skill.name}
-            icon={skill.icon}
-            name={skill.name}
-            description={skill.description}
-            tags={skill.tags}
-          />
-        ))}{" "}
-      </div>{" "}
+          <motion.div key={skill.name} variants={staggerItem}>
+            <CosmicCard
+              icon={skill.icon}
+              name={skill.name}
+              description={skill.description}
+              tags={skill.tags}
+            />
+          </motion.div>
+        ))}
+      </motion.div>
     </motion.section>
   );
 }

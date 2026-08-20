@@ -1,23 +1,22 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
+import { InfoIcon, ExternalLink } from "lucide-react";
+
 import SectionHeading from "@/components/common/SectionHeading";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { contactSchema } from "@/lib/schema";
-import type { ContactFormData } from "@/lib/schema";
-
-import { useState } from "react";
-
+import { Input } from "@/components/ui/input";
+import { contactSchema, type ContactFormData } from "@/lib/schema";
 import contactMethods from "@/components/contact/contact";
-
+import { contact } from "@/data/contact";
 import {
   Alert,
   AlertAction,
   AlertDescription,
   AlertTitle,
 } from "@/components/ui/alert";
-
 import {
   Field,
   FieldDescription,
@@ -28,15 +27,12 @@ import {
   FieldSeparator,
   FieldSet,
 } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { InfoIcon } from "lucide-react";
-
-import { contact } from "@/data/contact";
-
-import { motion as Motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
-
-import { sectionReveal } from "@/motion/section";
+import {
+  sectionReveal,
+  staggerContainer,
+  staggerItem,
+  DEFAULT_VIEWPORT,
+} from "@/motion";
 
 export default function ContactSection() {
   const [showAlert, setShowAlert] = useState(false);
@@ -46,48 +42,46 @@ export default function ContactSection() {
     formState: { errors, isSubmitting },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
-    defaultValues: {
-      fullName: "",
-      email: "",
-      comment: "",
-    },
+    defaultValues: { fullName: "", email: "", comment: "" },
   });
+
   const onSubmit = (data: ContactFormData) => {
     console.log("Form Data:", data);
-    // Xử lý gửi API ở đây
     setShowAlert(true);
   };
 
   return (
-    <Motion.section
+    <motion.section
       variants={sectionReveal}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={DEFAULT_VIEWPORT}
       id="contact"
       className="container relative z-10 mx-auto px-4 space-y-12"
     >
-      {" "}
       <SectionHeading
         badge={contact.badge}
         title={contact.title}
         description={contact.description}
-      />{" "}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="flex flex-col space-y-4 w-full max-w-md mx-auto my-auto">
-          {contactMethods.map((method, index) => {
-            // Lấy Component icon ra
-            const Icon = method.icon;
+      />
 
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={DEFAULT_VIEWPORT}
+          className="flex flex-col space-y-4 w-full max-w-md mx-auto my-auto"
+        >
+          {contactMethods.map((method) => {
+            const Icon = method.icon;
             return (
-              <Motion.a
+              <motion.a
                 key={method.id}
                 href={method.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
+                variants={staggerItem}
                 whileHover={{
                   backgroundColor: "rgba(var(--primary), 0.1)",
                   borderColor: "oklch(var(--primary))",
@@ -97,7 +91,6 @@ export default function ContactSection() {
                 <div className="relative flex items-center justify-center p-3 rounded-xl bg-muted/50 text-muted-foreground group-hover:text-primary transition-colors">
                   <div className="absolute inset-0 bg-primary/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="relative z-10">
-                    {/* Render trực tiếp dưới dạng Component và truyền prop size */}
                     <Icon className="h-5 w-5" />
                   </div>
                 </div>
@@ -115,10 +108,11 @@ export default function ContactSection() {
                   size={14}
                   className="absolute right-4 top-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1"
                 />
-              </Motion.a>
+              </motion.a>
             );
           })}
-        </div>
+        </motion.div>
+
         <form onSubmit={handleSubmit(onSubmit)}>
           <FieldSet className="w-full max-w-md mx-auto bg-background/50 border border-primary/20 rounded-lg p-6">
             <FieldLegend>Form contact</FieldLegend>
@@ -151,11 +145,9 @@ export default function ContactSection() {
                 <FieldError>{errors.email?.message}</FieldError>
               </Field>
               <Field>
-                <FieldLabel htmlFor="checkout-7j9-optional-comments">
-                  Additional comments
-                </FieldLabel>
+                <FieldLabel htmlFor="comments">Additional comments</FieldLabel>
                 <Textarea
-                  id="checkout-7j9-optional-comments"
+                  id="comments"
                   placeholder="Add any additional comments"
                   className="resize-none"
                   {...register("comment")}
@@ -173,14 +165,13 @@ export default function ContactSection() {
           </FieldSet>
         </form>
       </div>
+
       {showAlert && (
         <Alert>
           <InfoIcon />
           <AlertTitle>Notification!!!</AlertTitle>
           <AlertDescription>
             This is a demo form. The data you entered will not be sent anywhere.
-            Please contact me via email or social media for any inquiries. Thank
-            you for understanding!
           </AlertDescription>
           <AlertAction>
             <Button variant="outline" onClick={() => setShowAlert(false)}>
@@ -189,6 +180,6 @@ export default function ContactSection() {
           </AlertAction>
         </Alert>
       )}
-    </Motion.section>
+    </motion.section>
   );
 }

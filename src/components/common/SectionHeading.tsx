@@ -3,10 +3,10 @@ import { Star } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   headingContainer,
-  headingBadge,
   headingTitle,
-  headingDescription,
-} from "@/motion/heading";
+  headingTextItem,
+  DEFAULT_VIEWPORT,
+} from "@/motion";
 
 interface SectionHeadingProps {
   badge?: string;
@@ -26,11 +26,11 @@ export default function SectionHeading({
       variants={headingContainer}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={DEFAULT_VIEWPORT}
       className={center ? "text-center" : "text-left"}
     >
       {badge && (
-        <motion.div variants={headingBadge}>
+        <motion.div variants={headingTextItem}>
           <Badge variant="default" className="mb-4">
             <Star className="size-3 mr-1" />
             {badge}
@@ -49,7 +49,7 @@ export default function SectionHeading({
 
       {description && (
         <motion.p
-          variants={headingDescription}
+          variants={headingTextItem}
           className="mx-auto mt-4 max-w-2xl text-muted-foreground md:text-lg"
         >
           {description}

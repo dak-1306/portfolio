@@ -15,7 +15,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-import { projectSample } from "@/data/project"; // Import data
+import { projectSample } from "@/data/project";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -28,32 +28,24 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { pageTransition } from "@/motion/page";
+import { pageTransition } from "@/motion";
 
 const ProjectDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
 
   const plugin = useMemo(
-    () =>
-      Autoplay({
-        delay: 2000,
-        stopOnInteraction: true,
-      }),
+    () => Autoplay({ delay: 2000, stopOnInteraction: true }),
     [],
   );
 
-  const navigate = useNavigate();
-
-  // Tìm project hiện tại
   const project = projectSample.find((p) => p.slug === slug);
-  const id = project?.id; // Lấy ID để tính toán dự án tiếp theo
+  const id = project?.id;
 
-  // Logic chuyển sang project tiếp theo
   const nextId = (parseInt(id || "1") + 1).toString();
   const nextProject = projectSample.find((p) => p.id === nextId);
   const nextSlug = nextProject ? nextProject.slug : null;
 
-  // Xử lý khi không tìm thấy project (ID sai)
   if (!project) {
     return (
       <div className="h-screen flex flex-col items-center justify-center gap-4 bg-background text-foreground">
@@ -68,7 +60,7 @@ const ProjectDetail: React.FC = () => {
     <AnimatePresence mode="wait">
       <CosmicBackground />
       <motion.div
-        key={id} // Quan trọng: Re-animate khi ID thay đổi
+        key={id}
         variants={pageTransition}
         initial="initial"
         animate="animate"
@@ -76,8 +68,6 @@ const ProjectDetail: React.FC = () => {
         className="min-h-screen text-foreground py-12 px-4 md:px-8 relative z-10"
       >
         <div className="relative z-10 max-w-7xl mx-auto">
-          {/* Header Nav */}
-
           <Button
             variant="ghost"
             className="gap-2 group"
@@ -91,7 +81,6 @@ const ProjectDetail: React.FC = () => {
           </Button>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-            {/* LEFT CONTENT */}
             <div className="lg:col-span-8 space-y-8">
               <header className="space-y-4">
                 <motion.h1
@@ -159,7 +148,6 @@ const ProjectDetail: React.FC = () => {
               </div>
             </div>
 
-            {/* RIGHT SIDEBAR (Sticky) */}
             <aside className="lg:col-span-4">
               <div className="sticky top-10 space-y-6">
                 <Card className="bg-card/40 backdrop-blur-xl border-border shadow-2xl">
@@ -223,8 +211,6 @@ const ProjectDetail: React.FC = () => {
                     </div>
                   </CardContent>
                 </Card>
-
-                {/* Next Project Card (Logic + 1) */}
 
                 <Link
                   to={`${nextProject ? `/project/${nextSlug}` : `/project/${projectSample[0].slug}`}`}
