@@ -81,7 +81,8 @@ const SaturnAdvanced: React.FC = () => {
 
   // Resize Throttling & Adaptive Particle Count
   useEffect(() => {
-    let resizeTimer: NodeJS.Timeout;
+    let resizeTimer: ReturnType<typeof setTimeout>;
+
     const handleResize = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {

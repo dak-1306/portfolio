@@ -5,7 +5,7 @@ import SaturnScene from "@/components/cosmic/planets/SaturnScene";
 import CometTextReveal from "@/components/common/CometTextReveal";
 import { Button } from "@/components/ui/button";
 import { projectSample } from "@/data/project";
-import { hero } from "@/data/hero";
+import { heroData } from "@/data/sections";
 import { sectionReveal, DEFAULT_VIEWPORT } from "@/motion";
 
 export default function HeroSection() {
@@ -22,20 +22,20 @@ export default function HeroSection() {
         {/* Left Column: Text Content */}
         <div className="relative z-10 col-span-12 md:col-span-5 flex flex-col justify-center space-y-6">
           <p className="text-sm uppercase tracking-[0.3em] text-primary">
-            {hero.badge}
+            {heroData.badge}
           </p>
 
           {/* Comet Text Reveal cho Main Title */}
           <CometTextReveal
             as="h1"
-            text={hero.title}
+            text={heroData.title}
             delay={0.3}
             duration={2}
             className="text-4xl font-black leading-tight lg:text-6xl"
           />
 
           <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-            {hero.description}
+            {heroData.description}
           </p>
 
           <div className="space-x-4 pt-2">

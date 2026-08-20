@@ -6,7 +6,7 @@ import SectionHeading from "@/components/common/SectionHeading";
 import StarIcon from "@/components/common/StarIcon";
 import CosmicCard from "@/components/common/CosmicCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { projectSample, projectsHeading } from "@/data/project";
+import { projectSample, projectsHeader } from "@/data/project";
 import {
   sectionReveal,
   staggerContainer,
@@ -31,9 +31,9 @@ export default function ProjectSection() {
       id="projects"
     >
       <SectionHeading
-        title={projectsHeading.title}
-        badge={projectsHeading.badge}
-        description={projectsHeading.description}
+        title={projectsHeader.title}
+        badge={projectsHeader.badge}
+        description={projectsHeader.description}
       />
 
       <Tabs defaultValue="solar">

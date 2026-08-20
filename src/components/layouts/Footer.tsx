@@ -1,4 +1,4 @@
-import ContactMethods from "@/components/contact/contact";
+import ContactMethods from "@/components/sections/contact/contact";
 import LogoIcon from "@/components/common/Logo";
 
 export default function Footer() {

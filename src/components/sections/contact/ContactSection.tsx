@@ -9,8 +9,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { contactSchema, type ContactFormData } from "@/lib/schema";
-import contactMethods from "@/components/contact/contact";
-import { contact } from "@/data/contact";
+import contactMethods from "@/components/sections/contact/contact";
+import { contactData } from "@/data/sections";
 import {
   Alert,
   AlertAction,
@@ -60,9 +60,9 @@ export default function ContactSection() {
       className="container relative z-10 mx-auto px-4 space-y-12"
     >
       <SectionHeading
-        badge={contact.badge}
-        title={contact.title}
-        description={contact.description}
+        badge={contactData.badge}
+        title={contactData.title}
+        description={contactData.description}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

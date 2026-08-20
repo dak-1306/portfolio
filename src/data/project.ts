@@ -1,3 +1,5 @@
+import type { Project, SectionHeader } from "@/types/portfolio";
+
 import ttmLanding from "@/assets/images/landing.webp";
 import ttmDashboard from "@/assets/images/dashboard.webp";
 import ttmTask from "@/assets/images/task.webp";
@@ -11,25 +13,7 @@ import supportflowDashboard from "@/assets/images/DashboradSPF.webp";
 import supportflowChat from "@/assets/images/ChatSPF.webp";
 import supportflowWorkspace from "@/assets/images/WorkspaceSPF.webp";
 
-export interface Project {
-  id: string;
-  title: string;
-  slug: string;
-  subtitle: string;
-  description: string;
-  role: string;
-  duration: string;
-  status: "Completed" | "In Progress" | "Alpha";
-  techStack: string[];
-  features: string[];
-  liveUrl: string;
-  adminUrl?: string; // Bổ sung thêm link admin riêng cho BikeVN
-  githubUrl: string;
-  image: string[];
-  accentColor?: string;
-}
-
-export const projectsHeading = {
+export const projectsHeader: SectionHeader = {
   badge: "My Works",
   title: "Featured Projects",
   description:
@@ -43,7 +27,7 @@ export const projectSample: Project[] = [
     slug: "team-task-manager",
     subtitle: "Full-stack Project & Task Management System",
     description:
-      "A robust project and task management platform designed to streamline team collaboration and workflow tracking. The application emphasizes scalable frontend architecture, real-time client-server synchronization, and intuitive user experiences with high-performance interactive dashboards.",
+      "A robust project and task management platform designed to streamline team collaboration and workflow tracking...",
     role: "Full-Stack Developer",
     duration: "2025 - 2026",
     status: "Completed",
@@ -79,7 +63,7 @@ export const projectSample: Project[] = [
     slug: "bikevn",
     subtitle: "Motorbike Rental & Administrative Management Platform",
     description:
-      "A comprehensive digital marketplace facilitating motorbike rentals, flexible booking lifecycles, and secure online payment flows. Responsibilities included spearheading the entire frontend architecture, enforcing strict multi-role access controls, and designing a modular administrative system.",
+      "A comprehensive digital marketplace facilitating motorbike rentals, flexible booking lifecycles, and secure online payment flows...",
     role: "Lead Frontend Developer",
     duration: "2026 - Present",
     status: "In Progress",
@@ -105,19 +89,19 @@ export const projectSample: Project[] = [
       "High-performance caching and predictive server-state management via TanStack Query",
       "Clean, scalable, feature-first codebase organized in a structural monorepo approach",
     ],
-    liveUrl: "https://bike-vn.vercel.app", // Bổ sung đầy đủ link live
-    adminUrl: "https://bike-vn-admin.vercel.app", // Bổ sung link admin dashboard
+    liveUrl: "https://bike-vn.vercel.app",
+    adminUrl: "https://bike-vn-admin.vercel.app",
     githubUrl: "https://github.com/DATTCNPM/BikeVN",
     image: [bikevnHome, bikevnDetail, bikevnProfile],
     accentColor: "#b0b910",
   },
   {
-    id: "3", // Bạn có thể điều chỉnh id tùy theo thứ tự trong mảng projects của bạn
+    id: "3",
     title: "SupportFlow AI",
     slug: "supportflow-ai",
     subtitle: "AI Customer Support & Omnichannel Live Chat Platform",
     description:
-      "An enterprise-grade Customer Support Monorepo platform featuring an embeddable AI chatbot, Retrieval-Augmented Generation (RAG) capabilities, and real-time human handoff. Built with modular frontend architecture and high-performance backend pipelines to automate customer service seamlessly.",
+      "An enterprise-grade Customer Support Monorepo platform featuring an embeddable AI chatbot...",
     role: "Full-Stack Developer (Personal)",
     duration: "2026",
     status: "Completed",
@@ -144,10 +128,10 @@ export const projectSample: Project[] = [
       "Seamless real-time human agent handoff via Socket.io when AI resolution fails",
       "Workspace management and multi-tenant admin dashboard built in Turborepo",
     ],
-    liveUrl: "https://supportflow-ai-admin.vercel.app", // Link Live Demo (Admin Dashboard)
+    liveUrl: "https://supportflow-ai-admin.vercel.app",
     adminUrl: "https://supportflow-ai-admin.vercel.app",
     githubUrl: "https://github.com/dak-1306/supportflow-ai.git",
-    image: [supportflowDashboard, supportflowWorkspace, supportflowChat], // Thay tên biến import ảnh của bạn vào đây
-    accentColor: "#8E75B2", // Mã màu xược theo tông Google Gemini / Brand AI của project
+    image: [supportflowDashboard, supportflowWorkspace, supportflowChat],
+    accentColor: "#8E75B2",
   },
 ];

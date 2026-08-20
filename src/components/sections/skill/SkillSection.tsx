@@ -5,7 +5,7 @@ import Figma from "@/assets/icons/figma.svg?react";
 import OpenAi from "@/assets/icons/openAI.svg?react";
 import CosmicCard from "@/components/common/CosmicCard";
 import SectionHeading from "@/components/common/SectionHeading";
-import { skills } from "@/data/skills";
+import { skillsHeader } from "@/data/sections";
 import {
   sectionReveal,
   staggerContainer,
@@ -83,9 +83,9 @@ export default function SkillSection() {
       className="container relative z-10 mx-auto px-4 space-y-16"
     >
       <SectionHeading
-        badge={skills.badge}
-        title={skills.title}
-        description={skills.description}
+        badge={skillsHeader.badge}
+        title={skillsHeader.title}
+        description={skillsHeader.description}
       />
 
       <motion.div
