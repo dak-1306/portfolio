@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
-import { cardReveal, cardHover, DEFAULT_VIEWPORT } from "@/motion";
+import { cardVariants, DEFAULT_VIEWPORT } from "@/motion";
 
 interface SkillCardProps {
   icon?: ReactNode;
@@ -27,34 +27,33 @@ export default function SkillCard({
 }: SkillCardProps) {
   return (
     <MotionCard
-      variants={cardReveal}
+      variants={cardVariants}
       initial="hidden"
       whileInView="visible"
+      whileHover="hover"
       viewport={DEFAULT_VIEWPORT}
-      whileHover={cardHover.whileHover}
-      transition={cardHover.transition}
       className={cn(
         "group relative overflow-hidden",
         "border border-white/10",
         "bg-gradient-to-b from-card/90 to-card/50",
         "backdrop-blur-xl",
-        "shadow-[0_0_40px_rgba(120,119,198,0.10)]",
-        "transition-all duration-300",
-        "hover:border-primary/20",
+        "shadow-[0_0_30px_rgba(120,119,198,0.08)]",
+        "transition-colors duration-200 hover:border-primary/30",
+        "transform-gpu will-change-transform",
         className,
       )}
     >
       {/* Cosmic Glow */}
-      <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-        <div className="absolute -left-16 top-0 h-32 w-32 rounded-full bg-primary/20 blur-3xl" />
-        <div className="absolute bottom-0 right-0 h-32 w-32 rounded-full bg-secondary/20 blur-3xl" />
+      <div className="absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none">
+        <div className="absolute -left-16 top-0 h-32 w-32 rounded-full bg-primary/20 blur-2xl transform-gpu" />
+        <div className="absolute bottom-0 right-0 h-32 w-32 rounded-full bg-secondary/20 blur-2xl transform-gpu" />
       </div>
 
       <CardContent className="relative z-10 p-6">
         {/* Header */}
         <div className="flex items-start justify-between gap-4">
           {icon && (
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-primary transition-all duration-300 group-hover:scale-110">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-primary transition-transform duration-200 ease-out group-hover:scale-105">
               {icon}
             </div>
           )}
@@ -95,7 +94,7 @@ export default function SkillCard({
             <Badge
               key={tag}
               variant="outline"
-              className="border-white/10 bg-white/5 text-muted-foreground transition-colors duration-300 hover:border-primary/20 hover:bg-primary/10 hover:text-primary"
+              className="border-white/10 bg-white/5 text-muted-foreground transition-colors duration-200 hover:border-primary/30 hover:bg-primary/10 hover:text-primary"
             >
               {tag}
             </Badge>

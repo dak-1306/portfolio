@@ -1,12 +1,8 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import {
-  headingContainer,
-  headingTitle,
-  headingTextItem,
-  DEFAULT_VIEWPORT,
-} from "@/motion";
+import CometTextReveal from "@/components/common/CometTextReveal";
+import { headingContainer, headingTextItem, DEFAULT_VIEWPORT } from "@/motion";
 
 interface SectionHeadingProps {
   badge?: string;
@@ -29,24 +25,28 @@ export default function SectionHeading({
       viewport={DEFAULT_VIEWPORT}
       className={center ? "text-center" : "text-left"}
     >
+      {/* Badge xuất hiện trước */}
       {badge && (
         <motion.div variants={headingTextItem}>
-          <Badge variant="default" className="mb-4">
+          <Badge variant="default" className="mb-4 inline-flex items-center">
             <Star className="size-3 mr-1" />
             {badge}
           </Badge>
         </motion.div>
       )}
 
-      <motion.h2
-        variants={headingTitle}
-        className="font-heading text-4xl font-bold tracking-tight md:text-5xl"
-      >
-        <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-          {title}
-        </span>
-      </motion.h2>
+      {/* Comet Title chạy độc lập mượt mà */}
+      <div>
+        <CometTextReveal
+          as="h2"
+          text={title}
+          delay={0.15}
+          duration={1.5}
+          className="font-heading text-3xl font-bold tracking-tight md:text-5xl"
+        />
+      </div>
 
+      {/* Description hiện theo sau */}
       {description && (
         <motion.p
           variants={headingTextItem}

@@ -1,8 +1,7 @@
-// src/motion/index.ts
 import type { Variants, Transition } from "framer-motion";
 
 // ==========================================
-// 1. TOKENS (Giá trị cấu hình chung)
+// 1. TOKENS
 // ==========================================
 export const EASING = {
   smooth: [0.22, 1, 0.36, 1] as const,
@@ -14,7 +13,6 @@ export const DEFAULT_VIEWPORT = {
   margin: "-50px",
 } as const;
 
-// Transition tái sử dụng
 const TRANSITION_SMOOTH: Transition = { duration: 0.6, ease: EASING.smooth };
 const TRANSITION_FAST: Transition = { duration: 0.25, ease: "easeOut" };
 
@@ -89,18 +87,39 @@ export const headingTextItem: Variants = {
 };
 
 // ==========================================
-// 5. CARDS & HOVER STATES
+// 5. CARDS (Tích hợp Hover Spring tức thì)
 // ==========================================
-export const cardReveal: Variants = {
+export const cardVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
     transition: { duration: 0.45, ease: EASING.smooth },
   },
+  hover: {
+    y: -6,
+    scale: 1.01,
+    transition: { type: "spring", stiffness: 400, damping: 25 },
+  },
 };
 
-export const cardHover = {
-  whileHover: { y: -4 },
-  transition: { duration: 0.2, ease: "easeOut" as const },
+// ==========================================
+// 6. SPECIALIZED HEAVY & 3D COMPONENTS
+// ==========================================
+export const canvasReveal: Variants = {
+  hidden: { opacity: 0, scale: 0.92 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.8, ease: EASING.soft },
+  },
+};
+
+export const solarSystemReveal: Variants = {
+  hidden: { opacity: 0, scale: 0.85 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.8, ease: EASING.soft },
+  },
 };

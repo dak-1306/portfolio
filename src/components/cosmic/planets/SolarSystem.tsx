@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
   TooltipProvider,
 } from "@/components/ui/tooltip";
-import { sectionReveal, DEFAULT_VIEWPORT } from "@/motion";
+import { solarSystemReveal, DEFAULT_VIEWPORT } from "@/motion";
 
 type Project = {
   id: string;
@@ -45,29 +45,23 @@ export default function SolarSystem({
   if (!projectData || projectData.length === 0) return null;
 
   return (
-    <TooltipProvider>
-      <motion.section
-        variants={sectionReveal}
-        initial="hidden"
-        whileInView="visible"
-        viewport={DEFAULT_VIEWPORT}
-        className="relative flex min-h-[500px] md:min-h-screen items-center justify-center overflow-hidden py-20"
-      >
-        {/* Main Solar System Wrapper */}
+    <TooltipProvider delayDuration={100}>
+      <section className="relative flex min-h-[500px] md:min-h-screen items-center justify-center overflow-hidden py-20">
         <motion.div
-          initial={{ opacity: 0, scale: 0.7 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-          className="relative flex items-center justify-center scale-[0.5] sm:scale-[0.8] md:scale-[1.1] lg:scale-[1.3] transition-transform duration-500"
+          variants={solarSystemReveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={DEFAULT_VIEWPORT}
+          className="relative flex items-center justify-center scale-[0.5] sm:scale-[0.8] md:scale-[1.1] lg:scale-[1.3] transform-gpu will-change-transform"
         >
           {/* Sun Glow */}
-          <div className="absolute h-[250px] w-[250px] md:h-[350px] md:w-[350px] rounded-full bg-yellow-400/10 blur-[80px] md:blur-[120px]" />
+          <div className="absolute h-[250px] w-[250px] md:h-[350px] md:w-[350px] rounded-full bg-yellow-400/10 blur-[80px] md:blur-[120px] pointer-events-none" />
 
           {/* Sun */}
           <motion.div
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="sun relative z-20"
+            className="sun relative z-20 transform-gpu"
           >
             <div className="sun-surface" />
           </motion.div>
@@ -80,15 +74,16 @@ export default function SolarSystem({
             return (
               <div
                 key={project.id}
-                className={`orbit ${config.orbit} border-white/5`}
+                className={`orbit ${config.orbit} border-white/5 transform-gpu will-change-transform`}
               >
                 <Link to={`/project/${project.slug}`}>
                   <motion.div
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.9 }}
-                    className={`planet ${config.planet} ${config.size} cursor-pointer group`}
+                    whileHover={{ scale: 1.25 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className={`planet ${config.planet} ${config.size} cursor-pointer group transform-gpu`}
                   >
-                    <div className="planet-glow group-hover:opacity-100 transition-opacity" />
+                    <div className="planet-glow group-hover:opacity-100 transition-opacity duration-200" />
 
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -118,7 +113,7 @@ export default function SolarSystem({
         <div className="absolute inset-0 pointer-events-none">
           <div className="stars-overlay opacity-30" />
         </div>
-      </motion.section>
+      </section>
     </TooltipProvider>
   );
 }

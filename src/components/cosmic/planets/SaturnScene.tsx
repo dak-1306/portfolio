@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { sectionReveal, DEFAULT_VIEWPORT } from "@/motion";
+import { canvasReveal, DEFAULT_VIEWPORT } from "@/motion";
 
 class Particle {
   angle: number;
@@ -10,10 +10,8 @@ class Particle {
   color: string;
   perspective: number;
   opacity: number;
-  ring: string;
 
   constructor(ring: string) {
-    this.ring = ring;
     this.angle = Math.random() * Math.PI * 2;
     this.perspective = 0.2;
 
@@ -62,39 +60,46 @@ class Particle {
     const x = Math.cos(this.angle) * currentRadius;
     const y = Math.sin(this.angle) * currentRadius * this.perspective;
 
-    let currentOpacity = this.opacity;
-    if (Math.sin(this.angle) < 0) {
-      currentOpacity *= 0.4;
-    }
+    const isBack = Math.sin(this.angle) < 0;
+    const currentOpacity = isBack ? this.opacity * 0.4 : this.opacity;
 
-    ctx.beginPath();
-    ctx.arc(centerX + x, centerY + y, currentSize, 0, Math.PI * 2);
     ctx.fillStyle = this.color;
     ctx.globalAlpha = currentOpacity;
+    ctx.beginPath();
+    ctx.arc(centerX + x, centerY + y, currentSize, 0, Math.PI * 2);
     ctx.fill();
-    ctx.globalAlpha = 1;
   }
 }
 
 const SaturnAdvanced: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const canvasBackRef = useRef<HTMLCanvasElement>(null);
   const canvasFrontRef = useRef<HTMLCanvasElement>(null);
   const [baseSize, setBaseSize] = useState(750);
   const particles = useRef<Particle[]>([]);
+  const isVisible = useRef(true);
 
+  // Resize Throttling & Adaptive Particle Count
   useEffect(() => {
+    let resizeTimer: NodeJS.Timeout;
     const handleResize = () => {
-      const width = window.innerWidth;
-      if (width < 640) setBaseSize(width - 40);
-      else if (width < 1024) setBaseSize(600);
-      else setBaseSize(750);
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const width = window.innerWidth;
+        if (width < 640) setBaseSize(width - 40);
+        else if (width < 1024) setBaseSize(600);
+        else setBaseSize(750);
+      }, 100);
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
 
+    // Giảm số lượng hạt trên Mobile để tiết kiệm CPU
+    const isMobile = window.innerWidth < 640;
+    const count = isMobile ? 350 : 700;
+
     if (particles.current.length === 0) {
-      const count = 1800;
       for (let i = 0; i < count; i++) {
         const ring =
           i < 0.1 * count
@@ -108,19 +113,40 @@ const SaturnAdvanced: React.FC = () => {
       }
     }
 
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
+  // Intersection Observer: Tắt Canvas Loop khi không nằm trong màn hình
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible.current = entry.isIntersecting;
+      },
+      { threshold: 0.05 },
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Main Render Loop
   useEffect(() => {
     const canvasBack = canvasBackRef.current;
     const canvasFront = canvasFrontRef.current;
     if (!canvasBack || !canvasFront) return;
 
-    const ctxBack = canvasBack.getContext("2d");
-    const ctxFront = canvasFront.getContext("2d");
+    const ctxBack = canvasBack.getContext("2d", { alpha: true });
+    const ctxFront = canvasFront.getContext("2d", { alpha: true });
     if (!ctxBack || !ctxFront) return;
 
-    const dpr = window.devicePixelRatio || 1;
+    // Giới hạn DPR tối đa 1.5x để tránh tụt FPS trên màn hình Retina 3K/4K
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const scaleFactor = baseSize / 750;
 
     [canvasBack, canvasFront].forEach((canvas) => {
@@ -136,20 +162,25 @@ const SaturnAdvanced: React.FC = () => {
     let animationFrameId: number;
 
     const animate = () => {
-      ctxBack.clearRect(0, 0, baseSize, baseSize);
-      ctxFront.clearRect(0, 0, baseSize, baseSize);
+      // Bỏ qua tính toán hoàn toàn nếu Canvas nằm ngoài tầm nhìn màn hình
+      if (isVisible.current) {
+        ctxBack.clearRect(0, 0, baseSize, baseSize);
+        ctxFront.clearRect(0, 0, baseSize, baseSize);
 
-      const centerX = baseSize / 2;
-      const centerY = baseSize / 2;
+        const centerX = baseSize / 2;
+        const centerY = baseSize / 2;
 
-      particles.current.forEach((p) => {
-        p.update();
-        if (Math.sin(p.angle) < 0) {
-          p.draw(ctxBack, centerX, centerY, scaleFactor);
-        } else {
-          p.draw(ctxFront, centerX, centerY, scaleFactor);
+        const pLength = particles.current.length;
+        for (let i = 0; i < pLength; i++) {
+          const p = particles.current[i];
+          p.update();
+          if (Math.sin(p.angle) < 0) {
+            p.draw(ctxBack, centerX, centerY, scaleFactor);
+          } else {
+            p.draw(ctxFront, centerX, centerY, scaleFactor);
+          }
         }
-      });
+      }
 
       animationFrameId = requestAnimationFrame(animate);
     };
@@ -162,15 +193,16 @@ const SaturnAdvanced: React.FC = () => {
 
   return (
     <motion.div
-      variants={sectionReveal}
+      ref={containerRef}
+      variants={canvasReveal}
       initial="hidden"
       whileInView="visible"
       viewport={DEFAULT_VIEWPORT}
-      className="relative flex items-center justify-center w-full overflow-hidden"
+      className="relative flex items-center justify-center w-full overflow-hidden transform-gpu"
       style={{ height: `${baseSize}px` }}
     >
       <div
-        className="relative flex items-center justify-center transition-all duration-500"
+        className="relative flex items-center justify-center transform-gpu"
         style={{
           width: `${baseSize}px`,
           height: `${baseSize}px`,
@@ -179,13 +211,13 @@ const SaturnAdvanced: React.FC = () => {
       >
         <canvas
           ref={canvasBackRef}
-          className="absolute z-0 pointer-events-none"
+          className="absolute z-0 pointer-events-none transform-gpu"
         />
 
         <motion.div
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="relative z-10 rounded-full"
+          className="relative z-10 rounded-full transform-gpu"
           style={{ width: `${planetSize}px`, height: `${planetSize}px` }}
         >
           <svg viewBox="0 0 130 130" className="w-full h-full drop-shadow-2xl">
@@ -268,11 +300,11 @@ const SaturnAdvanced: React.FC = () => {
 
         <canvas
           ref={canvasFrontRef}
-          className="absolute z-20 pointer-events-none"
+          className="absolute z-20 pointer-events-none transform-gpu"
         />
 
         <div
-          className="absolute rounded-full opacity-10 -z-10 blur-[100px]"
+          className="absolute rounded-full opacity-10 -z-10 blur-[100px] pointer-events-none"
           style={{
             width: `${baseSize * 1.1}px`,
             height: `${baseSize * 1.1}px`,
